@@ -1,0 +1,37 @@
+/* tokens.css — single source of truth for all design decisions */
+:root {
+  /* Palette */
+  --color-bg: #0f0f0f;
+  --color-cabinet: #1e3a3a;
+  --color-cabinet-light: #254a4a;
+  --color-cream: #f2ead8;
+  --color-amber: #e8a020;
+  --color-black: #000000;
+  --color-text: #0f0f0f;
+  --color-cream-muted: rgba(242, 234, 216, 0.6);
+
+  /* Shadows — hard offset, zero blur (neobrutalist) */
+  --shadow-sm: 2px 2px 0 0 #000000;
+  --shadow-md: 4px 4px 0 0 #000000;
+  --shadow-lg: 6px 6px 0 0 #000000;
+  --shadow-xl: 8px 8px 0 0 #000000;
+
+  /* Borders */
+  --border: 2px solid #000000;
+  --border-heavy: 3px solid #000000;
+
+  /* Typography */
+  --font-mono: 'Courier Prime', 'Special Elite', monospace;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 24px;
+  --text-2xl: 32px;
+  --line-height: 1.7;
+
+  /* Transitions — snappy, game-feel */
+  --transition-snap: 80ms ease-out;
+  --transition-fast: 150ms ease-out;
+  --transition-med: 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
