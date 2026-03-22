@@ -9,6 +9,9 @@ import './ReadingScreen.css'
 export default function ReadingScreen({ sectionCode, onBack }) {
   const section = getSectionData(sectionCode)
   const [pageIndex, setPageIndex] = useState(0)
+  const [pendingIndex, setPendingIndex] = useState(null)
+  const [pageDirection, setPageDirection] = useState(1)
+  const wrapperRef = useRef(null)
   const docRef = useRef(null)
   const overlayRef = useRef(null)
   const animatingRef = useRef(false)
@@ -29,54 +32,51 @@ export default function ReadingScreen({ sectionCode, onBack }) {
       opacity: 0,
       duration: 0.3,
     })
-  }, { scope: docRef })
+  }, { scope: wrapperRef })
 
-  function animatePageChange(direction, callback) {
+  // Page-in animation whenever pageIndex or pendingIndex settles
+  useEffect(() => {
+    if (pendingIndex === null) return
+    // New page has rendered — animate it in
+    gsap.fromTo(docRef.current,
+      { y: pageDirection > 0 ? 30 : -30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.22, ease: 'back.out(1.7)', onComplete: () => {
+        animatingRef.current = false
+        setPendingIndex(null)
+      }}
+    )
+  }, [pageIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  function animatePageChange(direction, nextIndex) {
     if (animatingRef.current) return
     animatingRef.current = true
+    setPageDirection(direction)
 
+    // Lift then slide out
     const tl = gsap.timeline({
       onComplete: () => {
-        animatingRef.current = false
-        callback()
-        // Rise in
-        gsap.from(docRef.current, {
-          y: direction > 0 ? 24 : -24,
-          opacity: 0,
-          duration: 0.22,
-          ease: 'back.out(1.7)',
-        })
+        // Now swap the page — triggers useEffect above
+        setPageIndex(nextIndex)
+        setPendingIndex(nextIndex)
       },
     })
-
-    // Lift
-    tl.to(docRef.current, {
-      y: -6,
-      boxShadow: '10px 10px 0 0 #000',
-      duration: 0.12,
-      ease: 'power2.out',
-    })
-    // Slide back down into stack
-    tl.to(docRef.current, {
-      y: direction > 0 ? -20 : 20,
-      opacity: 0,
-      duration: 0.18,
-      ease: 'power2.in',
-    })
+    tl.to(docRef.current, { y: -6, boxShadow: '10px 10px 0 0 #000', duration: 0.12, ease: 'power2.out' })
+    tl.to(docRef.current, { y: direction > 0 ? -24 : 24, opacity: 0, duration: 0.18, ease: 'power2.in' })
   }
 
   function goNext() {
-    if (pageIndex >= totalPages - 1) return
-    animatePageChange(1, () => setPageIndex(i => i + 1))
+    if (pageIndex >= totalPages - 1 || animatingRef.current) return
+    animatePageChange(1, pageIndex + 1)
   }
 
   function goPrev() {
-    if (pageIndex <= 0) return
-    animatePageChange(-1, () => setPageIndex(i => i - 1))
+    if (pageIndex <= 0 || animatingRef.current) return
+    animatePageChange(-1, pageIndex - 1)
   }
 
   function handleBack() {
     if (animatingRef.current) return
+    animatingRef.current = true
     const tl = gsap.timeline({ onComplete: onBack })
     tl.to(overlayRef.current, { opacity: 0, duration: 0.2 })
     tl.to(docRef.current, { y: 140, opacity: 0, duration: 0.35, ease: 'power2.in' }, '<')
@@ -85,19 +85,21 @@ export default function ReadingScreen({ sectionCode, onBack }) {
   // Reset page index when section changes
   useEffect(() => {
     setPageIndex(0)
+    setPendingIndex(null)
+    animatingRef.current = false
   }, [sectionCode])
 
   return (
-    <div className="reading-screen">
-      {/* Dark overlay behind the document, cabinet shows through */}
+    <div className="reading-screen" ref={wrapperRef}>
+      {/* Dark overlay */}
       <div className="reading-screen__overlay" ref={overlayRef} />
 
-      <div className="reading-doc" ref={docRef}>
-        {/* Back button */}
-        <button className="reading-doc__back" onClick={handleBack}>
-          ← BACK
-        </button>
+      {/* Back button — outside the clipped doc so it's always visible */}
+      <button className="reading-screen__back" onClick={handleBack}>
+        ← BACK
+      </button>
 
+      <div className="reading-doc" ref={docRef}>
         {/* Paperclip — top left */}
         <div className="reading-doc__paperclip">
           <Paperclip />

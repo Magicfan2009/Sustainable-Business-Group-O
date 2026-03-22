@@ -1,10 +1,9 @@
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import FolderTab from '../components/FolderTab'
 import './CabinetScreen.css'
 
-const FOLDERS = [
+const DRAWERS = [
   { code: 'SEC-01', label: 'OVERVIEW' },
   { code: 'SEC-02', label: 'CARBON ACCOUNTING' },
   { code: 'SEC-03', label: 'TRIPLE BOTTOM LINE' },
@@ -14,58 +13,67 @@ const FOLDERS = [
 ]
 
 export default function CabinetScreen({ onOpenFile, onOpenAI }) {
-  const [drawerOpen, setDrawerOpen] = useState(false)
-  const cabinetRef = useRef(null)
+  const sceneRef = useRef(null)
 
   useGSAP(() => {
-    gsap.from(cabinetRef.current, {
-      y: 40,
+    gsap.from(sceneRef.current, {
+      y: 60,
       opacity: 0,
-      duration: 0.5,
-      ease: 'back.out(1.7)',
+      duration: 0.6,
+      ease: 'back.out(1.4)',
     })
-  }, { scope: cabinetRef })
-
-  function toggleDrawer() {
-    setDrawerOpen(prev => !prev)
-  }
+  }, { scope: sceneRef })
 
   return (
     <div className="cabinet-screen">
-      <div className="cabinet" ref={cabinetRef}>
-        {/* Label plate */}
-        <div className="cabinet__label">
-          GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
-        </div>
+      <div className="cabinet-scene" ref={sceneRef}>
 
-        {/* Cabinet body */}
-        <div className="cabinet__body">
-          {/* Drawer */}
-          <div className={`cabinet__drawer${drawerOpen ? ' cabinet__drawer--open' : ''}`}>
-            {/* Drawer face */}
-            <div className="cabinet__drawer-face">
-              <button
-                className="cabinet__handle"
-                onClick={toggleDrawer}
-                aria-label={drawerOpen ? 'Close drawer' : 'Open drawer'}
-              />
-            </div>
+        {/* ── Isometric cabinet shell ── */}
+        <div className="cabinet-iso">
 
-            {/* Drawer interior — folder tabs */}
-            <div className="cabinet__interior">
-              {FOLDERS.map((folder, i) => (
-                <FolderTab
-                  key={folder.code}
-                  code={folder.code}
-                  label={folder.label}
-                  index={i}
-                  drawerOpen={drawerOpen}
-                  onClick={() => onOpenFile(folder.code)}
-                />
-              ))}
-            </div>
+          {/* Top face */}
+          <div className="cabinet-iso__top">
+            <span className="cabinet-iso__top-label">
+              GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
+            </span>
           </div>
+
+          {/* Right side face */}
+          <div className="cabinet-iso__side" />
+
+          {/* Front face — all drawers live here */}
+          <div className="cabinet-iso__front">
+            {DRAWERS.map((drawer, i) => (
+              <button
+                key={drawer.code}
+                className="cabinet-drawer"
+                onClick={() => onOpenFile(drawer.code)}
+              >
+                {/* Drawer inset shadow line at top */}
+                <div className="cabinet-drawer__inset" />
+
+                {/* Handle bar */}
+                <div className="cabinet-drawer__handle-wrap">
+                  <div className="cabinet-drawer__handle" />
+                </div>
+
+                {/* Label */}
+                <div className="cabinet-drawer__labels">
+                  <span className="cabinet-drawer__code">{drawer.code}</span>
+                  <span className="cabinet-drawer__name">{drawer.label}</span>
+                </div>
+
+                {/* Arrow */}
+                <span className="cabinet-drawer__arrow">›</span>
+              </button>
+            ))}
+          </div>
+
         </div>
+
+        {/* Floor shadow */}
+        <div className="cabinet-shadow" />
+
       </div>
 
       {/* AI disclosure link */}
