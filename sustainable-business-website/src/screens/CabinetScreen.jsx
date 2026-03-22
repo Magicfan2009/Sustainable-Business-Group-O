@@ -27,56 +27,46 @@ export default function CabinetScreen({ onOpenFile, onOpenAI }) {
   return (
     <div className="cabinet-screen">
       <div className="cabinet-scene" ref={sceneRef}>
-
-        {/* ── Isometric cabinet shell ── */}
         <div className="cabinet-iso">
 
-          {/* Top face */}
-          <div className="cabinet-iso__top">
-            <span className="cabinet-iso__top-label">
-              GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
-            </span>
-          </div>
-
-          {/* Right side face */}
-          <div className="cabinet-iso__side" />
-
-          {/* Front face — all drawers live here */}
+          {/* Front face — drawers */}
           <div className="cabinet-iso__front">
-            {DRAWERS.map((drawer, i) => (
+            {DRAWERS.map((drawer) => (
               <button
                 key={drawer.code}
                 className="cabinet-drawer"
                 onClick={() => onOpenFile(drawer.code)}
               >
-                {/* Drawer inset shadow line at top */}
-                <div className="cabinet-drawer__inset" />
-
-                {/* Handle bar */}
                 <div className="cabinet-drawer__handle-wrap">
                   <div className="cabinet-drawer__handle" />
                 </div>
-
-                {/* Label */}
                 <div className="cabinet-drawer__labels">
                   <span className="cabinet-drawer__code">{drawer.code}</span>
                   <span className="cabinet-drawer__name">{drawer.label}</span>
                 </div>
-
-                {/* Arrow */}
                 <span className="cabinet-drawer__arrow">›</span>
               </button>
             ))}
           </div>
 
+          {/* Back face */}
+          <div className="cabinet-iso__back" />
+
+          {/* Top face */}
+          <div className="cabinet-iso__top" />
+
+          {/* Bottom face */}
+          <div className="cabinet-iso__bottom-face" />
+
+          {/* Right side */}
+          <div className="cabinet-iso__right" />
+
+          {/* Left side */}
+          <div className="cabinet-iso__left" />
+
         </div>
-
-        {/* Floor shadow */}
-        <div className="cabinet-shadow" />
-
       </div>
 
-      {/* AI disclosure link */}
       <button className="cabinet-screen__ai-link" onClick={onOpenAI}>
         AI USE STATEMENT
       </button>
