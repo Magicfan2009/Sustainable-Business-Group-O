@@ -1,0 +1,235 @@
+.reading-screen {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Semi-transparent overlay — cabinet visible behind at 15% */
+.reading-screen__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 15, 15, 0.85);
+  z-index: 0;
+}
+
+/* ── Document ── */
+.reading-doc {
+  position: relative;
+  z-index: 1;
+  background: var(--color-cream);
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 0 #000;
+  width: min(680px, 90vw);
+  max-height: 82vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Back button — floats above document, top left */
+.reading-doc__back {
+  position: absolute;
+  top: -44px;
+  left: 0;
+  background: var(--color-cabinet);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-cream);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  letter-spacing: 0.12em;
+  padding: 8px 16px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition:
+    background var(--transition-snap),
+    color var(--transition-snap),
+    box-shadow var(--transition-snap),
+    transform var(--transition-snap);
+}
+
+.reading-doc__back:hover {
+  background: var(--color-amber);
+  color: var(--color-black);
+  box-shadow: var(--shadow-md);
+}
+
+.reading-doc__back:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Paperclip — top left corner, overlaps header */
+.reading-doc__paperclip {
+  position: absolute;
+  top: -4px;
+  left: 14px;
+  z-index: 2;
+}
+
+/* Header bar */
+.reading-doc__header {
+  background: var(--color-cabinet);
+  padding: 12px 16px 12px 56px; /* left pad for paperclip */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  border-bottom: var(--border);
+}
+
+.reading-doc__section-code {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.1em;
+}
+
+.reading-doc__sep {
+  color: var(--color-cream-muted);
+}
+
+.reading-doc__section-title {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-cream);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Scrollable body */
+.reading-doc__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  line-height: var(--line-height);
+
+  /* Custom scrollbar — neobrutalist */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-cabinet) var(--color-cream);
+}
+
+.reading-doc__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.reading-doc__body::-webkit-scrollbar-track {
+  background: var(--color-cream);
+  border-left: 2px solid #000;
+}
+
+.reading-doc__body::-webkit-scrollbar-thumb {
+  background: var(--color-cabinet);
+  border: 2px solid #000;
+}
+
+/* Footer */
+.reading-doc__footer {
+  border-top: var(--border);
+  background: var(--color-cream);
+  flex-shrink: 0;
+  padding: 0 16px 8px;
+}
+
+/* ── Content styles within document body ── */
+.reading-doc__body h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #000;
+  color: var(--color-text);
+}
+
+.reading-doc__body h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-top: 20px;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.reading-doc__body p {
+  margin-bottom: 14px;
+}
+
+.reading-doc__body ul,
+.reading-doc__body ol {
+  padding-left: 20px;
+  margin-bottom: 14px;
+}
+
+.reading-doc__body li {
+  margin-bottom: 6px;
+}
+
+.reading-doc__body strong {
+  font-weight: 700;
+}
+
+/* Pull quote — amber highlight bar */
+.reading-doc__body .pull-quote {
+  background: var(--color-amber);
+  color: var(--color-black);
+  padding: 10px 14px;
+  margin: 16px 0;
+  border: var(--border);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Data table */
+.reading-doc__body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 16px;
+  font-size: var(--text-sm);
+}
+
+.reading-doc__body th {
+  background: var(--color-cabinet);
+  color: var(--color-cream);
+  border: var(--border);
+  padding: 7px 10px;
+  text-align: left;
+  letter-spacing: 0.06em;
+}
+
+.reading-doc__body td {
+  border: var(--border);
+  padding: 7px 10px;
+}
+
+.reading-doc__body tr:nth-child(even) td {
+  background: rgba(30, 58, 58, 0.06);
+}
+
+/* Section divider */
+.reading-doc__body hr {
+  border: none;
+  border-top: 2px solid #000;
+  margin: 20px 0;
+}
+
+/* Video block (SEC-06) */
+.reading-doc__body .video-block {
+  width: 100%;
+  border: var(--border);
+  display: block;
+}
+
+.reading-doc__body .video-block video,
+.reading-doc__body .video-block iframe {
+  width: 100%;
+  display: block;
+}

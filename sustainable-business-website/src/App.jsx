@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import PasswordScreen from './screens/PasswordScreen'
+import CabinetScreen from './screens/CabinetScreen'
+import ReadingScreen from './screens/ReadingScreen'
+import AIScreen from './screens/AIScreen'
 
 const SCREENS = { PASSWORD: 'password', CABINET: 'cabinet', READING: 'reading', AI: 'ai' }
 
@@ -8,33 +11,36 @@ function App() {
   const [fadeOut, setFadeOut] = useState(false)
   const [fadeDuration, setFadeDuration] = useState(400)
   const [activeFile, setActiveFile] = useState(null)
-  const [drawerOpen, setDrawerOpen] = useState(false)
 
-  function handlePasswordSuccess() {
-    setFadeDuration(800)
+  function transition(ms, callback) {
+    setFadeDuration(ms)
     setFadeOut(true)
     setTimeout(() => {
-      setScreen(SCREENS.CABINET)
+      callback()
       setFadeDuration(400)
       setFadeOut(false)
-    }, 900)
+    }, ms + 100)
+  }
+
+  function handlePasswordSuccess() {
+    transition(800, () => setScreen(SCREENS.CABINET))
   }
 
   function openFile(code) {
-    setFadeOut(true)
-    setTimeout(() => {
-      setActiveFile(code)
-      setScreen(SCREENS.READING)
-      setFadeOut(false)
-    }, 400)
+    setActiveFile(code)
+    setScreen(SCREENS.READING)
   }
 
   function goBack() {
-    setFadeOut(true)
-    setTimeout(() => {
-      setScreen(SCREENS.CABINET)
-      setFadeOut(false)
-    }, 400)
+    transition(400, () => setScreen(SCREENS.CABINET))
+  }
+
+  function openAI() {
+    transition(300, () => setScreen(SCREENS.AI))
+  }
+
+  function closeAI() {
+    transition(300, () => setScreen(SCREENS.CABINET))
   }
 
   return (
@@ -49,19 +55,13 @@ function App() {
         <PasswordScreen onSuccess={handlePasswordSuccess} />
       )}
       {screen === SCREENS.CABINET && (
-        <div style={{ color: 'var(--color-cream)', display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', fontFamily: 'var(--font-mono)' }}>
-          Cabinet coming next…
-        </div>
+        <CabinetScreen onOpenFile={openFile} onOpenAI={openAI} />
       )}
       {screen === SCREENS.READING && (
-        <div style={{ color: 'var(--color-cream)', padding: '2rem', fontFamily: 'var(--font-mono)' }}>
-          Reading: {activeFile}
-        </div>
+        <ReadingScreen sectionCode={activeFile} onBack={goBack} />
       )}
       {screen === SCREENS.AI && (
-        <div style={{ color: 'var(--color-cream)', padding: '2rem', fontFamily: 'var(--font-mono)' }}>
-          AI Disclosure coming soon
-        </div>
+        <AIScreen onBack={closeAI} />
       )}
     </div>
   )
