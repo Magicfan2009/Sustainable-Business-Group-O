@@ -23,8 +23,8 @@ html, body, #root {
   }
 }
 
-@media (max-width: 700px) {
-  .cabinet-decorations { display: none; }
+@media (max-width: 900px) {
+  .cabinet-decorations { display: none !important; }
 }
 
 button {
