@@ -35,10 +35,3 @@
   50%       { transform: translateY(-4px); }
 }
 
-/* Mobile scale */
-@media (max-width: 700px) {
-  .monitor-scene { transform: scale(0.65); transform-origin: center center; }
-}
-@media (max-width: 420px) {
-  .monitor-scene { transform: scale(0.5); }
-}
