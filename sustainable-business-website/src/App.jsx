@@ -25,6 +25,7 @@ function App() {
   const deCactusRef = useRef(null)
   const dePlantRef = useRef(null)
   const deMonitorDeskRef = useRef(null)
+  const deNametagRef = useRef(null)
 
   function transition(ms, callback) {
     setFadeDuration(ms)
@@ -167,6 +168,7 @@ function App() {
               onPanLeft={() => panToRoom('left')}
               onPanRight={() => panToRoom('right')}
               panning={panningRef}
+              nametagRef={deNametagRef}
             />
           </div>
           <div data-room="tablet" style={{ position: 'absolute', inset: 0, visibility: 'hidden' }}>
@@ -186,10 +188,11 @@ function App() {
             />
           </div>
           <DevEditor items={[
-            { id: 'frame',  label: 'Circula Frame', ref: deFrameRef },
-            { id: 'cactus', label: 'Left Cactus',   ref: deCactusRef },
-            { id: 'plant',  label: 'Right Plant',   ref: dePlantRef },
-            { id: 'desk',   label: 'Monitor Desk',  ref: deMonitorDeskRef },
+            { id: 'frame',   label: 'Circula Frame',  ref: deFrameRef },
+            { id: 'cactus',  label: 'Left Cactus',    ref: deCactusRef },
+            { id: 'plant',   label: 'Right Plant',    ref: dePlantRef },
+            { id: 'desk',    label: 'Monitor Desk',   ref: deMonitorDeskRef },
+            { id: 'nametag', label: 'Cabinet Title',  ref: deNametagRef },
           ]} />
         </div>
       )}

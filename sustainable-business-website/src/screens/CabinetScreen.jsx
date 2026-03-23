@@ -13,7 +13,7 @@ export const DRAWERS = [
   { code: 'SEC-06', label: 'EXECUTIVE SUMMARY' },
 ]
 
-export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft, onPanRight, panning }) {
+export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft, onPanRight, panning, nametagRef }) {
   const sceneRef = useRef(null)
 
   useGSAP(() => {
@@ -39,7 +39,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
           <div className="cabinet-iso__top" />
 
           {/* Nametag — floats above the cabinet */}
-          <div className="cabinet-nametag">
+          <div className="cabinet-nametag" ref={nametagRef}>
             GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
           </div>
 
