@@ -114,6 +114,8 @@ function App() {
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
           <div data-room="cabinet" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', visibility: 'visible' }}>
+            {/* Decorations — hidden on mobile */}
+            <div className="cabinet-decorations">
             {/* Picture frame — cabinet room only */}
             <div ref={deFrameRef} style={{ position: 'absolute', left: '64.4vw', top: '18.8vh', zIndex: 2, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
               <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)', flexShrink: 0 }} />
@@ -161,6 +163,7 @@ function App() {
                 </svg>
               </div>
             </div>
+            </div>{/* end cabinet-decorations */}
             <CabinetScreen
               onOpenFile={openFile}
               onOpenAI={openAI}
