@@ -326,7 +326,7 @@
 /* ── Nametag ── bare text, hovering above the cabinet */
 .cabinet-nametag {
   position: fixed;
-  top: calc(50% - 180px);
+  top: 22vh;
   left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-mono);

@@ -92,7 +92,7 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning, deskRef 
         </svg>
         {/* Desk surface under monitor */}
         <div ref={deskRef} style={{ width: 'min(560px, 90vw)', lineHeight: 0, overflow: 'visible' }}>
-        <svg width="calc(100% + 400px)" height="60" viewBox="-200 0 880 60" style={{ display: 'block', marginTop: '-4px', marginLeft: '-200px' }}>
+        <svg width="calc(100% + 400px)" height="56" viewBox="-200 0 880 56" style={{ display: 'block', marginTop: '-4px', marginLeft: '-200px' }}>
           {/* Desk surface */}
           <rect x="0" y="0" width="480" height="18" rx="3" fill="#9a7048" stroke="#5a3a1a" strokeWidth="2"/>
           {/* Desk front face */}
