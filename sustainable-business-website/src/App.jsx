@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 import gsap from 'gsap'
 import PasswordScreen from './screens/PasswordScreen'
 import CabinetScreen from './screens/CabinetScreen'
@@ -15,20 +15,10 @@ function App() {
   const [fadeOut, setFadeOut] = useState(false)
   const [fadeDuration, setFadeDuration] = useState(400)
   const [activeFile, setActiveFile] = useState(null)
-  const [scale, setScale] = useState(1)
   const [room, setRoom] = useState('cabinet') // 'cabinet' | 'tablet' | 'monitor'
   const roomRef = useRef('cabinet') // mirrors room state, always fresh in closures
   const panningRef = useRef(false)
   const bgRef = useRef(null)
-
-  useEffect(() => {
-    function update() {
-      setScale(Math.min(window.innerWidth / 1707, window.innerHeight / 980))
-    }
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
-  }, [])
 
   // DevEditor refs
   const deFrameRef = useRef(null)
@@ -104,16 +94,10 @@ function App() {
   }
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'fixed', top: 0, left: 0 }}>
     <div style={{
-      width: 1707,
-      height: 980,
-      transform: `scale(${scale})`,
-      transformOrigin: 'top left',
-      overflow: 'hidden',
-      position: 'absolute',
-      top: 0,
-      left: 0,
+      width: '100%',
+      height: '100%',
+      position: 'relative',
       opacity: fadeOut ? 0 : 1,
       transition: `opacity ${fadeDuration}ms ease`,
     }}>
@@ -216,7 +200,6 @@ function App() {
       {screen === SCREENS.AI && (
         <AIScreen onBack={closeAI} />
       )}
-    </div>
     </div>
   )
 }

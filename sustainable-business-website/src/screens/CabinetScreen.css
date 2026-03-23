@@ -327,7 +327,7 @@
 .cabinet-nametag {
   position: absolute;
   top: calc(var(--depth-top) * -1 - 36px);
-  left: 50%;
+  left: calc(50% + calc(var(--depth-side) / 2));
   transform: translateX(-50%);
   font-family: var(--font-mono);
   font-weight: 700;
@@ -414,3 +414,24 @@
   color: var(--color-black);
 }
 
+
+/* ── Mobile responsive ── */
+@media (max-width: 700px) {
+  .cabinet-screen {
+    gap: 20px;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .cabinet-scene {
+    transform: scale(0.72);
+    transform-origin: center center;
+  }
+  .cabinet-screen__links {
+    gap: 20px;
+  }
+}
+@media (max-width: 420px) {
+  .cabinet-scene {
+    transform: scale(0.55);
+  }
+}
