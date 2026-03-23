@@ -114,56 +114,6 @@ function App() {
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
           <div data-room="cabinet" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', visibility: 'visible' }}>
-            {/* Decorations — hidden on mobile/tablet */}
-            <div className="cabinet-decorations" style={{ display: window.innerWidth <= 900 ? 'none' : undefined }}>
-            {/* Picture frame — cabinet room only */}
-            <div ref={deFrameRef} style={{ position: 'absolute', left: '64.4vw', top: '18.8vh', zIndex: 2, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
-              <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)', flexShrink: 0 }} />
-              <svg width="100%" height="28" viewBox="0 0 192 28" preserveAspectRatio="none" style={{ display: 'block', marginBottom: '-2px', flexShrink: 0 }}>
-                <line x1="96" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
-                <line x1="96" y1="0" x2="188" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
-              </svg>
-              <div style={{ width: '100%', flex: 1, minHeight: '40px', background: '#2a1f0f', border: '6px solid #4a3520', boxShadow: '3px 3px 0 #000, inset 0 0 0 2px #6a5030', overflow: 'hidden', boxSizing: 'border-box' }}>
-                <img src="/images/circula.jpg" alt="Circula Partners" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-              </div>
-            </div>
-            {/* Office decorations — cabinet room only, clipped, behind cabinet */}
-            <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none', overflow: 'hidden' }}>
-              {/* Left floor: cactus on stool */}
-              <div ref={deCactusRef} style={{ position: 'absolute', left: '19.3vw', top: '39.7vh', width: '239px', height: '346px' }}>
-                <svg width="100%" height="100%" viewBox="0 0 70 90" fill="none">
-                  <rect x="22" y="52" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
-                  <rect x="18" y="50" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
-                  <ellipse cx="35" cy="53" rx="13" ry="3" fill="#3d2b1a"/>
-                  <rect x="30" y="18" width="10" height="34" rx="5" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1.2"/>
-                  <rect x="22" y="30" width="8" height="6" rx="3" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1.2"/>
-                  <rect x="22" y="20" width="6" height="14" rx="3" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1.2"/>
-                  <rect x="40" y="34" width="8" height="6" rx="3" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1.2"/>
-                  <rect x="42" y="24" width="6" height="14" rx="3" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1.2"/>
-                  <line x1="35" y1="22" x2="35" y2="16" stroke="#c8d0a0" strokeWidth="1"/>
-                  <line x1="32" y1="28" x2="28" y2="26" stroke="#c8d0a0" strokeWidth="0.8"/>
-                  <line x1="38" y1="28" x2="42" y2="26" stroke="#c8d0a0" strokeWidth="0.8"/>
-                  <rect x="14" y="74" width="6" height="16" fill="#7a5230" stroke="#4a2e10" strokeWidth="1"/>
-                  <rect x="50" y="74" width="6" height="16" fill="#7a5230" stroke="#4a2e10" strokeWidth="1"/>
-                  <rect x="10" y="70" width="50" height="6" rx="2" fill="#9a6840" stroke="#5a3a1a" strokeWidth="1.5"/>
-                </svg>
-              </div>
-              {/* Right floor: leafy plant in pot */}
-              <div ref={dePlantRef} style={{ position: 'absolute', left: '60.6vw', top: '39.9vh', width: '227px', height: '395px' }}>
-                <svg width="100%" height="100%" viewBox="0 0 60 80" fill="none">
-                  <rect x="17" y="50" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
-                  <rect x="13" y="48" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
-                  <ellipse cx="30" cy="51" rx="13" ry="3" fill="#3d2b1a"/>
-                  <line x1="30" y1="50" x2="30" y2="28" stroke="#4a7a30" strokeWidth="2"/>
-                  <ellipse cx="20" cy="30" rx="12" ry="6" fill="#3a8a3a" stroke="#2a5e2a" strokeWidth="1" transform="rotate(-30 20 30)"/>
-                  <ellipse cx="40" cy="26" rx="12" ry="6" fill="#4a9a4a" stroke="#2a5e2a" strokeWidth="1" transform="rotate(25 40 26)"/>
-                  <ellipse cx="24" cy="16" rx="10" ry="5" fill="#3a8a3a" stroke="#2a5e2a" strokeWidth="1" transform="rotate(-45 24 16)"/>
-                  <ellipse cx="38" cy="14" rx="10" ry="5" fill="#4a9a4a" stroke="#2a5e2a" strokeWidth="1" transform="rotate(40 38 14)"/>
-                  <ellipse cx="30" cy="10" rx="8" ry="4" fill="#5aaa5a" stroke="#2a5e2a" strokeWidth="1"/>
-                </svg>
-              </div>
-            </div>
-            </div>{/* end cabinet-decorations */}
             <CabinetScreen
               onOpenFile={openFile}
               onOpenAI={openAI}
@@ -172,6 +122,9 @@ function App() {
               onPanRight={() => panToRoom('right')}
               panning={panningRef}
               nametagRef={deNametagRef}
+              frameRef={deFrameRef}
+              cactusRef={deCactusRef}
+              plantRef={dePlantRef}
             />
           </div>
           <div data-room="tablet" style={{ position: 'absolute', inset: 0, visibility: 'hidden' }}>

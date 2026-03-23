@@ -12,6 +12,7 @@
 
 /* ── Scene wrapper (holds iso cabinet + shadow) ── */
 .cabinet-scene {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;

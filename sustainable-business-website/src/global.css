@@ -23,9 +23,6 @@ html, body, #root {
   }
 }
 
-@media (max-width: 900px) {
-  .cabinet-decorations { display: none !important; }
-}
 
 button {
   font-family: var(--font-mono);
