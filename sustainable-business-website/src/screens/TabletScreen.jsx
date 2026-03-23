@@ -133,14 +133,14 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
           <TabletSVG />
           <div style={{
             fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
-            letterSpacing: '0.18em', color: 'rgba(242,234,216,0.6)',
+            letterSpacing: '0.18em', color: 'rgba(0,30,80,0.7)',
             textTransform: 'uppercase',
           }}>
             CHARTS &amp; FIGURES
           </div>
           <div style={{
             fontFamily: 'var(--font-mono)', fontSize: '10px',
-            color: 'rgba(232,160,32,0.7)', letterSpacing: '0.1em',
+            color: 'rgba(0,102,204,0.8)', letterSpacing: '0.1em',
           }}>
             tap to open →
           </div>
@@ -167,8 +167,8 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
               onClick={activeSection ? closeSection : exitZoom}
               style={{
                 position: 'absolute', top: '16px', left: '16px', zIndex: 10,
-                fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#e8a020',
-                background: '#1a1a1a', border: '1px solid #333', padding: '6px 12px',
+                fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--color-amber)',
+                background: '#ffffff', border: '1px solid #ccc', padding: '6px 12px',
                 cursor: 'pointer', letterSpacing: '0.1em',
               }}
             >
@@ -188,9 +188,9 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
               }}
               transition={{ type: 'spring', stiffness: 220, damping: 28 }}
               style={{
-                background: '#111',
-                border: '2px solid #333',
-                boxShadow: '0 0 0 1px #000, 0 32px 80px rgba(0,0,0,0.8)',
+                background: '#d0d5de',
+                border: '2px solid #9aa0aa',
+                boxShadow: '0 0 0 1px #b0b8c4, 0 32px 80px rgba(0,30,80,0.25)',
                 overflow: 'hidden',
                 position: 'relative',
                 flexShrink: 0,
@@ -208,7 +208,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                 transition={{ type: 'spring', stiffness: 220, damping: 28 }}
                 style={{
                   width: '10px', height: '10px', borderRadius: '50%',
-                  background: '#2a2a2a', border: '1px solid #444',
+                  background: '#8a9099', border: '1px solid #6a7080',
                   position: 'absolute', zIndex: 3,
                 }}
               />
@@ -217,7 +217,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
               <div style={{
                 position: 'absolute', inset: '6px',
                 borderRadius: '16px',
-                border: '1px solid rgba(232,160,32,0.25)',
+                border: '1px solid rgba(0,102,204,0.3)',
                 pointerEvents: 'none', zIndex: 2,
               }} />
 
@@ -231,7 +231,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                 transition={{ type: 'spring', stiffness: 220, damping: 28 }}
                 style={{
                   position: 'absolute',
-                  background: '#0d1520',
+                  background: '#f5f7fa',
                   borderRadius: '8px',
                   overflow: 'hidden',
                 }}
@@ -281,8 +281,8 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                 style={{
                   position: 'absolute',
                   width: '44px', height: '44px', borderRadius: '50%',
-                  background: '#1e1e1e', border: '2px solid #444',
-                  boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.8)',
+                  background: '#b8bec8', border: '2px solid #8a90a0',
+                  boxShadow: 'inset 0 1px 3px rgba(0,30,80,0.2)',
                   zIndex: 3,
                 }}
               />
@@ -305,9 +305,9 @@ function TabletSVG() {
       xmlns="http://www.w3.org/2000/svg"
     >
       {/* Body */}
-      <rect x="2" y="2" width="216" height="296" rx="22" fill="#111" stroke="#2a2a2a" strokeWidth="2"/>
-      {/* Amber bezel ring */}
-      <rect x="8" y="8" width="204" height="284" rx="18" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="1"/>
+      <rect x="2" y="2" width="216" height="296" rx="22" fill="#c8cdd8" stroke="#9aa0aa" strokeWidth="2"/>
+      {/* Blue bezel ring */}
+      <rect x="8" y="8" width="204" height="284" rx="18" fill="none" stroke="rgba(0,102,204,0.3)" strokeWidth="1"/>
       {/* Screen area — lit up */}
       <rect x="16" y="40" width="188" height="212" rx="6" fill="url(#screenBg)"/>
       {/* Screen glow border */}
@@ -335,8 +335,8 @@ function TabletSVG() {
       <rect x="0" y="108" width="4" height="20" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
       <defs>
         <linearGradient id="screenBg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#1a2a3a"/>
-          <stop offset="100%" stopColor="#0d1820"/>
+          <stop offset="0%" stopColor="#e8eef5"/>
+          <stop offset="100%" stopColor="#d0dae8"/>
         </linearGradient>
         <linearGradient id="screenGloss" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="rgba(255,255,255,0.07)"/>

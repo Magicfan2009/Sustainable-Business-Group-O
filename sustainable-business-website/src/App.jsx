@@ -96,7 +96,7 @@ function App() {
     }}>
       {/* Parallax background */}
       <div ref={bgRef} style={{
-        position: 'fixed', inset: 0, background: '#0f0f0f', zIndex: -1,
+        position: 'fixed', inset: 0, background: 'var(--color-bg)', zIndex: -1,
       }} />
 
       {screen === SCREENS.PASSWORD && (

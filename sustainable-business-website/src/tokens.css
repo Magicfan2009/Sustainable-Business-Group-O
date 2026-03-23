@@ -1,24 +1,24 @@
 /* tokens.css — single source of truth for all design decisions */
 :root {
-  /* Palette */
-  --color-bg: #0f0f0f;
-  --color-cabinet: #2a2a2a;
-  --color-cabinet-light: #363636;
-  --color-cream: #f2ead8;
-  --color-amber: #e8a020;
-  --color-black: #000000;
-  --color-text: #0f0f0f;
-  --color-cream-muted: rgba(242, 234, 216, 0.6);
+  /* Palette — VW-aligned: white/light-grey base, navy + blue accents */
+  --color-bg: #f0f2f5;               /* light grey page background */
+  --color-cabinet: #6b7280;          /* medium grey cabinet body */
+  --color-cabinet-light: #7d8794;    /* lighter grey drawer faces */
+  --color-cream: #ffffff;            /* white — was warm cream */
+  --color-amber: #0066cc;            /* VW blue — replaces amber/yellow */
+  --color-black: #001e50;            /* VW navy — replaces pure black */
+  --color-text: #001e50;             /* navy text on light backgrounds */
+  --color-cream-muted: rgba(255, 255, 255, 0.6);
 
   /* Shadows — hard offset, zero blur (neobrutalist) */
-  --shadow-sm: 2px 2px 0 0 #000000;
-  --shadow-md: 4px 4px 0 0 #000000;
-  --shadow-lg: 6px 6px 0 0 #000000;
-  --shadow-xl: 8px 8px 0 0 #000000;
+  --shadow-sm: 2px 2px 0 0 #001e50;
+  --shadow-md: 4px 4px 0 0 #001e50;
+  --shadow-lg: 6px 6px 0 0 #001e50;
+  --shadow-xl: 8px 8px 0 0 #001e50;
 
   /* Borders */
-  --border: 2px solid #000000;
-  --border-heavy: 3px solid #000000;
+  --border: 2px solid #001e50;
+  --border-heavy: 3px solid #001e50;
 
   /* Typography */
   --font-mono: 'Courier Prime', 'Special Elite', monospace;
