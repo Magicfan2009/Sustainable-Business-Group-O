@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
+import PanArrow from '../components/PanArrow'
 import './CabinetScreen.css'
 
 const DRAWERS = [
@@ -12,7 +13,7 @@ const DRAWERS = [
   { code: 'SEC-06', label: 'EXECUTIVE SUMMARY' },
 ]
 
-export default function CabinetScreen({ onOpenFile, onOpenAI, onHome }) {
+export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft, onPanRight, panning }) {
   const sceneRef = useRef(null)
 
   useGSAP(() => {
@@ -25,7 +26,9 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome }) {
   }, { scope: sceneRef })
 
   return (
-    <div className="cabinet-screen">
+    <div className="cabinet-screen" style={{ position: 'relative' }}>
+      <PanArrow direction="left" onClick={onPanLeft} panning={panning} />
+      <PanArrow direction="right" onClick={onPanRight} panning={panning} />
 
       <div className="cabinet-scene" ref={sceneRef}>
 

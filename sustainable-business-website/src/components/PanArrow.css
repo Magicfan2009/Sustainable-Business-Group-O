@@ -1,0 +1,40 @@
+.pan-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  background: #1a1a1a;
+  border: 2px solid #333;
+  box-shadow: 2px 2px 0 #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #666;
+  transition: border-color 80ms ease-out, color 80ms ease-out;
+  z-index: 5;
+  user-select: none;
+}
+
+.pan-arrow--left  { left: 8px; }
+.pan-arrow--right { right: 8px; }
+
+.pan-arrow:hover:not(.pan-arrow--disabled) {
+  border-color: #e8a020;
+  color: #e8a020;
+}
+
+.pan-arrow--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .pan-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 20px;
+  }
+}
