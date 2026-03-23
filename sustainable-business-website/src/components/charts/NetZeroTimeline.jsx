@@ -109,13 +109,16 @@ export default function NetZeroTimeline() {
           const c = COMPANIES.find(x => x.name === hovered)
           if (!c) return null
           return (
-            <motion.div key={hovered} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.15 }}
+            <motion.div key={hovered} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.12 }}
               style={{
-                width: '100%', background: '#ffffff',
+                position: 'absolute',
+                bottom: '8px', left: '8px', right: '8px',
+                background: '#ffffff',
                 border: `1px solid ${c.color}`,
                 padding: '6px 8px', fontSize: '10px', color: '#001e50',
                 fontFamily: 'var(--font-mono)', lineHeight: 1.5,
                 boxShadow: '0 2px 8px rgba(0,30,80,0.1)',
+                pointerEvents: 'none', zIndex: 10,
               }}
             >
               <div style={{ color: c.color, fontWeight: 700, marginBottom: '3px', fontSize: '11px' }}>

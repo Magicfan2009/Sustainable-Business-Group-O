@@ -88,13 +88,16 @@ export default function NetZeroProjection() {
       </svg>
 
       {hoveredPt && (
-        <motion.div initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
           style={{
-            marginTop: '4px', background: '#ffffff',
+            position: 'absolute',
+            bottom: '8px', left: '8px', right: '8px',
+            background: '#ffffff',
             border: `1px solid ${hoveredPt.color}`,
             padding: '5px 8px', fontSize: '11px', color: '#001e50',
             fontFamily: 'var(--font-mono)', lineHeight: 1.5,
             boxShadow: '0 2px 8px rgba(0,30,80,0.1)',
+            pointerEvents: 'none', zIndex: 10,
           }}
         >
           <span style={{ color: hoveredPt.color, fontWeight: 700 }}>{hoveredPt.label}</span>
