@@ -8,14 +8,15 @@ const SEC01_PAGES = [
   <div key="sec01-p1">
     <h2>From Value Destroyer to Value Creator</h2>
     <p>
-      The 2015 "Dieselgate" emissions scandal marked a structural turning point for Volkswagen.
-      What began as a failure in the Compliance phase of the Dunphy et al. (2003) Waves of Sustainability
-      model catalysed a transformation into VW's current third wave: the Sustaining Corporation.
+      The <span className="mark-red">2015 "Dieselgate" emissions scandal</span> marked a structural turning point for Volkswagen.
+      What began as a failure in the <span className="mark-yellow">Compliance phase of the Dunphy et al. (2003) Waves of Sustainability
+      model</span> catalysed a transformation into VW's current <span className="pen-blue">third wave: the Sustaining Corporation</span>.
     </p>
+    <span className="margin-note">→ Dunphy model = key framework (Lecture 1)</span>
     <p>
       VW now defines sustainability across four nested dimensions — Nature, People, Society, and Business —
-      aligning with Kate Raworth's Doughnut Economics framework: operating within the ecological ceiling
-      while meeting the social foundation.
+      aligning with <span className="mark-blue">Kate Raworth's Doughnut Economics framework</span>: operating within the <span className="pen-green">ecological ceiling</span>
+      while meeting the <span className="pen-green">social foundation</span>.
     </p>
     <div className="pull-quote">
       The "regenerate+" strategy aims to reinterpret VW not merely as a car manufacturer,
@@ -26,7 +27,7 @@ const SEC01_PAGES = [
       <li><strong>Nature</strong> — Planetary boundaries, climate targets, circular economy</li>
       <li><strong>People</strong> — Human rights, supply chain due diligence, labour standards</li>
       <li><strong>Society</strong> — Community engagement, trust rebuilding, governance</li>
-      <li><strong>Business</strong> — Sustainable profitability, green finance, EV transition</li>
+      <li><strong>Business</strong> — <span className="mark-yellow">Sustainable profitability</span>, green finance, EV transition</li>
     </ul>
   </div>,
 
@@ -39,14 +40,15 @@ const SEC01_PAGES = [
       </thead>
       <tbody>
         <tr><td>1st</td><td>Rejection</td><td>Pre-1990s</td><td>Maximise profit with minimal environmental consideration</td></tr>
-        <tr><td>2nd</td><td>Compliance</td><td>1990–2015</td><td>Meeting legal minimums — culminating in the 2015 Dieselgate defeat device scandal</td></tr>
-        <tr><td>3rd (current)</td><td>Transformation</td><td>2016–Present</td><td>The "regenerate+" strategy: reinterpreting VW as an integral part of society</td></tr>
+        <tr><td>2nd</td><td>Compliance</td><td>1990–2015</td><td><span className="mark-red">Meeting legal minimums — culminating in the 2015 Dieselgate defeat device scandal</span></td></tr>
+        <tr><td>3rd (current)</td><td><span className="mark-green">Transformation</span></td><td>2016–Present</td><td>The "regenerate+" strategy: reinterpreting VW as an integral part of society</td></tr>
       </tbody>
     </table>
+    <span className="margin-note">⬆ VW is HERE now</span>
     <p>
-      Whilst VW has entered the Transformation wave, the 2015 scandal reveals the fragility of
-      compliance-only approaches. The Dunphy model makes clear that organisations must integrate
-      sustainability at the strategic core — not manage it as a risk afterthought.
+      Whilst VW has entered the Transformation wave, the 2015 scandal reveals the <span className="pen-red">fragility of
+      compliance-only approaches</span>. The Dunphy model makes clear that organisations must integrate
+      sustainability at the <span className="mark-yellow">strategic core</span> — not manage it as a risk afterthought.
     </p>
   </div>,
 
@@ -54,17 +56,18 @@ const SEC01_PAGES = [
   <div key="sec01-p3">
     <h2>Doughnut Economics — Nested Dependencies</h2>
     <p>
-      Unlike the "three overlapping circles" model, VW's framework adopts the 3-Nested Dependencies
-      Model: Economy sits inside Society, which sits inside Environment.
+      Unlike the "three overlapping circles" model, VW's framework adopts the <span className="mark-blue">3-Nested Dependencies
+      Model</span>: Economy sits inside Society, which sits inside Environment.
     </p>
+    <span className="margin-note">Not the Venn diagram! Nested = stronger claim</span>
     <table>
       <thead>
         <tr><th>Layer</th><th>VW Application</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Ecological Ceiling</strong></td><td>Zero Impact Factory and net zero 2050 — planetary boundaries for climate, biodiversity, water</td></tr>
-        <tr><td><strong>Social Foundation</strong></td><td>Human rights, supply chain due diligence, cobalt/lithium sourcing — S-Rating for 63,000+ suppliers</td></tr>
-        <tr><td><strong>Business Economy</strong></td><td>Sustainable profitability within social and environmental bounds — 6% operating margin, €89B EV investment</td></tr>
+        <tr><td><strong>Ecological Ceiling</strong></td><td><span className="mark-green">Zero Impact Factory</span> and net zero 2050 — planetary boundaries for climate, biodiversity, water</td></tr>
+        <tr><td><strong>Social Foundation</strong></td><td>Human rights, supply chain due diligence, cobalt/lithium sourcing — <span className="mark-yellow">S-Rating for 63,000+ suppliers</span></td></tr>
+        <tr><td><strong>Business Economy</strong></td><td>Sustainable profitability within social and environmental bounds — <span className="pen-blue">6% operating margin, €89B EV investment</span></td></tr>
       </tbody>
     </table>
   </div>,
@@ -72,16 +75,17 @@ const SEC01_PAGES = [
   /* Page 4 */
   <div key="sec01-p4">
     <h2>Business Case Drivers</h2>
-    <p>Sustainability is not charity. Four strategic drivers explain VW's €89 billion commitment.</p>
+    <p><span className="mark-yellow">Sustainability is not charity.</span> Four strategic drivers explain VW's €89 billion commitment.</p>
+    <span className="margin-note--red margin-note">← This framing = Lecture 3 Business Case argument</span>
     <table>
       <thead>
         <tr><th>Driver</th><th>Detail</th><th>Metric</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Access to Markets</strong></td><td>100% EV transition in Europe by 2035 to meet EU fleet CO₂ targets (&lt;93.6g/km for 2025)</td><td>100% BEV by 2035</td></tr>
+        <tr><td><strong>Access to Markets</strong></td><td>100% EV transition in Europe by 2035 to meet EU fleet CO₂ targets (&lt;93.6g/km for 2025)</td><td><span className="mark-green">100% BEV by 2035</span></td></tr>
         <tr><td><strong>Operational Efficiency</strong></td><td>"Zero Impact Factory": reducing environmental impact per vehicle by 37.5% by 2030</td><td>−37.5% impact/vehicle</td></tr>
-        <tr><td><strong>Access to Capital</strong></td><td>Over €15 billion in Green Bonds issued (late 2025)</td><td>€15B+ Green Bonds</td></tr>
-        <tr><td><strong>Compliance</strong></td><td>Avoiding multi-billion euro fines for fleet CO₂ non-compliance. VW at 0g compliance margin for 2025</td><td>0g margin — critical</td></tr>
+        <tr><td><strong>Access to Capital</strong></td><td>Over €15 billion in Green Bonds issued (late 2025)</td><td><span className="mark-green">€15B+ Green Bonds</span></td></tr>
+        <tr><td><strong>Compliance</strong></td><td>Avoiding multi-billion euro fines for fleet CO₂ non-compliance. VW at 0g compliance margin for 2025</td><td><span className="mark-red">0g margin — critical</span></td></tr>
       </tbody>
     </table>
   </div>,
@@ -92,22 +96,23 @@ const SEC02_PAGES = [
   <div key="sec02-p1">
     <h2>Carbon Accounts &amp; Climate Targets</h2>
     <p>
-      Framework: GHG Protocol Corporate Accounting and Reporting Standard.<br/>
+      Framework: <span className="mark-blue">GHG Protocol Corporate Accounting and Reporting Standard</span>.<br/>
       Formula: <strong>Activity Data × Emission Factor = GHG Emitted (tCO₂e)</strong><br/>
-      Note: 1 tonne Carbon = 3.67 tCO₂e (atomic weights 12 &amp; 44)
+      Note: <span className="mark-yellow">1 tonne Carbon = 3.67 tCO₂e</span> (atomic weights 12 &amp; 44)
     </p>
+    <span className="margin-note">GHG Protocol = gold standard methodology (Lectures 4–7)</span>
     <h3>Scope 1 &amp; 2 Performance (2024)</h3>
     <p>
-      VW has achieved a 25% reduction in Scope 1 emissions since 2019, with market-based Scope 2
-      at 4.2 MtCO₂e. Targets are SBTi validated at 1.5°C alignment.
+      VW has achieved a <span className="mark-green">25% reduction in Scope 1 emissions since 2019</span>, with market-based Scope 2
+      at 4.2 MtCO₂e. Targets are <span className="pen-green">SBTi validated at 1.5°C alignment</span>.
     </p>
     <table>
       <thead>
         <tr><th>Scope</th><th>Type</th><th>Value</th><th>Note</th></tr>
       </thead>
       <tbody>
-        <tr><td>Scope 1</td><td>Direct Emissions</td><td>3.3 Mt CO₂e</td><td>−25% since 2019. Fuel combustion, industrial processes.</td></tr>
-        <tr><td>Scope 2</td><td>Energy Indirect</td><td>4.2 Mt CO₂e</td><td>Market-based method. Purchased electricity and heat.</td></tr>
+        <tr><td>Scope 1</td><td>Direct Emissions</td><td><span className="mark-green">3.3 Mt CO₂e</span></td><td>−25% since 2019. Fuel combustion, industrial processes.</td></tr>
+        <tr><td>Scope 2</td><td>Energy Indirect</td><td>4.2 Mt CO₂e</td><td><span className="pen-blue">Market-based method.</span> Purchased electricity and heat.</td></tr>
       </tbody>
     </table>
   </div>,
@@ -116,26 +121,28 @@ const SEC02_PAGES = [
   <div key="sec02-p2">
     <h2>The Scope 3 Trap — Critical Material Issue</h2>
     <div className="pull-quote">Scope 3: ~95% of Total Emissions</div>
+    <span className="margin-note--red margin-note">⚠ This is the number that matters most</span>
     <p>
-      For an automaker like VW, Scope 3 Category 11 (Use of Sold Products) represents
-      688 Mt CO₂e — the single most material category. These emissions occur when customers
-      drive VW vehicles, making the transition to zero-emission EVs the primary lever.
+      For an automaker like VW, <span className="mark-red">Scope 3 Category 11 (Use of Sold Products) represents
+      688 Mt CO₂e</span> — the single most material category. These emissions occur when customers
+      drive VW vehicles, making the <span className="mark-yellow">transition to zero-emission EVs the primary lever</span>.
     </p>
     <table>
       <thead>
         <tr><th>Scope 3 Category</th><th>Volume</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>Cat.11 Use of Sold Products</td><td>688 Mt (92%)</td><td>Emissions from customers driving ICE vehicles. EV transition is VW's primary lever.</td></tr>
+        <tr><td>Cat.11 Use of Sold Products</td><td><span className="mark-red">688 Mt (92%)</span></td><td>Emissions from customers driving ICE vehicles. EV transition is VW's primary lever.</td></tr>
         <tr><td>Cat.1 Purchased Goods</td><td>38 Mt (5%)</td><td>Upstream supply chain. 63,000+ suppliers in 96 countries.</td></tr>
         <tr><td>Cat.4 Upstream Transport</td><td>~1%</td><td>—</td></tr>
         <tr><td>Other Scope 3</td><td>~2%</td><td>—</td></tr>
       </tbody>
     </table>
     <p>
-      <strong>SBTi Note:</strong> Carbon credits and offsets cannot be counted as emission reductions
-      toward science-based targets. They may only be used to neutralise genuinely residual emissions.
+      <strong>SBTi Note:</strong> <span className="pen-red">Carbon credits and offsets cannot be counted as emission reductions
+      toward science-based targets.</span> They may only be used to neutralise genuinely residual emissions.
     </p>
+    <span className="margin-note--red margin-note">Oxford Offsetting Principles — offsets ≠ reductions!</span>
   </div>,
 
   /* Page 3 */
@@ -146,35 +153,38 @@ const SEC02_PAGES = [
         <tr><th>Target</th><th>Pathway</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>Scope 1 &amp; 2</td><td>1.5°C Aligned (SBTi validated)</td><td>Reduce absolute Scope 1+2 GHG emissions 50% by 2030 vs. 2018 baseline</td></tr>
-        <tr><td>Scope 3</td><td>Well-below 2°C</td><td>Reduce carbon footprint per vehicle-km by 30% by 2030 vs. 2018 baseline</td></tr>
-        <tr><td>Net Zero</td><td>2050 Target</td><td>Full value chain net carbon neutrality. Offsets cannot substitute real reductions.</td></tr>
+        <tr><td>Scope 1 &amp; 2</td><td><span className="mark-green">1.5°C Aligned (SBTi validated)</span></td><td>Reduce absolute Scope 1+2 GHG emissions 50% by 2030 vs. 2018 baseline</td></tr>
+        <tr><td>Scope 3</td><td><span className="mark-yellow">Well-below 2°C</span></td><td>Reduce carbon footprint per vehicle-km by 30% by 2030 vs. 2018 baseline</td></tr>
+        <tr><td>Net Zero</td><td>2050 Target</td><td>Full value chain net carbon neutrality. <span className="pen-red">Offsets cannot substitute real reductions.</span></td></tr>
       </tbody>
     </table>
+    <span className="margin-note">Scope 3 NOT yet at 1.5°C — key credibility gap vs. Mercedes</span>
   </div>,
 
   /* Page 4 */
   <div key="sec02-p4">
     <h2>Decarbonisation Hierarchy</h2>
-    <p>Avoid → Reduce → Compensate</p>
-    <h3>1. Avoid (Highest Priority)</h3>
+    <p><span className="mark-blue">Avoid → Reduce → Compensate</span></p>
+    <span className="margin-note">Priority order matters — can't jump to offsets! (Oxford Principles)</span>
+    <h3>1. <span className="mark-green">Avoid</span> (Highest Priority)</h3>
     <ul>
-      <li>100% BEV portfolio by 2035 in Europe</li>
+      <li><span className="pen-green">100% BEV portfolio by 2035 in Europe</span></li>
       <li>Zero Impact Factory design</li>
       <li>Renewable energy procurement</li>
     </ul>
-    <h3>2. Reduce (Core Strategy)</h3>
+    <h3>2. <span className="mark-yellow">Reduce</span> (Core Strategy)</h3>
     <ul>
       <li>Fleet efficiency improvements</li>
       <li>Supply chain S-Rating system</li>
       <li>Circular economy — 40% recycled materials by 2040</li>
     </ul>
-    <h3>3. Compensate — Residuals Only (Last Resort)</h3>
+    <h3>3. <span className="mark-red">Compensate</span> — Residuals Only (Last Resort)</h3>
     <ul>
       <li>Carbon credits for genuinely residual emissions only</li>
       <li>Nature-based solutions</li>
-      <li>High-quality verified offsets (Gold Standard)</li>
+      <li><span className="pen-blue">High-quality verified offsets (Gold Standard)</span></li>
     </ul>
+    <span className="margin-note--red margin-note">Only step 3 uses offsets — and only for what cannot be avoided/reduced</span>
   </div>,
 ]
 
@@ -183,19 +193,20 @@ const SEC03_PAGES = [
   <div key="sec03-p1">
     <h2>People, Planet &amp; Profit</h2>
     <p>
-      Elkington's Triple Bottom Line applied to Volkswagen. The three pillars are treated as
+      <span className="mark-blue">Elkington's Triple Bottom Line</span> applied to Volkswagen. The three pillars are treated as
       nested dependencies — profit operates within society, which operates within environmental limits.
     </p>
+    <span className="margin-note">TBL = separate accounts for each pillar — not a trade-off! (Lecture 8)</span>
     <h3>People — Human Rights &amp; Supply Chain</h3>
     <table>
       <thead>
         <tr><th>Metric</th><th>Initiative</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>18 Materials Audited</td><td>Human Rights Due Diligence</td><td>Auditing 18 high-risk raw materials including Cobalt and Lithium to eliminate child labour</td></tr>
-        <tr><td>63,000+ Suppliers</td><td>S-Rating Supplier System</td><td>Mandatory sustainability rating. Failure on "People" criteria = no contract</td></tr>
+        <tr><td><span className="mark-yellow">18 Materials Audited</span></td><td>Human Rights Due Diligence</td><td>Auditing 18 high-risk raw materials including <span className="pen-red">Cobalt and Lithium</span> to eliminate child labour</td></tr>
+        <tr><td><span className="mark-green">63,000+ Suppliers</span></td><td>S-Rating Supplier System</td><td>Mandatory sustainability rating. <span className="mark-red">Failure on "People" criteria = no contract</span></td></tr>
         <tr><td>Full Chain Traceability</td><td>Battery Mineral Traceability</td><td>Blockchain-based tracking of Cobalt from DRC mines to VW factories</td></tr>
-        <tr><td>35,000 Retrained</td><td>Workforce Transition</td><td>35,000 German workers retrained for EV/digital roles through the "Future Pact"</td></tr>
+        <tr><td>35,000 Retrained</td><td>Workforce Transition</td><td><span className="pen-blue">35,000 German workers retrained</span> for EV/digital roles through the "Future Pact"</td></tr>
       </tbody>
     </table>
   </div>,
@@ -203,15 +214,16 @@ const SEC03_PAGES = [
   /* Page 2 */
   <div key="sec03-p2">
     <h2>Planet — Circular Economy &amp; Climate</h2>
+    <span className="margin-note--green margin-note">Regenerative by Design — beyond just reducing harm</span>
     <table>
       <thead>
         <tr><th>Metric</th><th>Initiative</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>40% by 2040</td><td>Circular Economy Target</td><td>40% circular materials in vehicles by 2040, benchmarked against Renault's Cradle-to-Cradle leadership</td></tr>
-        <tr><td>−37.5% by 2030</td><td>Zero Impact Factory</td><td>Reducing environmental impact per vehicle produced by 37.5% by 2030. Zero carbon, zero waste, zero water per site.</td></tr>
-        <tr><td>95%+ Recovered</td><td>Battery Closed Loop</td><td>Used EV batteries repurposed for stationary energy storage before full recycling</td></tr>
-        <tr><td>Net Positive by 2030</td><td>Biodiversity Commitment</td><td>Net positive biodiversity at all new factory sites, aligned with Kunming-Montreal Framework</td></tr>
+        <tr><td><span className="mark-green">40% by 2040</span></td><td>Circular Economy Target</td><td>40% circular materials in vehicles by 2040, benchmarked against Renault's Cradle-to-Cradle leadership</td></tr>
+        <tr><td><span className="mark-yellow">−37.5% by 2030</span></td><td>Zero Impact Factory</td><td>Reducing environmental impact per vehicle produced by 37.5% by 2030. <span className="pen-green">Zero carbon, zero waste, zero water</span> per site.</td></tr>
+        <tr><td>95%+ Recovered</td><td>Battery Closed Loop</td><td>Used EV batteries repurposed for <span className="pen-blue">stationary energy storage</span> before full recycling</td></tr>
+        <tr><td>Net Positive by 2030</td><td>Biodiversity Commitment</td><td>Net positive biodiversity at all new factory sites, aligned with <span className="mark-blue">Kunming-Montreal Framework</span></td></tr>
       </tbody>
     </table>
   </div>,
@@ -219,15 +231,16 @@ const SEC03_PAGES = [
   /* Page 3 */
   <div key="sec03-p3">
     <h2>Profit — Sustainable Profitability</h2>
+    <span className="margin-note">Profit = evidence sustainability is good business, not just good ethics</span>
     <table>
       <thead>
         <tr><th>Metric</th><th>Initiative</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>6% Margin Target</td><td>Operating Margin</td><td>Targeting 6% operating margin by 2025 while investing €89B in electrification and digitalisation to 2030</td></tr>
-        <tr><td>€15B+ Raised</td><td>Green Bond Programme</td><td>Over €15 billion in green bonds issued (2025), providing ESG-mandated institutional capital at favourable rates</td></tr>
-        <tr><td>#1 EV in Europe (2025)</td><td>EV Revenue Growth</td><td>VW reclaimed #1 EV market share in Europe in 2025 with ID.3, ID.4, ID.7 and ID.Buzz</td></tr>
-        <tr><td>0g Margin — Critical</td><td>Avoided Fines</td><td>EU fleet CO₂ compliance at 0g margin. Each gram over = ~€95 fine × 8M+ vehicles sold</td></tr>
+        <tr><td>6% Margin Target</td><td>Operating Margin</td><td>Targeting 6% operating margin by 2025 while investing <span className="mark-yellow">€89B in electrification</span> and digitalisation to 2030</td></tr>
+        <tr><td><span className="mark-green">€15B+ Raised</span></td><td>Green Bond Programme</td><td>Over €15 billion in green bonds issued (2025), providing ESG-mandated institutional capital at favourable rates</td></tr>
+        <tr><td><span className="mark-green">#1 EV in Europe (2025)</span></td><td>EV Revenue Growth</td><td>VW reclaimed #1 EV market share in Europe in 2025 with ID.3, ID.4, ID.7 and ID.Buzz</td></tr>
+        <tr><td><span className="mark-red">0g Margin — Critical</span></td><td>Avoided Fines</td><td>EU fleet CO₂ compliance at 0g margin. Each gram over = <span className="pen-red">~€95 fine × 8M+ vehicles sold</span></td></tr>
       </tbody>
     </table>
   </div>,
@@ -236,17 +249,18 @@ const SEC03_PAGES = [
   <div key="sec03-p4">
     <h2>Ethics &amp; Trust — Rebuilding Post-Dieselgate</h2>
     <p>
-      The Edelman Trust Barometer shows the automotive sector at ~67% global trust.
-      VW carries a specific trust deficit post-2015 that demands higher transparency standards.
+      The <span className="mark-blue">Edelman Trust Barometer</span> shows the automotive sector at ~67% global trust.
+      VW carries a <span className="mark-red">specific trust deficit post-2015</span> that demands higher transparency standards.
     </p>
+    <span className="margin-note--red margin-note">Dieselgate = trust capital destroyed. Governance reform = rebuilding it.</span>
     <table>
       <thead>
         <tr><th>Initiative</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>Independent Sustainability Council</td><td>VW established an independent Council to challenge the Board of Management — direct governance response to Dieselgate</td></tr>
-        <tr><td>Reasonable Assurance Reporting</td><td>VW uses Reasonable Assurance (positive framing: "fairly presented") for key KPIs — a higher standard than Limited Assurance used by many competitors including Tesla</td></tr>
-        <tr><td>Double Materiality (CSRD)</td><td>VW assesses both financial materiality AND impact materiality — meeting the EU CSRD standard</td></tr>
+        <tr><td><span className="mark-green">Independent Sustainability Council</span></td><td>VW established an independent Council to challenge the Board of Management — direct governance response to Dieselgate</td></tr>
+        <tr><td><span className="mark-yellow">Reasonable Assurance Reporting</span></td><td>VW uses Reasonable Assurance (positive framing: "fairly presented") for key KPIs — a <span className="pen-green">higher standard</span> than Limited Assurance used by many competitors including Tesla</td></tr>
+        <tr><td>Double Materiality (CSRD)</td><td>VW assesses both <span className="pen-blue">financial materiality AND impact materiality</span> — meeting the EU CSRD standard</td></tr>
       </tbody>
     </table>
     <h3>Double Materiality Map</h3>
@@ -255,12 +269,12 @@ const SEC03_PAGES = [
         <tr><th>Impact Topic</th><th>Financial</th><th>Impact on World</th><th>CSRD Status</th></tr>
       </thead>
       <tbody>
-        <tr><td>Climate Change / GHG</td><td>High</td><td>Critical</td><td>Material</td></tr>
-        <tr><td>Battery Mineral Supply Chain</td><td>High</td><td>High</td><td>Material</td></tr>
+        <tr><td><span className="mark-red">Climate Change / GHG</span></td><td>High</td><td>Critical</td><td>Material</td></tr>
+        <tr><td><span className="mark-red">Battery Mineral Supply Chain</span></td><td>High</td><td>High</td><td>Material</td></tr>
         <tr><td>Human Rights in Supply Chain</td><td>Medium</td><td>Critical</td><td>Material</td></tr>
         <tr><td>Product Carbon Footprint</td><td>High</td><td>High</td><td>Material</td></tr>
         <tr><td>Data Security &amp; Privacy</td><td>High</td><td>Medium</td><td>Material</td></tr>
-        <tr><td>Circular Economy / Waste</td><td>Medium</td><td>High</td><td>Material</td></tr>
+        <tr><td>Circular Economy / Waste</td><td>Medium</td><td>High</td><td><span className="mark-yellow">Material</span></td></tr>
         <tr><td>Employee Health &amp; Safety</td><td>Medium</td><td>Medium</td><td>Significant</td></tr>
         <tr><td>Biodiversity &amp; Land Use</td><td>Low</td><td>Medium</td><td>Relevant</td></tr>
       </tbody>
@@ -408,42 +422,43 @@ const SEC05_PAGES = [
     <h2>Recommended Strategy 2025–2035</h2>
     <p>
       Based on analysis of VW's sustainability performance, competitive benchmarking, and application
-      of the GHG Protocol, SBTi, and Doughnut Economics frameworks.
+      of the <span className="mark-blue">GHG Protocol, SBTi, and Doughnut Economics frameworks</span>.
     </p>
     <table>
       <thead>
         <tr><th>Assessment</th><th>Finding</th></tr>
       </thead>
       <tbody>
-        <tr><td>Key Risk</td><td>0g EU compliance margin for 2025. Any EV sales shortfall = multi-billion fines.</td></tr>
-        <tr><td>Key Gap vs BMW</td><td>SBTi Scope 3 validation not yet completed. This is the #1 credibility gap.</td></tr>
-        <tr><td>Key Strength</td><td>Scale and portfolio breadth. #1 EV in Europe 2025. €15B green bond momentum.</td></tr>
+        <tr><td><span className="mark-red">Key Risk</span></td><td><span className="pen-red">0g EU compliance margin for 2025.</span> Any EV sales shortfall = multi-billion fines.</td></tr>
+        <tr><td><span className="mark-yellow">Key Gap</span></td><td>SBTi Scope 3 validation not yet completed. <span className="mark-yellow">This is the #1 credibility gap.</span></td></tr>
+        <tr><td><span className="mark-green">Key Strength</span></td><td>Scale and portfolio breadth. <span className="pen-green">#1 EV in Europe 2025.</span> €15B green bond momentum.</td></tr>
       </tbody>
     </table>
   </div>,
 
   /* Page 2 */
   <div key="sec05-p2">
-    <h2>R1 — Environmental [CRITICAL]</h2>
+    <h2>R1 — Environmental <span className="mark-red">[CRITICAL]</span></h2>
     <h3>Accelerate Scope 3 Category 11 Reduction</h3>
     <p>
-      Category 11 (Use of Sold Products) is ~94% of total Scope 3 at 688 Mt CO₂e.
+      <span className="mark-red">Category 11 (Use of Sold Products) is ~94% of total Scope 3 at 688 Mt CO₂e.</span>
       No Net Zero 2050 is achievable without aggressively reducing ICE fleet share.
     </p>
+    <span className="margin-note--red margin-note">Action #1 — cannot be deferred</span>
     <table>
       <thead>
         <tr><th>Target</th><th>Detail</th></tr>
       </thead>
       <tbody>
         <tr><td>30% BEV share globally by 2028</td><td>Feasible with current investment trajectory (vs current ~20%)</td></tr>
-        <tr><td>Full BEV in Europe by 2035</td><td>NO derogations — required for regulatory compliance</td></tr>
-        <tr><td>−30% carbon intensity/vehicle-km by 2030</td><td>SBTi validated, on track vs 2018 baseline</td></tr>
+        <tr><td><span className="mark-green">Full BEV in Europe by 2035</span></td><td>NO derogations — required for regulatory compliance</td></tr>
+        <tr><td>−30% carbon intensity/vehicle-km by 2030</td><td><span className="pen-green">SBTi validated</span>, on track vs 2018 baseline</td></tr>
       </tbody>
     </table>
     <p>
-      <strong>Operations:</strong> Accelerate ID.2 (€25K entry-level) launch to democratise EVs.
+      <strong>Operations:</strong> Accelerate <span className="mark-yellow">ID.2 (€25K entry-level)</span> launch to democratise EVs.
       Expand IONITY charging partnership.<br/>
-      <strong>Products:</strong> Redesign all future platforms as BEV-only. No new ICE platform investment post-2026.
+      <strong>Products:</strong> Redesign all future platforms as BEV-only. <span className="pen-red">No new ICE platform investment post-2026.</span>
     </p>
   </div>,
 
@@ -535,28 +550,30 @@ const SEC06_PAGES = [
       "VW's shift from a Value Destroyer to a Reasonable Assurance leader proves that transformation
       is possible — but its razor-thin compliance margin makes 2025–2030 a make-or-break era."
     </div>
+    <span className="margin-note">This is the mic-drop conclusion — use in presentations</span>
     <h3>Key Findings</h3>
     <ol>
-      <li><strong>VW is in Transformation (Wave 3)</strong> — Following Dieselgate, VW has structurally reoriented. The "regenerate+" strategy positions VW as an integral part of society.</li>
-      <li><strong>Scope 3 is the Battle Ground</strong> — ~95% of VW's total emissions are Scope 3, with Category 11 at 688 Mt CO₂e. The EV transition is the climate strategy.</li>
-      <li><strong>People &amp; Planet Pillar Credible</strong> — VW's S-Rating system, cobalt traceability, and Reasonable Assurance reporting put VW ahead of Mercedes-Benz and Toyota on transparency.</li>
-      <li><strong>Key Differentiator vs Mercedes-Benz</strong> — Mercedes targets Net Zero by 2039 but backed off its all-electric pledge. VW's Reasonable Assurance standard and 2035 BEV mandate are stronger structural signals.</li>
+      <li><strong>VW is in <span className="mark-blue">Transformation (Wave 3)</span></strong> — Following Dieselgate, VW has structurally reoriented. The "regenerate+" strategy positions VW as an integral part of society.</li>
+      <li><strong><span className="mark-red">Scope 3 is the Battle Ground</span></strong> — ~95% of VW's total emissions are Scope 3, with <span className="pen-red">Category 11 at 688 Mt CO₂e</span>. The EV transition is the climate strategy.</li>
+      <li><strong><span className="mark-green">People &amp; Planet Pillar Credible</span></strong> — VW's S-Rating system, cobalt traceability, and <span className="pen-green">Reasonable Assurance</span> reporting put VW ahead of Mercedes-Benz and Toyota on transparency.</li>
+      <li><strong>Key Differentiator vs Stellantis</strong> — Stellantis leads on timeline (2038) but <span className="mark-yellow">scaled back its "Dare Forward" plan in 2024</span>. VW's governance integrity is the stronger structural signal.</li>
     </ol>
   </div>,
 
   /* Page 2 */
   <div key="sec06-p2">
     <h2>Five Critical Actions — Board Priorities</h2>
+    <span className="margin-note--red margin-note">Actions ranked by urgency — start at 01</span>
     <table>
       <thead>
         <tr><th>#</th><th>Action</th><th>Timing</th></tr>
       </thead>
       <tbody>
-        <tr><td>01</td><td>Submit Scope 3 targets to SBTi for validation — close the #1 credibility gap vs Mercedes-Benz and BMW</td><td>Immediate</td></tr>
-        <tr><td>02</td><td>Execute 2025 EU CO₂ compliance at 0g margin — any delay = billions in fines</td><td>Critical</td></tr>
-        <tr><td>03</td><td>Launch ID.2 entry-level BEV to drive Category 11 reductions at scale</td><td>2026</td></tr>
-        <tr><td>04</td><td>Extend S-Rating to Tier 2 suppliers — complete the cobalt/lithium traceability chain</td><td>2027–2028</td></tr>
-        <tr><td>05</td><td>Achieve CDP "A" rating and publish Sustainability Council challenge report annually</td><td>2026</td></tr>
+        <tr><td><span className="circle-red">01</span></td><td><span className="mark-yellow">Submit Scope 3 targets to SBTi</span> for validation — close the #1 credibility gap vs Mercedes-Benz</td><td>Immediate</td></tr>
+        <tr><td><span className="circle-red">02</span></td><td><span className="mark-red">Execute 2025 EU CO₂ compliance</span> at 0g margin — any delay = billions in fines</td><td>Critical</td></tr>
+        <tr><td>03</td><td>Launch <span className="pen-green">ID.2 entry-level BEV</span> to drive Category 11 reductions at scale</td><td>2026</td></tr>
+        <tr><td>04</td><td>Extend <span className="pen-blue">S-Rating to Tier 2 suppliers</span> — complete the cobalt/lithium traceability chain</td><td>2027–2028</td></tr>
+        <tr><td>05</td><td>Achieve <span className="mark-green">CDP "A" rating</span> and publish Sustainability Council challenge report annually</td><td>2026</td></tr>
       </tbody>
     </table>
     <hr/>
@@ -566,12 +583,12 @@ const SEC06_PAGES = [
         <tr><th>Framework</th><th>Application</th></tr>
       </thead>
       <tbody>
-        <tr><td>Dunphy et al. (2003)</td><td>Categorising VW's journey through 3 Waves of Sustainability</td></tr>
-        <tr><td>GHG Protocol</td><td>Scope 1, 2 &amp; 3 emissions accounting</td></tr>
-        <tr><td>SBTi</td><td>1.5°C alignment for Scope 1+2; Well-below 2°C for Scope 3</td></tr>
-        <tr><td>Doughnut Economics</td><td>3-Nested Dependencies model</td></tr>
-        <tr><td>Triple Bottom Line</td><td>People, Planet, Profit as nested, not overlapping</td></tr>
-        <tr><td>Double Materiality (EU CSRD)</td><td>Financial + Impact materiality for comprehensive risk assessment</td></tr>
+        <tr><td><span className="mark-blue">Dunphy et al. (2003)</span></td><td>Categorising VW's journey through 3 Waves of Sustainability</td></tr>
+        <tr><td><span className="mark-blue">GHG Protocol</span></td><td>Scope 1, 2 &amp; 3 emissions accounting</td></tr>
+        <tr><td><span className="mark-blue">SBTi</span></td><td>1.5°C alignment for Scope 1+2; Well-below 2°C for Scope 3</td></tr>
+        <tr><td><span className="mark-blue">Doughnut Economics</span></td><td>3-Nested Dependencies model</td></tr>
+        <tr><td><span className="mark-blue">Triple Bottom Line</span></td><td>People, Planet, Profit as nested, not overlapping</td></tr>
+        <tr><td><span className="mark-blue">Double Materiality (EU CSRD)</span></td><td>Financial + Impact materiality for comprehensive risk assessment</td></tr>
       </tbody>
     </table>
   </div>,
