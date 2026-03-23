@@ -183,6 +183,11 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 
             {/* Tablet shell — animates between portrait and landscape */}
             <motion.div
+              initial={{
+                width:  'min(420px, 88vw)',
+                height: 'min(640px, 86vh)',
+                borderRadius: '28px',
+              }}
               animate={isLandscape ? {
                 width:  'min(92vh, 96vw)',
                 height: 'min(64vh, 68vw)',
