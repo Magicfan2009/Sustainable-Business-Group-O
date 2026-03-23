@@ -1,29 +1,51 @@
-/* Pixel-art-style paperclip — block rectangle style, amber + black outlines */
-export default function Paperclip({ width = 28, height = 52 }) {
-  const sw = 5
+/* Paperclip — single stroked path, amber, rounded ends */
+export default function Paperclip({ width = 24, height = 52 }) {
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 28 52"
+      viewBox="0 0 24 52"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{ display: 'block' }}
     >
-      {/* Outer loop — top bar */}
-      <rect x="2.5" y="2.5" width="23" height="5" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Outer loop — right side */}
-      <rect x="20.5" y="2.5" width="5" height="38" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Outer loop — bottom bar */}
-      <rect x="2.5" y="35.5" width="23" height="5" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Inner left side */}
-      <rect x="2.5" y="2.5" width="5" height="46" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Inner bottom bar */}
-      <rect x="2.5" y="43.5" width="14" height="5" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Inner right side (short) */}
-      <rect x="11.5" y="12.5" width="5" height="36" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
-      {/* Inner top bar */}
-      <rect x="2.5" y="12.5" width="14" height="5" fill="#e8a020" stroke="#000" strokeWidth={sw} strokeLinecap="square" strokeLinejoin="miter" />
+      {/*
+        A paperclip is two nested U-shapes sharing the top edge.
+        Outer U: wide, goes from top-left down to bottom, curves right, up to top-right
+        Inner tongue: narrower, starts lower, curves back up
+        Drawn as one continuous stroke path.
+      */}
+      <path
+        d="
+          M 18 3
+          Q 21 3 21 6
+          L 21 40
+          Q 21 49 12 49
+          Q 3 49 3 40
+          L 3 6
+          Q 3 3 6 3
+          L 18 3
+        "
+        stroke="#e8a020"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+      <path
+        d="
+          M 8 14
+          L 8 40
+          Q 8 44 12 44
+          Q 16 44 16 40
+          L 16 10
+        "
+        stroke="#e8a020"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
     </svg>
   )
 }
