@@ -7,7 +7,7 @@ import AIScreen from './screens/AIScreen'
 const SCREENS = { PASSWORD: 'password', CABINET: 'cabinet', READING: 'reading', AI: 'ai' }
 
 function App() {
-  const [screen, setScreen] = useState(SCREENS.PASSWORD)
+  const [screen, setScreen] = useState(SCREENS.CABINET)
   const [fadeOut, setFadeOut] = useState(false)
   const [fadeDuration, setFadeDuration] = useState(400)
   const [activeFile, setActiveFile] = useState(null)
