@@ -269,68 +269,72 @@ const SEC03_PAGES = [
 ]
 
 const SEC04_PAGES = [
-  /* Page 1 */
+  /* Page 1 — Strategic Overview */
   <div key="sec04-p1">
-    <h2>Quantitative &amp; Qualitative Benchmark</h2>
+    <h2>4-Way Strategic Benchmark</h2>
     <p>
-      Comparing VW against Mercedes-Benz, BMW, Toyota, and BYD across SBTi alignment,
-      carbon intensity, EV strategy, reporting quality, and regulatory compliance.
+      Comparing VW against Mercedes-Benz (Luxury), Stellantis (Regional Volume), and Toyota
+      (Multi-Pathway) — a direct Volume vs. Volume comparison within the European market.
+      Analysis follows the Dunphy (2003) Transformation Wave and GHG Protocol frameworks.
     </p>
     <div className="pull-quote">
-      "While Mercedes-Benz targets an earlier net-zero date (2039), Volkswagen is betting on massive
-      industrial scale and a more aggressive 2035 EV-only mandate in Europe."
+      "While Stellantis leads on timeline (2038) and Mercedes leads in digital ethics, Volkswagen
+      stands out for Governance Integrity — turning the 2015 trust deficit into a gold standard."
     </div>
     <h3>Strategic Comparison Matrix</h3>
     <table>
       <thead>
-        <tr><th>Company</th><th>EV Strategy</th><th>SBTi</th><th>Carbon/vehicle</th><th>EU Compliance</th></tr>
+        <tr><th>Feature</th><th>Volkswagen</th><th>Mercedes-Benz</th><th>Stellantis</th><th>Toyota</th></tr>
       </thead>
       <tbody>
-        <tr><td><strong>Volkswagen</strong></td><td>All-In BEV</td><td>1.5°C (S1+2)</td><td>0.68 tCO₂e</td><td>0g margin ⚠</td></tr>
-        <tr><td>Mercedes-Benz</td><td>Flexible (50/50 by 2030)</td><td>1.5°C (All Scopes)</td><td>0.54 tCO₂e</td><td>+8g over</td></tr>
-        <tr><td>BMW</td><td>Technology Openness</td><td>1.5°C (All Scopes)</td><td>0.58 tCO₂e</td><td>+13g over</td></tr>
-        <tr><td>Toyota</td><td>Multi-Pathway (HEV)</td><td>1.5°C (S1+2)</td><td>0.72 tCO₂e</td><td>Compliance risk EU</td></tr>
-        <tr><td>BYD</td><td>Vertical Integration</td><td>Not disclosed</td><td>0.52 tCO₂e</td><td>Outside EU</td></tr>
+        <tr><td>Strategic Goal</td><td>regenerate+</td><td>Ambition 2039</td><td>Dare Forward 2030</td><td>Env. Challenge 2050</td></tr>
+        <tr><td>Net Zero Goal</td><td>2050</td><td>2039</td><td>2038 (Entire Chain)</td><td>2050</td></tr>
+        <tr><td>Assurance Level</td><td>Reasonable (Gold)</td><td>Limited/Reasonable</td><td>Limited (Standard)</td><td>Limited (Standard)</td></tr>
+        <tr><td>Strategic Path</td><td>BEV-First</td><td>Luxury BEV</td><td>Multi-Energy Platform</td><td>Multi-Pathway</td></tr>
+        <tr><td>Circular Focus</td><td>Closed-Loop Batteries</td><td>96% Recovery Plant</td><td>Mirafiori 4R Hub</td><td>Battery 2nd Life</td></tr>
       </tbody>
     </table>
   </div>,
 
-  /* Page 2 */
+  /* Page 2 — Strategic Philosophies & Brand DNA */
   <div key="sec04-p2">
-    <h2>Compliance Clock — EU CO₂ Targets 2025</h2>
+    <h2>Strategic Philosophies — Brand DNA</h2>
     <p>
-      EU fleet-wide CO₂ target: &lt;93.6g/km for 2025. Each gram of non-compliance = ~€95 fine
-      × all vehicles sold. For VW's 8M+ annual volume, this means billions at stake.
+      Applying the Dunphy et al. (2003) 3rd Wave: Transformation lens to each competitor's
+      core sustainability philosophy reveals fundamentally different approaches to value creation.
     </p>
     <table>
       <thead>
-        <tr><th>Company</th><th>Position</th></tr>
+        <tr><th>Company</th><th>Philosophy</th><th>Qualitative Edge</th></tr>
       </thead>
       <tbody>
-        <tr><td>BMW</td><td>+13g over-compliant</td></tr>
-        <tr><td>Mercedes-Benz</td><td>+8g over-compliant</td></tr>
-        <tr><td>Volkswagen ⚠</td><td>~0g margin — CRITICAL</td></tr>
-        <tr><td>Toyota</td><td>Compliance risk EU</td></tr>
+        <tr><td><strong>Volkswagen</strong></td><td>"Nature and Society Positive" — regenerate+</td><td>Four-dimensional integration: Nature, People, Society, Business embedded in core management</td></tr>
+        <tr><td>Mercedes-Benz</td><td>"Luxury Integrity" — electric-only where market allows</td><td>Unique pillars: Traffic Safety and Digital Trust (ethical AI &amp; data privacy)</td></tr>
+        <tr><td>Stellantis</td><td>"Dare Forward 2030" — transitioning to Sustainable Mobility Tech Company</td><td>Three pillars: Care, Tech, Value. "Care" emphasises ethical responsibility to customers and planet</td></tr>
+        <tr><td>Toyota</td><td>"Multi-Pathway &amp; Happiness" — diverse tech options for all markets</td><td>Pragmatism over purity: argues BEV-only ignores infrastructure gaps in emerging markets</td></tr>
       </tbody>
     </table>
     <div className="pull-quote">
-      VW's razor-thin 2025 compliance margin means any unexpected slowdown in EV sales in H2 2025
-      could trigger multi-billion euro fines — making 2025–2030 VW's most critical execution period.
+      Stellantis' "Dare Forward 2030" sets the industry's most aggressive Net Zero date (2038),
+      but faces the Ambition vs. Integration conflict: uniting 14 disparate brands under one roadmap.
     </div>
   </div>,
 
-  /* Page 3 */
+  /* Page 3 — Governance & Reporting Integrity */
   <div key="sec04-p3">
-    <h2>Anti-Greenwash Analysis — Transparency Index</h2>
+    <h2>Governance &amp; Reporting Integrity</h2>
+    <p>
+      Graded on Materiality Approach, Assurance Level, and Governance Structure — applying
+      the GHG Protocol Corporate Standard and Oxford Offsetting Principles.
+    </p>
     <table>
       <thead>
-        <tr><th>Company</th><th>Score</th><th>Assurance Level</th><th>CDP</th><th>SBTi</th></tr>
+        <tr><th>Benchmark</th><th>Volkswagen</th><th>Mercedes-Benz</th><th>Stellantis</th><th>Toyota</th></tr>
       </thead>
       <tbody>
-        <tr><td>BMW</td><td>95</td><td>Reasonable</td><td>A</td><td>Validated (All Scopes)</td></tr>
-        <tr><td>Volkswagen</td><td>88</td><td>Reasonable</td><td>A−</td><td>Validated (S1+2)</td></tr>
-        <tr><td>Mercedes-Benz</td><td>78</td><td>Limited</td><td>A−</td><td>Validated (All Scopes)</td></tr>
-        <tr><td>Toyota</td><td>65</td><td>Limited</td><td>B</td><td>Validated (S1+2)</td></tr>
+        <tr><td>Materiality</td><td>Double Materiality: financial + societal impact</td><td>Holistic; Advisory Board for Integrity &amp; Sustainability</td><td>Holistic "Care" model; −50% intensity targets</td><td>Impact-focused via Six Challenges</td></tr>
+        <tr><td>Assurance</td><td>Reasonable Assurance — highest audit standard, post-2015 trust rebuild</td><td>Mix of Limited/Reasonable for key indicators</td><td>Limited Assurance — industry standard</td><td>Limited Assurance — industry standard</td></tr>
+        <tr><td>Governance</td><td>Independent Sustainability Council challenges the Board</td><td>Board-level member for Integrity, Governance &amp; Sustainability</td><td>Integrated Carbon Net Zero action plan across engineering/purchasing</td><td>"Sustainability Meeting" deciding long-term strategies</td></tr>
       </tbody>
     </table>
     <h3>Strengths &amp; Weaknesses</h3>
@@ -339,52 +343,62 @@ const SEC04_PAGES = [
         <tr><th>Company</th><th>Key Strength</th><th>Key Weakness</th></tr>
       </thead>
       <tbody>
-        <tr><td>Volkswagen</td><td>#1 EV Europe 2025; Reasonable Assurance; S-Rating 63,000+ suppliers</td><td>Razor-thin 2025 compliance margin; Scope 3 not SBTi-validated</td></tr>
-        <tr><td>Mercedes-Benz</td><td>Net Zero 2039; carbon-neutral plants since 2022</td><td>Walked back full-electrification pledge; Limited Assurance</td></tr>
-        <tr><td>BYD</td><td>Global #1 BEV by volume; owns full supply chain</td><td>No SBTi nor public CDP disclosure</td></tr>
-        <tr><td>Toyota</td><td>TPS/Kaizen operational excellence; high Edelman trust</td><td>EU 2035 BEV mandate lock-out risk</td></tr>
+        <tr><td>Volkswagen</td><td>Reasonable Assurance; S-Rating hard-block for 63,000+ suppliers; #1 EV Europe 2025</td><td>Razor-thin 2025 EU compliance margin; Scope 3 not SBTi-validated</td></tr>
+        <tr><td>Mercedes-Benz</td><td>Net Zero 2039; Ambition Letter ties CO₂ neutrality into supplier contracts</td><td>Walked back full-electrification pledge; primarily Limited Assurance</td></tr>
+        <tr><td>Stellantis</td><td>Industry-leading 2038 Net Zero; Mirafiori 4R Hub as circular economy benchmark</td><td>Scaled back "Dare Forward 2030" plan in 2024 after profit warnings; brand integration risk</td></tr>
+        <tr><td>Toyota</td><td>TPS/Kaizen operational excellence; Life Cycle Zero commitment across full vehicle life</td><td>EU 2035 BEV mandate compliance risk; Limited Assurance standard</td></tr>
       </tbody>
     </table>
   </div>,
 
-  /* Page 4 */
+  /* Page 4 — Management Conflicts & Risk Trade-Offs */
   <div key="sec04-p4">
-    <h2>Risk Trade-Off Matrix</h2>
+    <h2>Management Conflicts &amp; Risk Trade-Off Matrix</h2>
+    <p>
+      Applying Lecture 2's Strategic Conflict framework: each company faces a fundamental
+      trade-off that constrains its sustainability transformation.
+    </p>
     <table>
       <thead>
-        <tr><th>Company</th><th>Strategy</th><th>Financial Risk</th><th>Regulatory Risk</th></tr>
+        <tr><th>Company</th><th>Core Conflict</th><th>Financial Risk</th><th>Regulatory Risk</th></tr>
       </thead>
       <tbody>
-        <tr><td>Volkswagen</td><td>All-In BEV</td><td>HIGH — €89B Capex</td><td>LOW — compliant with EU mandate</td></tr>
-        <tr><td>Mercedes-Benz</td><td>Flexible / Luxury BEV</td><td>MEDIUM — selective investment</td><td>LOW-MEDIUM — slight buffer</td></tr>
-        <tr><td>BYD</td><td>Vertical Integration BEV</td><td>LOW — owns supply chain</td><td>LOW — leads in China/Global</td></tr>
-        <tr><td>Toyota</td><td>Multi-Pathway (HEV)</td><td>LOW — leverages existing tech</td><td>HIGH — EU 2035 BEV mandate risk</td></tr>
+        <tr><td><strong>Volkswagen</strong></td><td>Scale vs. Agility — transforming 600,000-employee super-tanker while needing software-driven speed</td><td>HIGH — €89B Capex commitment</td><td>LOW — aligned with EU 2035 mandate</td></tr>
+        <tr><td>Mercedes-Benz</td><td>Luxury vs. Weight — heavy materials conflict with carbon-neutral fleet target by 2039</td><td>MEDIUM — selective investment</td><td>LOW-MEDIUM — slight compliance buffer</td></tr>
+        <tr><td>Stellantis</td><td>Ambition vs. Integration — 2038 Net Zero while merging cultures/supply chains of 14 global brands</td><td>MEDIUM — restructuring costs</td><td>LOW-MEDIUM — ahead of EU timeline</td></tr>
+        <tr><td>Toyota</td><td>Diversity vs. Regulation — Multi-Pathway pragmatism vs. EU 2035 BEV mandate squeeze</td><td>LOW — leverages existing hybrid tech</td><td>HIGH — EU 2035 BEV mandate risk</td></tr>
       </tbody>
     </table>
     <div className="pull-quote">
-      "The automotive industry is split into two camps. VW and BYD are betting on a BEV-only future.
-      Toyota uses a multi-pathway approach. VW's move to Reasonable Assurance and its 2035 BEV mandate
-      position it as the more transparent leader in the global Transformation Wave."
+      "Stellantis sets the most aggressive Net Zero timeline (2038), but its Ambition vs. Integration
+      conflict is the industry's highest execution risk. VW's Governance Integrity — Reasonable
+      Assurance and hard-block S-Rating — is its competitive moat post-Dieselgate."
     </div>
   </div>,
 
-  /* Page 5 */
+  /* Page 5 — Framework Summary & Net Zero Timeline */
   <div key="sec04-p5">
-    <h2>Framework Summary Matrix</h2>
+    <h2>Full Framework Summary Matrix</h2>
     <table>
       <thead>
-        <tr><th>Framework</th><th>Volkswagen</th><th>Mercedes-Benz</th><th>BYD</th><th>Toyota</th></tr>
+        <tr><th>Framework</th><th>Volkswagen</th><th>Mercedes-Benz</th><th>Stellantis</th><th>Toyota</th></tr>
       </thead>
       <tbody>
-        <tr><td>Materiality</td><td>Double Materiality</td><td>Financial focus</td><td>Impact focus</td><td>Hybrid-centric Impact</td></tr>
-        <tr><td>SBTi Alignment</td><td>1.5°C (S1+2 validated)</td><td>1.5°C (All Scopes)</td><td>Committed</td><td>1.5°C (S1&amp;2 only)</td></tr>
-        <tr><td>Assurance Level</td><td>Reasonable</td><td>Limited</td><td>CSRD (limited)</td><td>Limited</td></tr>
-        <tr><td>Net Zero Target</td><td>2050</td><td>2039</td><td>2045</td><td>2050</td></tr>
-        <tr><td>EV Strategy</td><td>100% BEV Europe 2035</td><td>50/50 by 2030 (revised)</td><td>BEV + PHEV</td><td>Multi-Pathway</td></tr>
-        <tr><td>Key Strength</td><td>Industrial Scale</td><td>Luxury Efficiency</td><td>Vertical Integration</td><td>Operational Lean (TPS)</td></tr>
-        <tr><td>Key Weakness</td><td>Compliance margin 0g</td><td>Backed off all-electric</td><td>No SBTi/CDP</td><td>EU regulatory risk</td></tr>
+        <tr><td>Materiality</td><td>Double Materiality</td><td>Holistic / Financial</td><td>Holistic "Care" model</td><td>Impact (Six Challenges)</td></tr>
+        <tr><td>SBTi Alignment</td><td>1.5°C (S1+2 validated)</td><td>1.5°C (All Scopes)</td><td>Committed</td><td>1.5°C (S1+2 only)</td></tr>
+        <tr><td>Assurance Level</td><td>Reasonable (Gold)</td><td>Limited/Reasonable</td><td>Limited (Standard)</td><td>Limited (Standard)</td></tr>
+        <tr><td>Net Zero Target</td><td>2050</td><td>2039</td><td>2038</td><td>2050</td></tr>
+        <tr><td>EV Strategy</td><td>100% BEV Europe 2035</td><td>Electric-only where viable</td><td>Multi-Energy Platform</td><td>Multi-Pathway (HEV/BEV)</td></tr>
+        <tr><td>Circular Economy</td><td>Closed-Loop Battery System</td><td>96% Material Recovery</td><td>Mirafiori 4R Hub</td><td>Battery 2nd Life Programme</td></tr>
+        <tr><td>Key Strength</td><td>Governance Integrity</td><td>Luxury Brand Trust</td><td>Earliest Net Zero (2038)</td><td>Operational Excellence (TPS)</td></tr>
+        <tr><td>Key Weakness</td><td>0g EU compliance margin</td><td>Backed off all-electric</td><td>14-brand integration risk</td><td>EU regulatory squeeze</td></tr>
       </tbody>
     </table>
+    <div className="pull-quote">
+      Net Zero Timeline: Stellantis (2038) → Mercedes-Benz (2039) → VW / Toyota (2050).
+      VW sacrifices timeline leadership for Governance Integrity — the only competitor with
+      Reasonable Assurance and a hard-block supplier S-Rating system.
+    </div>
   </div>,
 ]
 
