@@ -39,7 +39,18 @@ export default function NetZeroTimeline() {
         <line x1={toX(2026)} y1={Y_LINE-20} x2={toX(2026)} y2={Y_LINE+8} stroke="#0066cc" strokeWidth="1" strokeDasharray="2 2" />
         <text x={toX(2026)} y={Y_LINE-23} fontSize="8" fill="#0066cc" textAnchor="middle" fontFamily="monospace">TODAY</text>
 
-        {/* Render Toyota's visual circle first so VW paints over it */}
+        {/* Non-2050 companies: render circles first */}
+        {COMPANIES.map((c) => {
+          if (c.year === 2050) return null
+          const cx = toX(c.year) + (X_OFFSET[c.name] ?? 0)
+          const isHov = hovered === c.name
+          return (
+            <circle key={`vis-${c.name}`} cx={cx} cy={Y_LINE}
+              r={isHov ? 10 : 7} fill={c.color}
+              style={{ pointerEvents: 'none', transition: 'r 0.1s ease' }} />
+          )
+        })}
+        {/* Toyota at 2050 — rendered before VW so VW paints on top */}
         {COMPANIES.map((c) => {
           if (c.name !== 'Toyota') return null
           const cx = toX(c.year) + (X_OFFSET[c.name] ?? 0)
@@ -50,6 +61,7 @@ export default function NetZeroTimeline() {
               style={{ pointerEvents: 'none', transition: 'r 0.1s ease' }} />
           )
         })}
+        {/* VW at 2050 — on top, white outline separates from Toyota */}
         {COMPANIES.map((c) => {
           if (c.name !== 'VW') return null
           const cx = toX(c.year) + (X_OFFSET[c.name] ?? 0)

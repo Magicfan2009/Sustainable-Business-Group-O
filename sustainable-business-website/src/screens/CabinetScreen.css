@@ -377,7 +377,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   letter-spacing: 0.2em;
-  color: var(--color-cream-muted);
+  color: var(--color-amber);
   background: none;
   border: none;
   cursor: pointer;
@@ -387,7 +387,7 @@
 }
 
 .cabinet-screen__home-btn:hover {
-  color: var(--color-cream);
+  color: var(--color-black);
 }
 
 /* ── AI link ── */

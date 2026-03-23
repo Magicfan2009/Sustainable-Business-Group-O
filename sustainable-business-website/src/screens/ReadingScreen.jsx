@@ -158,7 +158,7 @@ export default function ReadingScreen({ sectionCode, onBack }) {
           onClick={() => setChartOpen(true)}
           style={{
             position: 'absolute',
-            right: 'max(16px, calc(50% - 420px))',
+            right: 'max(8px, calc(50% - 460px))',
             top: '50%',
             transform: 'translateY(-50%)',
             cursor: 'pointer',
@@ -166,29 +166,41 @@ export default function ReadingScreen({ sectionCode, onBack }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '8px',
+            gap: '6px',
           }}
         >
           {/* Mini tablet SVG */}
-          <svg viewBox="0 0 110 150" width="90" height="123" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="108" height="148" rx="12" fill="#c8cdd8" stroke="#9aa0aa" strokeWidth="1.5"/>
-            <rect x="4" y="4" width="102" height="142" rx="10" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="0.75"/>
-            <rect x="8" y="20" width="94" height="106" rx="4" fill="url(#miniScreenBg)"/>
-            <circle cx="55" cy="10" r="3.5" fill="#8a9099" stroke="#6a7080" strokeWidth="0.75"/>
-            <circle cx="55" cy="137" r="7" fill="#8a9099" stroke="#6a7080" strokeWidth="1"/>
-            <circle cx="55" cy="137" r="5" fill="none" stroke="#8a9099" strokeWidth="0.75"/>
-            <defs>
-              <linearGradient id="miniScreenBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#e8eef5"/>
-                <stop offset="100%" stopColor="#d0dae8"/>
-              </linearGradient>
-            </defs>
-          </svg>
+          <motion.div whileHover={{ scale: 1.06, y: -2 }} whileTap={{ scale: 0.96 }}>
+            <svg viewBox="0 0 110 150" width="90" height="123" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="1" y="1" width="108" height="148" rx="12" fill="#c8cdd8" stroke="#9aa0aa" strokeWidth="1.5"/>
+              <rect x="4" y="4" width="102" height="142" rx="10" fill="none" stroke="rgba(0,102,204,0.3)" strokeWidth="0.75"/>
+              <rect x="8" y="20" width="94" height="106" rx="4" fill="url(#miniScreenBg)"/>
+              <circle cx="55" cy="10" r="3.5" fill="#8a9099" stroke="#6a7080" strokeWidth="0.75"/>
+              <circle cx="55" cy="137" r="7" fill="#8a9099" stroke="#6a7080" strokeWidth="1"/>
+              <circle cx="55" cy="137" r="5" fill="none" stroke="#8a9099" strokeWidth="0.75"/>
+              <defs>
+                <linearGradient id="miniScreenBg" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#e8eef5"/>
+                  <stop offset="100%" stopColor="#d0dae8"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </motion.div>
+          {/* Bouncing arrow + boxed label */}
+          <motion.div
+            animate={{ y: [-3, 3, -3] }}
+            transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ fontSize: '16px', color: '#0066cc', lineHeight: 1 }}
+          >↑</motion.div>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '9px',
-            color: 'rgba(0,102,204,0.8)', letterSpacing: '0.1em',
-            textTransform: 'uppercase',
-          }}>view chart</span>
+            color: '#0066cc', letterSpacing: '0.1em',
+            textTransform: 'uppercase', fontWeight: 700,
+            background: 'rgba(0,102,204,0.08)',
+            border: '1px solid rgba(0,102,204,0.35)',
+            padding: '2px 6px',
+            borderRadius: '2px',
+          }}>tap for chart</span>
         </motion.div>
       )}
 
