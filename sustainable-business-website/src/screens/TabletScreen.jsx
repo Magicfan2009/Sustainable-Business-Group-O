@@ -260,8 +260,8 @@ function TabletSVG() {
   return (
     <svg
       viewBox="0 0 220 300"
-      width="180"
-      height="245"
+      width="260"
+      height="355"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -269,10 +269,10 @@ function TabletSVG() {
       <rect x="2" y="2" width="216" height="296" rx="22" fill="#111" stroke="#2a2a2a" strokeWidth="2"/>
       {/* Amber bezel ring */}
       <rect x="8" y="8" width="204" height="284" rx="18" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="1"/>
-      {/* Screen area */}
-      <rect x="16" y="40" width="188" height="212" rx="6" fill="#080c10"/>
-      {/* Screen glow */}
-      <rect x="16" y="40" width="188" height="212" rx="6" fill="none" stroke="rgba(232,160,32,0.12)" strokeWidth="1"/>
+      {/* Screen area — lit up */}
+      <rect x="16" y="40" width="188" height="212" rx="6" fill="url(#screenBg)"/>
+      {/* Screen glow border */}
+      <rect x="16" y="40" width="188" height="212" rx="6" fill="none" stroke="rgba(120,180,255,0.2)" strokeWidth="1"/>
       {/* Faint screen content — decorative grid of icons */}
       {[0,1,2].map(col => [0,1].map(row => (
         <rect
@@ -295,8 +295,12 @@ function TabletSVG() {
       <rect x="0" y="80" width="4" height="20" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
       <rect x="0" y="108" width="4" height="20" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
       <defs>
+        <linearGradient id="screenBg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a2a3a"/>
+          <stop offset="100%" stopColor="#0d1820"/>
+        </linearGradient>
         <linearGradient id="screenGloss" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="rgba(255,255,255,0.06)"/>
+          <stop offset="0%" stopColor="rgba(255,255,255,0.07)"/>
           <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
         </linearGradient>
       </defs>
