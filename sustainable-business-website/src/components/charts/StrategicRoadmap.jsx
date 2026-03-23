@@ -31,8 +31,8 @@ export default function StrategicRoadmap() {
       <div className="chart__title">Strategic Roadmap 2025–2035</div>
 
       {/* Horizontal node row */}
-      <div style={{ position: 'relative', width: '100%', marginTop: '12px' }}>
-        <div style={{ position: 'absolute', top: '11px', left: '8px', right: '8px', height: '2px', background: '#333' }} />
+      <div style={{ position: 'relative', width: '100%', marginTop: '20px' }}>
+        <div style={{ position: 'absolute', top: '17px', left: '8px', right: '8px', height: '2px', background: '#333' }} />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {MILESTONES.map((m, i) => (
             <div
@@ -42,14 +42,14 @@ export default function StrategicRoadmap() {
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', width: '15%' }}
             >
               <div style={{
-                width: '22px', height: '22px', borderRadius: '50%',
+                width: '34px', height: '34px', borderRadius: '50%',
                 background: open === i ? '#e8a020' : '#1a1a1a',
                 border: `2px solid ${open === i ? '#e8a020' : '#444'}`,
                 boxShadow: open === i ? '0 0 6px #e8a020' : '2px 2px 0 #000',
                 zIndex: 1, transition: 'background 150ms ease, border-color 150ms ease',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}>
-                <span style={{ fontSize: '5px', color: open === i ? '#000' : '#888', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{m.year}</span>
+                <span style={{ fontSize: '8px', color: open === i ? '#000' : '#888', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{m.year}</span>
               </div>
             </div>
           ))}
@@ -61,11 +61,11 @@ export default function StrategicRoadmap() {
         <div style={{
           marginTop: '8px', width: '100%',
           background: '#0d1117', border: '1px solid #e8a020',
-          padding: '5px 7px', overflow: 'hidden',
+          padding: '8px 12px', overflow: 'hidden',
         }}>
-          <div style={{ fontSize: '8px', color: '#e8a020', fontFamily: 'var(--font-mono)', fontWeight: 700, marginBottom: '4px' }}>{MILESTONES[open].year}</div>
+          <div style={{ fontSize: '12px', color: '#e8a020', fontFamily: 'var(--font-mono)', fontWeight: 700, marginBottom: '4px' }}>{MILESTONES[open].year}</div>
           {MILESTONES[open].items.map((item, i) => (
-            <div key={i} style={{ fontSize: '7px', color: '#f2ead8', fontFamily: 'var(--font-mono)', marginBottom: '3px', lineHeight: 1.4 }}>
+            <div key={i} style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', marginBottom: '3px', lineHeight: 1.4 }}>
               › {item}
             </div>
           ))}

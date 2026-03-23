@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './charts.css'
 
 // Data points [year, Mt]
@@ -8,25 +8,30 @@ const BAU = [[2024,695],[2030,660],[2040,600],[2050,560]]
 const SBTI_TARGET = [[2024,695],[2028,520],[2032,350],[2040,150],[2050,30]]
 
 const MIN_YEAR = 2019, MAX_YEAR = 2055, MIN_MT = 0, MAX_MT = 800
-const W = 220, H = 140, PAD = { top: 10, right: 10, bottom: 24, left: 32 }
+const W = 380, H = 240, PAD = { top: 16, right: 16, bottom: 36, left: 48 }
 
 function toX(year) { return PAD.left + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (W - PAD.left - PAD.right) }
 function toY(mt)   { return H - PAD.bottom - (mt - MIN_MT) / (MAX_MT - MIN_MT) * (H - PAD.top - PAD.bottom) }
 function polyline(pts) { return pts.map(([y,m]) => `${toX(y)},${toY(m)}`).join(' ') }
 
+const ALL_SERIES = [
+  { key: 'vw', label: 'VW Trajectory', color: '#f2ead8', pts: [...HISTORICAL, ...VW_TRAJECTORY.slice(1)], strokeWidth: 3, dasharray: null },
+  { key: 'sbti', label: 'SBTi Target', color: '#e8a020', pts: SBTI_TARGET, strokeWidth: 1.5, dasharray: '3 2' },
+  { key: 'bau', label: 'BAU', color: '#cc2200', pts: BAU, strokeWidth: 2, dasharray: '4 3' },
+]
+
 export default function NetZeroProjection() {
-  const line1Ref = useRef(null)
-  const line2Ref = useRef(null)
-  const line3Ref = useRef(null)
+  const lineRefs = useRef([])
+  const [hoveredPt, setHoveredPt] = useState(null)
 
   useEffect(() => {
-    [line1Ref, line2Ref, line3Ref].forEach((ref, i) => {
-      if (!ref.current) return
-      const len = ref.current.getTotalLength()
-      ref.current.style.strokeDasharray = len
-      ref.current.style.strokeDashoffset = len
-      ref.current.style.transition = `stroke-dashoffset ${0.8 + i * 0.2}s ease ${i * 0.15}s forwards`
-      setTimeout(() => { if (ref.current) ref.current.style.strokeDashoffset = 0 }, 50)
+    lineRefs.current.forEach((ref, i) => {
+      if (!ref) return
+      const len = ref.getTotalLength()
+      ref.style.strokeDasharray = len
+      ref.style.strokeDashoffset = len
+      ref.style.transition = `stroke-dashoffset ${0.8 + i * 0.2}s ease ${i * 0.15}s forwards`
+      setTimeout(() => { if (ref) ref.style.strokeDashoffset = 0 }, 50)
     })
   }, [])
 
@@ -44,28 +49,62 @@ export default function NetZeroProjection() {
         ))}
         {/* Y axis labels */}
         {mts.map(m => (
-          <text key={m} x={PAD.left - 2} y={toY(m) + 3} fontSize="5" fill="#555" textAnchor="end" fontFamily="monospace">{m}</text>
+          <text key={m} x={PAD.left - 2} y={toY(m) + 3} fontSize="8" fill="#555" textAnchor="end" fontFamily="monospace">{m}</text>
         ))}
         {/* X axis labels */}
         {years.map(y => (
-          <text key={y} x={toX(y)} y={H - 4} fontSize="5" fill="#555" textAnchor="middle" fontFamily="monospace">{y}</text>
+          <text key={y} x={toX(y)} y={H - 4} fontSize="8" fill="#555" textAnchor="middle" fontFamily="monospace">{y}</text>
         ))}
 
-        {/* BAU line */}
-        <polyline ref={line3Ref} points={polyline(BAU)} fill="none" stroke="#cc2200" strokeWidth="1.5" strokeDasharray="4 3" />
-        {/* SBTi target */}
-        <polyline ref={line2Ref} points={polyline(SBTI_TARGET)} fill="none" stroke="#e8a020" strokeWidth="1" strokeDasharray="3 2" />
-        {/* VW trajectory */}
-        <polyline ref={line1Ref} points={polyline([...HISTORICAL, ...VW_TRAJECTORY.slice(1)])} fill="none" stroke="#f2ead8" strokeWidth="2" />
+        {/* Lines */}
+        {ALL_SERIES.map((s, i) => (
+          <polyline
+            key={s.key}
+            ref={el => lineRefs.current[i] = el}
+            points={polyline(s.pts)}
+            fill="none"
+            stroke={s.color}
+            strokeWidth={s.strokeWidth}
+            strokeDasharray={s.dasharray || undefined}
+          />
+        ))}
+
+        {/* Hit targets — invisible circles on each data point */}
+        {ALL_SERIES.map(s => s.pts.map(([year, mt], pi) => (
+          <circle
+            key={`${s.key}-${pi}`}
+            cx={toX(year)}
+            cy={toY(mt)}
+            r={5}
+            fill={s.color}
+            opacity={0}
+            style={{ cursor: 'crosshair' }}
+            onMouseEnter={() => setHoveredPt({ label: s.label, color: s.color, year, mt })}
+            onMouseLeave={() => setHoveredPt(null)}
+          />
+        )))}
 
         {/* Legend */}
-        <rect x={PAD.left} y={4} width="6" height="2" fill="#f2ead8" />
-        <text x={PAD.left + 8} y={7} fontSize="5" fill="#f2ead8" fontFamily="monospace">VW Trajectory</text>
-        <line x1={PAD.left + 50} y1={5} x2={PAD.left + 56} y2={5} stroke="#e8a020" strokeWidth="1" strokeDasharray="3 2" />
-        <text x={PAD.left + 58} y={7} fontSize="5" fill="#e8a020" fontFamily="monospace">SBTi Target</text>
-        <line x1={PAD.left + 100} y1={5} x2={PAD.left + 106} y2={5} stroke="#cc2200" strokeWidth="1.5" strokeDasharray="4 3" />
-        <text x={PAD.left + 108} y={7} fontSize="5" fill="#cc2200" fontFamily="monospace">BAU</text>
+        <rect x={PAD.left} y={6} width="10" height="3" fill="#f2ead8" />
+        <text x={PAD.left + 14} y={10} fontSize="8" fill="#f2ead8" fontFamily="monospace">VW Trajectory</text>
+        <line x1={PAD.left + 80} y1={8} x2={PAD.left + 90} y2={8} stroke="#e8a020" strokeWidth="1.5" strokeDasharray="3 2" />
+        <text x={PAD.left + 94} y={10} fontSize="8" fill="#e8a020" fontFamily="monospace">SBTi Target</text>
+        <line x1={PAD.left + 170} y1={8} x2={PAD.left + 180} y2={8} stroke="#cc2200" strokeWidth="2" strokeDasharray="4 3" />
+        <text x={PAD.left + 184} y={10} fontSize="8" fill="#cc2200" fontFamily="monospace">BAU</text>
       </svg>
+
+      {/* Hover tooltip */}
+      {hoveredPt && (
+        <div style={{
+          marginTop: '6px', background: '#0d1117',
+          border: `1px solid ${hoveredPt.color}`,
+          padding: '5px 8px', fontSize: '11px', color: '#f2ead8',
+          fontFamily: 'var(--font-mono)', lineHeight: 1.5,
+        }}>
+          <span style={{ color: hoveredPt.color, fontWeight: 700 }}>{hoveredPt.label}</span>
+          {' — '}{hoveredPt.year}: <span style={{ color: hoveredPt.color }}>{hoveredPt.mt} Mt</span>
+        </div>
+      )}
     </div>
   )
 }

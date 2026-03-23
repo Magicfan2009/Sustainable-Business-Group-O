@@ -13,11 +13,11 @@
 }
 
 .chart__title {
-  font-size: 8px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   color: #e8a020;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   align-self: flex-start;
 }
 
@@ -26,8 +26,8 @@
   position: absolute;
   background: #1a1a1a;
   border: 1px solid #e8a020;
-  padding: 4px 6px;
-  font-size: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
   color: #f2ead8;
   pointer-events: none;
   z-index: 20;

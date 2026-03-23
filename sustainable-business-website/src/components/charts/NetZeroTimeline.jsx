@@ -9,7 +9,7 @@ const COMPANIES = [
   { name: 'Toyota', year: 2050, color: '#cc5544', strategy: 'Env. Challenge 2050', caveat: 'EU BEV mandate compliance risk from hybrid focus' },
 ]
 const MIN_YEAR = 2024, MAX_YEAR = 2058
-const W = 210, Y_LINE = 50
+const W = 360, Y_LINE = 80
 
 function toX(year) { return 10 + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (W - 20) }
 
@@ -27,7 +27,7 @@ export default function NetZeroTimeline() {
   return (
     <div className="chart">
       <div className="chart__title">Net Zero Target Timeline</div>
-      <svg width={W} height={120} style={{ overflow: 'visible', marginTop: '8px' }}>
+      <svg width={W} height={200} style={{ overflow: 'visible', marginTop: '8px' }}>
         {/* Axis line */}
         <line x1="10" y1={Y_LINE} x2={W - 10} y2={Y_LINE} stroke="#333" strokeWidth="1.5" />
 
@@ -35,13 +35,13 @@ export default function NetZeroTimeline() {
         {[2025,2030,2035,2040,2045,2050,2055].map(y => (
           <g key={y}>
             <line x1={toX(y)} y1={Y_LINE - 3} x2={toX(y)} y2={Y_LINE + 3} stroke="#444" strokeWidth="1" />
-            <text x={toX(y)} y={Y_LINE + 11} fontSize="5" fill="#555" textAnchor="middle" fontFamily="monospace">{y}</text>
+            <text x={toX(y)} y={Y_LINE + 14} fontSize="8" fill="#555" textAnchor="middle" fontFamily="monospace">{y}</text>
           </g>
         ))}
 
         {/* TODAY marker */}
-        <line x1={toX(2026)} y1={Y_LINE - 12} x2={toX(2026)} y2={Y_LINE + 6} stroke="#e8a020" strokeWidth="1" strokeDasharray="2 2" />
-        <text x={toX(2026)} y={Y_LINE - 14} fontSize="5" fill="#e8a020" textAnchor="middle" fontFamily="monospace">TODAY</text>
+        <line x1={toX(2026)} y1={Y_LINE - 20} x2={toX(2026)} y2={Y_LINE + 8} stroke="#e8a020" strokeWidth="1" strokeDasharray="2 2" />
+        <text x={toX(2026)} y={Y_LINE - 22} fontSize="8" fill="#e8a020" textAnchor="middle" fontFamily="monospace">TODAY</text>
 
         {/* Company markers */}
         {COMPANIES.map((c, i) => {
@@ -55,10 +55,10 @@ export default function NetZeroTimeline() {
               onMouseLeave={() => setHovered(null)}
               style={{ cursor: 'default' }}
             >
-              <circle cx={toX(c.year)} cy={Y_LINE} r="4" fill={c.color} />
-              <line x1={toX(c.year)} y1={Y_LINE - 4} x2={x} y2={Y_LINE + yOff + 6} stroke={c.color} strokeWidth="0.5" strokeDasharray="2 1" />
-              <text x={x} y={Y_LINE + yOff} fontSize="6" fill={c.color} textAnchor="middle" fontFamily="monospace" fontWeight="700">{c.year}</text>
-              <text x={x} y={Y_LINE + yOff + 8} fontSize="5" fill="#888" textAnchor="middle" fontFamily="monospace">{c.name}</text>
+              <circle cx={toX(c.year)} cy={Y_LINE} r="7" fill={c.color} />
+              <line x1={toX(c.year)} y1={Y_LINE - 7} x2={x} y2={Y_LINE + yOff + 6} stroke={c.color} strokeWidth="0.5" strokeDasharray="2 1" />
+              <text x={x} y={Y_LINE + yOff} fontSize="10" fill={c.color} textAnchor="middle" fontFamily="monospace" fontWeight="700">{c.year}</text>
+              <text x={x} y={Y_LINE + yOff + 12} fontSize="8" fill="#888" textAnchor="middle" fontFamily="monospace">{c.name}</text>
             </g>
           )
         })}
@@ -69,10 +69,10 @@ export default function NetZeroTimeline() {
         <div style={{
           width: '100%', background: '#0d1117',
           border: `1px solid ${COMPANIES[hovered].color}`,
-          padding: '5px 6px', fontSize: '7px', color: '#f2ead8',
+          padding: '5px 6px', fontSize: '10px', color: '#f2ead8',
           fontFamily: 'var(--font-mono)', lineHeight: 1.5,
         }}>
-          <div style={{ color: COMPANIES[hovered].color, fontWeight: 700, marginBottom: '2px' }}>{COMPANIES[hovered].name} — {COMPANIES[hovered].strategy}</div>
+          <div style={{ color: COMPANIES[hovered].color, fontWeight: 700, marginBottom: '2px', fontSize: '11px' }}>{COMPANIES[hovered].name} — {COMPANIES[hovered].strategy}</div>
           {COMPANIES[hovered].caveat}
         </div>
       )}

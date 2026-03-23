@@ -10,7 +10,7 @@ const COMPANIES = [
   { name: 'Toyota', color: '#cc5544', scores: [3,2,3,2,3] },
 ]
 
-const CX = 90, CY = 80, R = 55
+const CX = 130, CY = 120, R = 85
 function angleFor(i, n) { return (Math.PI * 2 * i / n) - Math.PI / 2 }
 function point(score, i, n) {
   const a = angleFor(i, n)
@@ -46,7 +46,7 @@ export default function CompetitorRadar() {
   return (
     <div className="chart">
       <div className="chart__title">Competitor Sustainability Radar</div>
-      <svg width="180" height="160" style={{ overflow: 'visible' }}>
+      <svg width="260" height="240" style={{ overflow: 'visible' }}>
         {/* Grid */}
         {gridPolys.map((p, i) => (
           <polygon key={i} points={p} fill="none" stroke="#1e1e1e" strokeWidth="1" />
@@ -62,14 +62,14 @@ export default function CompetitorRadar() {
           const x = CX + (R + 12) * Math.cos(a)
           const y = CY + (R + 12) * Math.sin(a)
           return label.split('\n').map((line, li) => (
-            <text key={`${i}-${li}`} x={x} y={y + li * 7} fontSize="5.5" fill="#666" textAnchor="middle" fontFamily="monospace">{line}</text>
+            <text key={`${i}-${li}`} x={x} y={y + li * 9} fontSize="8" fill="#666" textAnchor="middle" fontFamily="monospace">{line}</text>
           ))
         })}
         {/* Company polygons */}
         {COMPANIES.map(c => !hidden.includes(c.name) && (
           <polygon key={c.name} points={polygon(c.scores, n)}
             fill={c.color} fillOpacity="0.15"
-            stroke={c.color} strokeWidth={c.always ? 2 : 1.5}
+            stroke={c.color} strokeWidth={c.always ? 2.5 : 1.5}
           />
         ))}
       </svg>
@@ -82,8 +82,8 @@ export default function CompetitorRadar() {
             background: 'none', border: 'none', cursor: c.always ? 'default' : 'pointer',
             opacity: hidden.includes(c.name) ? 0.35 : 1, padding: '1px 3px',
           }}>
-            <div style={{ width: '8px', height: '8px', background: c.color }} />
-            <span style={{ fontSize: '6px', color: '#f2ead8', fontFamily: 'var(--font-mono)' }}>{c.name}</span>
+            <div style={{ width: '12px', height: '12px', background: c.color }} />
+            <span style={{ fontSize: '10px', color: '#f2ead8', fontFamily: 'var(--font-mono)' }}>{c.name}</span>
           </button>
         ))}
       </div>

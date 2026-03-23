@@ -21,19 +21,19 @@ export default function ScopeDonut() {
     <div className="chart">
       <div className="chart__title">Emissions Profile — Scope 1 / 2 / 3</div>
 
-      <div style={{ position: 'relative', width: '80px', height: '80px', margin: '8px auto' }}>
+      <div style={{ position: 'relative', width: '140px', height: '140px', margin: '16px auto' }}>
         <div style={{
-          width: '80px', height: '80px', borderRadius: '50%',
+          width: '140px', height: '140px', borderRadius: '50%',
           background: gradient,
         }} />
         {/* Hole */}
         <div style={{
-          position: 'absolute', top: '20px', left: '20px',
+          position: 'absolute', top: '50px', left: '50px',
           width: '40px', height: '40px', borderRadius: '50%',
           background: '#080c10',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <span style={{ fontSize: '6px', color: '#666', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre' }}>
+          <span style={{ fontSize: '10px', color: '#666', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre' }}>
             {hovered !== null ? `${SCOPES[hovered].pct}%` : '695Mt\ntotal'}
           </span>
         </div>
@@ -53,9 +53,9 @@ export default function ScopeDonut() {
               border: hovered === i ? `1px solid ${s.color}` : '1px solid transparent',
             }}
           >
-            <div style={{ width: '8px', height: '8px', background: s.color, flexShrink: 0 }} />
-            <span style={{ fontSize: '7px', color: '#f2ead8', fontFamily: 'var(--font-mono)', flex: 1 }}>{s.label}</span>
-            <span style={{ fontSize: '7px', color: s.color, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{s.value}Mt</span>
+            <div style={{ width: '12px', height: '12px', background: s.color, flexShrink: 0 }} />
+            <span style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', flex: 1 }}>{s.label}</span>
+            <span style={{ fontSize: '11px', color: s.color, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{s.value}Mt</span>
           </div>
         ))}
       </div>
@@ -64,7 +64,7 @@ export default function ScopeDonut() {
         <div style={{
           marginTop: '6px', width: '100%', background: '#0d1117',
           border: `1px solid ${SCOPES[hovered].color}`,
-          padding: '4px 6px', fontSize: '7px', color: '#f2ead8',
+          padding: '4px 6px', fontSize: '11px', color: '#f2ead8',
           fontFamily: 'var(--font-mono)', lineHeight: 1.5,
         }}>
           {SCOPES[hovered].desc}

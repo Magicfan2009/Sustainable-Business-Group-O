@@ -41,10 +41,10 @@ export default function DunphyTimeline() {
       <div className="chart__title">Dunphy et al. (2003) — Waves of Sustainability</div>
 
       {/* Timeline line + nodes */}
-      <div style={{ position: 'relative', width: '100%', marginTop: '16px' }}>
+      <div style={{ position: 'relative', width: '100%', marginTop: '24px' }}>
         {/* Connecting line */}
         <div style={{
-          position: 'absolute', top: '12px', left: '12px', right: '12px',
+          position: 'absolute', top: '18px', left: '18px', right: '18px',
           height: '2px', background: '#333',
         }} />
 
@@ -58,7 +58,7 @@ export default function DunphyTimeline() {
             >
               {/* Node circle */}
               <div style={{
-                width: '24px', height: '24px', borderRadius: '50%',
+                width: '36px', height: '36px', borderRadius: '50%',
                 background: w.color, border: `2px solid ${w.color}`,
                 boxShadow: w.current ? `0 0 8px ${w.color}` : '2px 2px 0 #000',
                 position: 'relative', zIndex: 1, flexShrink: 0,
@@ -73,9 +73,9 @@ export default function DunphyTimeline() {
               </div>
 
               <div style={{ marginTop: '6px', textAlign: 'center' }}>
-                <div style={{ fontSize: '7px', fontFamily: 'var(--font-mono)', color: w.color, letterSpacing: '0.1em', fontWeight: 700 }}>{w.label}</div>
-                <div style={{ fontSize: '6px', fontFamily: 'var(--font-mono)', color: '#666', marginTop: '1px' }}>{w.period}</div>
-                {w.current && <div style={{ fontSize: '6px', color: '#e8a020', marginTop: '2px' }}>▲ YOU ARE HERE</div>}
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: w.color, letterSpacing: '0.1em', fontWeight: 700 }}>{w.label}</div>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#666', marginTop: '1px' }}>{w.period}</div>
+                {w.current && <div style={{ fontSize: '9px', color: '#e8a020', marginTop: '2px' }}>▲ YOU ARE HERE</div>}
               </div>
             </div>
           ))}
@@ -87,10 +87,10 @@ export default function DunphyTimeline() {
         <div style={{
           marginTop: '12px', width: '100%',
           background: '#0d1117', border: `1px solid ${WAVES[open].color}`,
-          padding: '6px 8px', fontSize: '7px', fontFamily: 'var(--font-mono)',
+          padding: '10px 12px', fontSize: '11px', fontFamily: 'var(--font-mono)',
           color: '#f2ead8', lineHeight: 1.6, letterSpacing: '0.04em',
         }}>
-          <div style={{ color: WAVES[open].color, fontWeight: 700, marginBottom: '3px', fontSize: '8px' }}>{WAVES[open].label}</div>
+          <div style={{ color: WAVES[open].color, fontWeight: 700, marginBottom: '3px', fontSize: '12px' }}>{WAVES[open].label}</div>
           {WAVES[open].desc}
         </div>
       )}

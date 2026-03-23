@@ -99,8 +99,8 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 function TabletHome({ sections, onOpen, zoomed }) {
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px',
-      padding: '10px', height: '100%', boxSizing: 'border-box',
+      display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px',
+      padding: '16px', height: '100%', boxSizing: 'border-box',
     }}>
       {sections.map(s => (
         <button
@@ -108,13 +108,13 @@ function TabletHome({ sections, onOpen, zoomed }) {
           onClick={() => onOpen && onOpen(s.code)}
           style={{
             background: '#0d1117', border: 'none', borderLeft: '2px solid #e8a020',
-            padding: '8px 6px', cursor: zoomed ? 'pointer' : 'default',
+            padding: '14px 12px', cursor: zoomed ? 'pointer' : 'default',
             textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '2px',
             opacity: zoomed ? 1 : 0.85,
           }}
         >
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#e8a020', letterSpacing: '0.15em' }}>{s.code}</span>
-          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: '#f2ead8', letterSpacing: '0.08em' }}>{s.label}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '13px', color: '#e8a020', letterSpacing: '0.15em' }}>{s.code}</span>
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#f2ead8', letterSpacing: '0.08em' }}>{s.label}</span>
         </button>
       ))}
     </div>
@@ -128,18 +128,18 @@ function TabletChartView({ code, onBack, subPage, onSubPageChange }) {
   return (
     <div style={{ padding: '8px', height: '100%', boxSizing: 'border-box', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '4px', flexShrink: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px', flexShrink: 0 }}>
         <button onClick={onBack} style={{
-          fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#e8a020',
+          fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#e8a020',
           background: 'none', border: 'none', cursor: 'pointer', padding: 0,
           letterSpacing: '0.1em',
         }}>← BACK</button>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#f2ead8', letterSpacing: '0.1em', flex: 1 }}>{code}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#f2ead8', letterSpacing: '0.1em', flex: 1 }}>{code}</span>
         {hasSubPages && (
           <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-            <button onClick={() => onSubPageChange(Math.max(0, subPage - 1))} style={{ fontSize: '10px', color: '#666', background: 'none', border: 'none', cursor: 'pointer' }}>‹</button>
-            <span style={{ fontSize: '7px', color: '#666', fontFamily: 'var(--font-mono)' }}>{subPage + 1}/{subPageCount}</span>
-            <button onClick={() => onSubPageChange(Math.min(subPageCount - 1, subPage + 1))} style={{ fontSize: '10px', color: '#666', background: 'none', border: 'none', cursor: 'pointer' }}>›</button>
+            <button onClick={() => onSubPageChange(Math.max(0, subPage - 1))} style={{ fontSize: '16px', color: '#666', background: 'none', border: 'none', cursor: 'pointer' }}>‹</button>
+            <span style={{ fontSize: '11px', color: '#666', fontFamily: 'var(--font-mono)' }}>{subPage + 1}/{subPageCount}</span>
+            <button onClick={() => onSubPageChange(Math.min(subPageCount - 1, subPage + 1))} style={{ fontSize: '16px', color: '#666', background: 'none', border: 'none', cursor: 'pointer' }}>›</button>
           </div>
         )}
       </div>
