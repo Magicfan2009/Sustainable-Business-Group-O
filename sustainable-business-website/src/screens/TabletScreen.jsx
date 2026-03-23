@@ -97,10 +97,16 @@ const SECTIONS = [
   },
 ]
 
+// Sections that should stay in portrait (not rotate to landscape)
+const PORTRAIT_ONLY = new Set(['SEC-03'])
+
 export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, panning }) {
   const [activeSection, setActiveSection] = useState(null)
   const [subPage, setSubPage] = useState(0)
   const [zoomed, setZoomed] = useState(false)
+
+  // Go landscape only when a section is open AND it's not portrait-only
+  const isLandscape = activeSection && !PORTRAIT_ONLY.has(activeSection)
 
   function openSection(code) {
     if (code === 'SEC-06') { onPanToMonitor(); return }
@@ -177,7 +183,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 
             {/* Tablet shell — animates between portrait and landscape */}
             <motion.div
-              animate={activeSection ? {
+              animate={isLandscape ? {
                 width:  'min(92vh, 96vw)',
                 height: 'min(64vh, 68vw)',
                 borderRadius: '20px',
@@ -198,7 +204,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
             >
               {/* Camera — top-centre in portrait, left-centre in landscape */}
               <motion.div
-                animate={activeSection ? {
+                animate={isLandscape ? {
                   top: '50%', left: '14px',
                   translateX: '0%', translateY: '-50%',
                 } : {
@@ -223,7 +229,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 
               {/* Screen — inset adjusts for orientation */}
               <motion.div
-                animate={activeSection ? {
+                animate={isLandscape ? {
                   top: '14px', left: '36px', right: '62px', bottom: '14px',
                 } : {
                   top: '34px', left: '14px', right: '14px', bottom: '68px',
@@ -270,7 +276,7 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 
               {/* Home button — bottom-centre portrait / right-centre landscape */}
               <motion.div
-                animate={activeSection ? {
+                animate={isLandscape ? {
                   top: '50%', right: '10px', left: 'auto', bottom: 'auto',
                   translateX: '0%', translateY: '-50%',
                 } : {
