@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
+import { motion } from 'motion/react'
 import './charts.css'
 
 // Data points [year, Mt]
@@ -20,24 +21,12 @@ const ALL_SERIES = [
   { key: 'bau', label: 'BAU', color: '#cc2200', pts: BAU, strokeWidth: 2, dasharray: '4 3' },
 ]
 
+// Year ticks
+const years = [2020, 2025, 2030, 2035, 2040, 2045, 2050]
+const mts = [0, 200, 400, 600, 800]
+
 export default function NetZeroProjection() {
-  const lineRefs = useRef([])
   const [hoveredPt, setHoveredPt] = useState(null)
-
-  useEffect(() => {
-    lineRefs.current.forEach((ref, i) => {
-      if (!ref) return
-      const len = ref.getTotalLength()
-      ref.style.strokeDasharray = len
-      ref.style.strokeDashoffset = len
-      ref.style.transition = `stroke-dashoffset ${0.8 + i * 0.2}s ease ${i * 0.15}s forwards`
-      setTimeout(() => { if (ref) ref.style.strokeDashoffset = 0 }, 50)
-    })
-  }, [])
-
-  // Year ticks
-  const years = [2020, 2025, 2030, 2035, 2040, 2045, 2050]
-  const mts = [0, 200, 400, 600, 800]
 
   return (
     <div className="chart">
@@ -56,28 +45,33 @@ export default function NetZeroProjection() {
           <text key={y} x={toX(y)} y={H - 4} fontSize="8" fill="#555" textAnchor="middle" fontFamily="monospace">{y}</text>
         ))}
 
-        {/* Lines */}
+        {/* Animated Lines */}
         {ALL_SERIES.map((s, i) => (
-          <polyline
+          <motion.polyline
             key={s.key}
-            ref={el => lineRefs.current[i] = el}
             points={polyline(s.pts)}
             fill="none"
             stroke={s.color}
             strokeWidth={s.strokeWidth}
             strokeDasharray={s.dasharray || undefined}
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 0.8 + i * 0.2, ease: 'easeOut', delay: i * 0.15 }}
           />
         ))}
 
-        {/* Hit targets — invisible circles on each data point */}
-        {ALL_SERIES.map(s => s.pts.map(([year, mt], pi) => (
-          <circle
+        {/* Animated data point circles */}
+        {ALL_SERIES.map((s, si) => s.pts.map(([year, mt], pi) => (
+          <motion.circle
             key={`${s.key}-${pi}`}
             cx={toX(year)}
             cy={toY(mt)}
             r={5}
             fill={s.color}
-            opacity={0}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 0, scale: 1 }}
+            whileHover={{ opacity: 1, scale: 1.4 }}
+            transition={{ delay: si * 0.15 + pi * 0.06, type: 'spring', stiffness: 300, damping: 20 }}
             style={{ cursor: 'crosshair' }}
             onMouseEnter={() => setHoveredPt({ label: s.label, color: s.color, year, mt })}
             onMouseLeave={() => setHoveredPt(null)}
@@ -95,15 +89,19 @@ export default function NetZeroProjection() {
 
       {/* Hover tooltip */}
       {hoveredPt && (
-        <div style={{
-          marginTop: '6px', background: '#0d1117',
-          border: `1px solid ${hoveredPt.color}`,
-          padding: '5px 8px', fontSize: '11px', color: '#f2ead8',
-          fontFamily: 'var(--font-mono)', lineHeight: 1.5,
-        }}>
+        <motion.div
+          initial={{ opacity: 0, y: 4 }}
+          animate={{ opacity: 1, y: 0 }}
+          style={{
+            marginTop: '6px', background: '#0d1117',
+            border: `1px solid ${hoveredPt.color}`,
+            padding: '5px 8px', fontSize: '11px', color: '#f2ead8',
+            fontFamily: 'var(--font-mono)', lineHeight: 1.5,
+          }}
+        >
           <span style={{ color: hoveredPt.color, fontWeight: 700 }}>{hoveredPt.label}</span>
           {' — '}{hoveredPt.year}: <span style={{ color: hoveredPt.color }}>{hoveredPt.mt} Mt</span>
-        </div>
+        </motion.div>
       )}
     </div>
   )

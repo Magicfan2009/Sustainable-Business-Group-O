@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import gsap from 'gsap'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import './charts.css'
 
 const MILESTONES = [
@@ -13,64 +13,47 @@ const MILESTONES = [
 
 export default function StrategicRoadmap() {
   const [open, setOpen] = useState(null)
-  const nodesRef = useRef([])
-
-  useEffect(() => {
-    gsap.from(nodesRef.current, {
-      scale: 0, opacity: 0, duration: 0.35, ease: 'back.out(1.7)',
-      stagger: 0.1, delay: 0.1,
-    })
-  }, [])
-
-  function toggle(i) {
-    setOpen(open === i ? null : i)
-  }
-
   return (
     <div className="chart" style={{ justifyContent: 'flex-start', padding: '6px 4px' }}>
       <div className="chart__title">Strategic Roadmap 2025–2035</div>
-
-      {/* Horizontal node row */}
       <div style={{ position: 'relative', width: '100%', marginTop: '20px' }}>
-        <div style={{ position: 'absolute', top: '17px', left: '8px', right: '8px', height: '2px', background: '#333' }} />
+        <motion.div initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }}
+          style={{ position: 'absolute', top: '17px', left: '8px', right: '8px', height: '2px', background: '#333', transformOrigin: 'left' }}
+        />
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           {MILESTONES.map((m, i) => (
-            <div
-              key={i}
-              ref={el => nodesRef.current[i] = el}
-              onClick={() => toggle(i)}
+            <motion.div key={i} initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 20, delay: 0.15 + i * 0.1 }}
+              onClick={() => setOpen(open === i ? null : i)}
               style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', width: '15%' }}
             >
-              <div style={{
-                width: '34px', height: '34px', borderRadius: '50%',
-                background: open === i ? '#e8a020' : '#1a1a1a',
-                border: `2px solid ${open === i ? '#e8a020' : '#444'}`,
-                boxShadow: open === i ? '0 0 6px #e8a020' : '2px 2px 0 #000',
-                zIndex: 1, transition: 'background 150ms ease, border-color 150ms ease',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-              }}>
+              <motion.div
+                animate={{ background: open === i ? '#e8a020' : '#1a1a1a', borderColor: open === i ? '#e8a020' : '#444', boxShadow: open === i ? '0 0 10px #e8a020' : '2px 2px 0 #000' }}
+                whileHover={{ scale: 1.2, boxShadow: '0 0 8px rgba(232,160,32,0.5)' }}
+                whileTap={{ scale: 0.9 }}
+                style={{ width: '34px', height: '34px', borderRadius: '50%', border: '2px solid #444', zIndex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
                 <span style={{ fontSize: '8px', color: open === i ? '#000' : '#888', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{m.year}</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
-
-      {/* Expanded detail */}
-      {open !== null && (
-        <div style={{
-          marginTop: '8px', width: '100%',
-          background: '#0d1117', border: '1px solid #e8a020',
-          padding: '8px 12px', overflow: 'hidden',
-        }}>
-          <div style={{ fontSize: '12px', color: '#e8a020', fontFamily: 'var(--font-mono)', fontWeight: 700, marginBottom: '4px' }}>{MILESTONES[open].year}</div>
-          {MILESTONES[open].items.map((item, i) => (
-            <div key={i} style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', marginBottom: '3px', lineHeight: 1.4 }}>
-              › {item}
-            </div>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {open !== null && (
+          <motion.div key={open} initial={{ opacity: 0, height: 0, y: -8 }} animate={{ opacity: 1, height: 'auto', y: 0 }} exit={{ opacity: 0, height: 0 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+            style={{ marginTop: '10px', width: '100%', background: '#0d1117', border: '1px solid #e8a020', padding: '8px 12px', overflow: 'hidden' }}
+          >
+            <div style={{ fontSize: '12px', color: '#e8a020', fontFamily: 'var(--font-mono)', fontWeight: 700, marginBottom: '6px' }}>{MILESTONES[open].year}</div>
+            {MILESTONES[open].items.map((item, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
+                style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', marginBottom: '4px', lineHeight: 1.5 }}
+              >› {item}</motion.div>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

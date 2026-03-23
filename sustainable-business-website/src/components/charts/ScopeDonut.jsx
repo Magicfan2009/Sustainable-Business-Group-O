@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import './charts.css'
 
 const SCOPES = [
@@ -9,67 +10,64 @@ const SCOPES = [
 
 export default function ScopeDonut() {
   const [hovered, setHovered] = useState(null)
-
-  // Build conic-gradient: S3 dominates (~98.9%), S1 0.5%, S2 0.6%
-  const gradient = `conic-gradient(
-    #cc2200 0deg 356deg,
-    #4ade80 356deg 357.8deg,
-    #e8a020 357.8deg 360deg
-  )`
+  const gradient = `conic-gradient(#cc2200 0deg 356deg, #4ade80 356deg 357.8deg, #e8a020 357.8deg 360deg)`
 
   return (
     <div className="chart">
       <div className="chart__title">Emissions Profile — Scope 1 / 2 / 3</div>
-
-      <div style={{ position: 'relative', width: '140px', height: '140px', margin: '16px auto' }}>
-        <div style={{
-          width: '140px', height: '140px', borderRadius: '50%',
-          background: gradient,
-        }} />
-        {/* Hole */}
-        <div style={{
-          position: 'absolute', top: '50px', left: '50px',
-          width: '40px', height: '40px', borderRadius: '50%',
-          background: '#080c10',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <span style={{ fontSize: '10px', color: '#666', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre' }}>
-            {hovered !== null ? `${SCOPES[hovered].pct}%` : '695Mt\ntotal'}
-          </span>
+      <motion.div
+        initial={{ scale: 0, rotate: -180 }}
+        animate={{ scale: 1, rotate: 0 }}
+        transition={{ type: 'spring', stiffness: 160, damping: 18, delay: 0.1 }}
+        style={{ position: 'relative', width: '140px', height: '140px', margin: '16px auto' }}
+      >
+        <div style={{ width: '140px', height: '140px', borderRadius: '50%', background: gradient }} />
+        <div style={{ position: 'absolute', top: '30px', left: '30px', width: '80px', height: '80px', borderRadius: '50%', background: '#080c10', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={hovered ?? 'total'}
+              initial={{ opacity: 0, scale: 0.7 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.7 }}
+              transition={{ duration: 0.15 }}
+              style={{ fontSize: '10px', color: hovered !== null ? SCOPES[hovered].color : '#666', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre', fontWeight: 700 }}
+            >
+              {hovered !== null ? `${SCOPES[hovered].pct}%` : '695Mt\ntotal'}
+            </motion.span>
+          </AnimatePresence>
         </div>
-      </div>
-
-      {/* Legend */}
-      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '4px', marginTop: '4px' }}>
+      </motion.div>
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '5px' }}>
         {SCOPES.map((s, i) => (
-          <div
+          <motion.div
             key={i}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 300, damping: 24 }}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
-            style={{
-              display: 'flex', alignItems: 'center', gap: '6px',
-              padding: '3px 4px', cursor: 'default',
-              background: hovered === i ? '#0d1117' : 'transparent',
-              border: hovered === i ? `1px solid ${s.color}` : '1px solid transparent',
-            }}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 6px', cursor: 'default', background: hovered === i ? '#0d1117' : 'transparent', border: hovered === i ? `1px solid ${s.color}` : '1px solid transparent', borderRadius: '2px' }}
           >
-            <div style={{ width: '12px', height: '12px', background: s.color, flexShrink: 0 }} />
+            <motion.div whileHover={{ scale: 1.3 }} style={{ width: '12px', height: '12px', background: s.color, borderRadius: '2px', flexShrink: 0 }} />
             <span style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', flex: 1 }}>{s.label}</span>
             <span style={{ fontSize: '11px', color: s.color, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{s.value}Mt</span>
-          </div>
+          </motion.div>
         ))}
       </div>
-
-      {hovered !== null && (
-        <div style={{
-          marginTop: '6px', width: '100%', background: '#0d1117',
-          border: `1px solid ${SCOPES[hovered].color}`,
-          padding: '4px 6px', fontSize: '11px', color: '#f2ead8',
-          fontFamily: 'var(--font-mono)', lineHeight: 1.5,
-        }}>
-          {SCOPES[hovered].desc}
-        </div>
-      )}
+      <AnimatePresence>
+        {hovered !== null && (
+          <motion.div
+            key={hovered}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.15 }}
+            style={{ marginTop: '8px', width: '100%', background: '#0d1117', border: `1px solid ${SCOPES[hovered].color}`, padding: '6px 8px', fontSize: '10px', color: '#f2ead8', fontFamily: 'var(--font-mono)', lineHeight: 1.5 }}
+          >
+            {SCOPES[hovered].desc}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }
