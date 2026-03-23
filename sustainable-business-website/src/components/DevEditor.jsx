@@ -226,6 +226,7 @@ export default function DevEditor({ items }) {
         </pre>
         <div style={{ marginTop: 10, color: '#555', fontSize: 10, borderTop: '1px solid #222', paddingTop: 8 }}>
           Drag box → move · Drag ↘ corner → resize · Copy values → paste to Claude
+          Navigate to the correct room first, then open editor (monitor desk requires monitor room)
         </div>
       </div>
     </>

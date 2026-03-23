@@ -8,7 +8,7 @@ const W = 480, H = 420
 // Screen area within the bezel
 const SX = 48, SY = 36, SW = 384, SH = 260
 
-export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
+export default function MonitorScreen({ onPanLeft, onPanRight, panning, deskRef }) {
   return (
     <div className="monitor-screen" style={{ position: 'relative' }}>
       <PanArrow direction="left" onClick={onPanLeft} panning={panning} label="Filing Cabinet" />
@@ -91,7 +91,8 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
             fill="rgba(0,0,0,0.12)" />
         </svg>
         {/* Desk surface under monitor */}
-        <svg width="min(560px, 90vw)" viewBox="0 0 480 60" style={{ display: 'block', marginTop: '-4px' }}>
+        <div ref={deskRef} style={{ width: 'min(560px, 90vw)', lineHeight: 0 }}>
+        <svg width="100%" viewBox="0 0 480 60" style={{ display: 'block', marginTop: '-4px' }}>
           {/* Desk surface */}
           <rect x="0" y="0" width="480" height="18" rx="3" fill="#9a7048" stroke="#5a3a1a" strokeWidth="2"/>
           {/* Desk front face */}
@@ -108,6 +109,7 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
           <rect x="399" y="-44" width="6" height="4" rx="2" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1"/>
           <rect x="415" y="-42" width="6" height="4" rx="2" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1"/>
         </svg>
+        </div>
       </div>
     </div>
   )
