@@ -16,6 +16,13 @@ html, body, #root {
   overflow: hidden;
 }
 
+@media (max-width: 700px) {
+  html, body, #root {
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
 button {
   font-family: var(--font-mono);
   cursor: pointer;
@@ -23,23 +30,3 @@ button {
   background: none;
 }
 
-/* Mobile fallback — desktop only site */
-@media (max-width: 1023px) {
-  #root::after {
-    content: 'THIS REPORT IS OPTIMISED FOR DESKTOP VIEWING.';
-    position: fixed;
-    inset: 0;
-    background: var(--color-bg);
-    color: var(--color-cream);
-    font-family: var(--font-mono);
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 2rem;
-    z-index: 9999;
-  }
-  #root > * { display: none; }
-}

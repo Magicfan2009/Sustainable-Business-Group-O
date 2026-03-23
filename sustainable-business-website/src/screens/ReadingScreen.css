@@ -57,11 +57,36 @@
   background: var(--color-cream);
   border: 3px solid #000;
   box-shadow: 6px 6px 0 0 #000;
-  width: min(680px, 90vw);
+  width: min(680px, 94vw);
   max-height: 82vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .reading-screen {
+    padding: 8px;
+  }
+
+  .reading-doc {
+    max-height: 88vh;
+    box-shadow: 3px 3px 0 0 #000;
+  }
+
+  .reading-doc__body {
+    padding: 16px 14px;
+    font-size: var(--text-sm);
+  }
+
+  .reading-doc__header {
+    padding: 10px 12px 10px 48px;
+  }
+
+  .reading-screen__back {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
 }
 
 /* Paperclip — top left corner, overlaps header */

@@ -419,3 +419,27 @@
 .cabinet-screen__ai-link:hover {
   color: var(--color-cream);
 }
+
+/* ── Mobile responsive ── */
+@media (max-width: 700px) {
+  .cabinet-screen {
+    gap: 20px;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .cabinet-scene {
+    transform: scale(0.72);
+    transform-origin: center center;
+  }
+
+  .cabinet-screen__links {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .cabinet-scene {
+    transform: scale(0.55);
+  }
+}
