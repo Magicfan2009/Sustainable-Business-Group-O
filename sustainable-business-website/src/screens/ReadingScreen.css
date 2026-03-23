@@ -278,3 +278,80 @@
   width: 100%;
   display: block;
 }
+
+/* ── Mini cabinet — left of document ── */
+.mini-cabinet {
+  position: absolute;
+  left: max(8px, calc(50% - 460px));
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 120px;
+}
+
+.mini-cabinet__drawer {
+  background: var(--color-cabinet-light);
+  border: 2px solid #000;
+  box-shadow: 3px 3px 0 #000;
+  cursor: pointer;
+  padding: 6px 8px;
+  text-align: left;
+  font-family: var(--font-mono);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  transition:
+    background 120ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.mini-cabinet__drawer:hover:not(:disabled) {
+  background: #8d95a0;
+  transform: translateX(-4px);
+  box-shadow: 5px 3px 0 #000;
+}
+
+.mini-cabinet__drawer:active:not(:disabled) {
+  transform: translateX(-6px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.mini-cabinet__drawer--active {
+  background: var(--color-amber);
+  cursor: default;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.mini-cabinet__code {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.1em;
+}
+
+.mini-cabinet__drawer--active .mini-cabinet__code {
+  color: #fff;
+}
+
+.mini-cabinet__label {
+  font-size: 8px;
+  color: var(--color-text);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.mini-cabinet__drawer--active .mini-cabinet__label {
+  color: #fff;
+}
+
+/* Hide on small screens where there's no horizontal space */
+@media (max-width: 900px) {
+  .mini-cabinet {
+    display: none;
+  }
+}

@@ -4,7 +4,7 @@ import gsap from 'gsap'
 import PanArrow from '../components/PanArrow'
 import './CabinetScreen.css'
 
-const DRAWERS = [
+export const DRAWERS = [
   { code: 'SEC-01', label: 'OVERVIEW' },
   { code: 'SEC-02', label: 'CARBON ACCOUNTING' },
   { code: 'SEC-03', label: 'TRIPLE BOTTOM LINE' },

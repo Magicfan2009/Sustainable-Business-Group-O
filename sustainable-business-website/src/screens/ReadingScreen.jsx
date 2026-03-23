@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Paperclip from '../components/Paperclip'
+import { DRAWERS } from './CabinetScreen'
 import PageNav from '../components/PageNav'
 import { getSectionData } from '../data/sections'
 import DunphyTimeline from '../components/charts/DunphyTimeline'
@@ -14,7 +15,7 @@ import NetZeroTimeline from '../components/charts/NetZeroTimeline'
 import StrategicRoadmap from '../components/charts/StrategicRoadmap'
 import './ReadingScreen.css'
 
-export default function ReadingScreen({ sectionCode, onBack }) {
+export default function ReadingScreen({ sectionCode, onBack, onSectionChange }) {
   const section = getSectionData(sectionCode)
   const [pageIndex, setPageIndex] = useState(0)
   const [pendingIndex, setPendingIndex] = useState(null)
@@ -118,6 +119,26 @@ export default function ReadingScreen({ sectionCode, onBack }) {
       <button className="reading-screen__back" onClick={handleBack}>
         ← BACK
       </button>
+
+      {/* Mini cabinet — left of document for section switching */}
+      <motion.div
+        className="mini-cabinet"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 24, delay: 0.3 }}
+      >
+        {DRAWERS.map((d) => (
+          <button
+            key={d.code}
+            className={`mini-cabinet__drawer${d.code === sectionCode ? ' mini-cabinet__drawer--active' : ''}`}
+            onClick={() => onSectionChange && onSectionChange(d.code)}
+            disabled={d.code === sectionCode}
+          >
+            <span className="mini-cabinet__code">{d.code}</span>
+            <span className="mini-cabinet__label">{d.label}</span>
+          </button>
+        ))}
+      </motion.div>
 
       <div className="reading-doc" ref={docRef}>
         {/* Paperclip — top left */}

@@ -10,7 +10,7 @@ import MonitorScreen from './screens/MonitorScreen'
 const SCREENS = { PASSWORD: 'password', ROOMS: 'rooms', READING: 'reading', AI: 'ai' }
 
 function App() {
-  const [screen, setScreen] = useState(SCREENS.ROOMS)
+  const [screen, setScreen] = useState(SCREENS.PASSWORD)
   const [fadeOut, setFadeOut] = useState(false)
   const [fadeDuration, setFadeDuration] = useState(400)
   const [activeFile, setActiveFile] = useState(null)
@@ -134,7 +134,7 @@ function App() {
       )}
 
       {screen === SCREENS.READING && (
-        <ReadingScreen sectionCode={activeFile} onBack={goBack} />
+        <ReadingScreen sectionCode={activeFile} onBack={goBack} onSectionChange={openFile} />
       )}
       {screen === SCREENS.AI && (
         <AIScreen onBack={closeAI} />
