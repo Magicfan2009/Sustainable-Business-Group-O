@@ -15,6 +15,7 @@ function App() {
   const [fadeDuration, setFadeDuration] = useState(400)
   const [activeFile, setActiveFile] = useState(null)
   const [room, setRoom] = useState('cabinet') // 'cabinet' | 'tablet' | 'monitor'
+  const roomRef = useRef('cabinet') // mirrors room state, always fresh in closures
   const panningRef = useRef(false)
   const bgRef = useRef(null)
 
@@ -54,7 +55,8 @@ function App() {
     panningRef.current = true
 
     const ROOM_ORDER = ['cabinet', 'tablet', 'monitor']
-    const currentIdx = ROOM_ORDER.indexOf(room)
+    const currentRoom = roomRef.current
+    const currentIdx = ROOM_ORDER.indexOf(currentRoom)
     const targetIdx = ROOM_ORDER.indexOf(targetRoom)
     // Determine direction: +1 = right (exit left), -1 = left (exit right)
     let direction = targetIdx > currentIdx ? 1 : -1
@@ -65,7 +67,7 @@ function App() {
     const exitX = direction > 0 ? '-120vw' : '120vw'
     const enterX = direction > 0 ? '120vw' : '-120vw'
 
-    const currentEl = document.querySelector(`[data-room="${room}"]`)
+    const currentEl = document.querySelector(`[data-room="${currentRoom}"]`)
     const targetEl = document.querySelector(`[data-room="${targetRoom}"]`)
     if (!currentEl || !targetEl) { panningRef.current = false; return }
 
@@ -75,6 +77,7 @@ function App() {
     const tl = gsap.timeline({
       onComplete: () => {
         gsap.set(currentEl, { x: 0, zIndex: 1 })
+        roomRef.current = targetRoom
         setRoom(targetRoom)
         panningRef.current = false
       }

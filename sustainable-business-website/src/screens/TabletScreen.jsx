@@ -21,6 +21,7 @@ const SECTIONS = [
 export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, panning }) {
   const [activeSection, setActiveSection] = useState(null)
   const [subPage, setSubPage] = useState(0)
+  const [zoomed, setZoomed] = useState(false)
 
   function openSection(code) {
     if (code === 'SEC-06') { onPanToMonitor(); return }
@@ -32,24 +33,51 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
     setActiveSection(null)
   }
 
+  function handleTabletClick() {
+    if (!zoomed) setZoomed(true)
+  }
+
   return (
     <div className="tablet-screen" style={{ position: 'relative' }}>
-      <PanArrow direction="left" onClick={onPanLeft} panning={panning} />
-      <PanArrow direction="right" onClick={onPanRight} panning={panning} />
+      {/* Pan arrows hidden when zoomed */}
+      {!zoomed && <PanArrow direction="left" onClick={onPanLeft} panning={panning} />}
+      {!zoomed && <PanArrow direction="right" onClick={onPanRight} panning={panning} />}
 
-      <div className="tablet-scene">
+      {/* Zoom-out button */}
+      {zoomed && (
+        <button
+          onClick={() => { setZoomed(false); setActiveSection(null) }}
+          style={{
+            position: 'absolute', top: '16px', left: '16px', zIndex: 10,
+            fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#e8a020',
+            background: '#1a1a1a', border: '1px solid #333', padding: '6px 12px',
+            cursor: 'pointer', letterSpacing: '0.1em',
+          }}
+        >
+          ← BACK
+        </button>
+      )}
+
+      <div
+        className={`tablet-scene${zoomed ? ' tablet-scene--zoomed' : ''}`}
+        onClick={handleTabletClick}
+        style={{ cursor: zoomed ? 'default' : 'pointer' }}
+      >
         <div className="tablet-iso">
           <div className="tablet-iso__top" />
           <div className="tablet-iso__side" />
-          <div className="tablet-nametag">CHARTS &amp; FIGURES</div>
+          {!zoomed && <div className="tablet-nametag">CHARTS &amp; FIGURES</div>}
 
           <div className="tablet-iso__front">
             <div className="tablet-iso__camera" />
             <div className="tablet-iso__bezel" />
 
-            <div className="tablet-iso__screen">
+            <div
+              className="tablet-iso__screen"
+              onClick={e => { if (zoomed) e.stopPropagation() }}
+            >
               {!activeSection ? (
-                <TabletHome sections={SECTIONS} onOpen={openSection} />
+                <TabletHome sections={SECTIONS} onOpen={zoomed ? openSection : null} zoomed={zoomed} />
               ) : (
                 <TabletChartView
                   code={activeSection}
@@ -68,19 +96,23 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
   )
 }
 
-function TabletHome({ sections, onOpen }) {
+function TabletHome({ sections, onOpen, zoomed }) {
   return (
     <div style={{
       display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px',
       padding: '10px', height: '100%', boxSizing: 'border-box',
     }}>
       {sections.map(s => (
-        <button key={s.code} onClick={() => onOpen(s.code)} style={{
-          background: '#0d1117', borderLeft: '2px solid #e8a020',
-          border: 'none', borderLeft: '2px solid #e8a020',
-          padding: '8px 6px', cursor: 'pointer', textAlign: 'left',
-          display: 'flex', flexDirection: 'column', gap: '2px',
-        }}>
+        <button
+          key={s.code}
+          onClick={() => onOpen && onOpen(s.code)}
+          style={{
+            background: '#0d1117', border: 'none', borderLeft: '2px solid #e8a020',
+            padding: '8px 6px', cursor: zoomed ? 'pointer' : 'default',
+            textAlign: 'left', display: 'flex', flexDirection: 'column', gap: '2px',
+            opacity: zoomed ? 1 : 0.85,
+          }}
+        >
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#e8a020', letterSpacing: '0.15em' }}>{s.code}</span>
           <span style={{ fontFamily: 'var(--font-mono)', fontSize: '7px', color: '#f2ead8', letterSpacing: '0.08em' }}>{s.label}</span>
         </button>
