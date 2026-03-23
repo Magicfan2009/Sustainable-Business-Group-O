@@ -17,11 +17,10 @@ function startDrag(e, onMove) {
 
 function Overlay({ id, label, color, rect, onRectChange }) {
   const snapRect = useRef(rect)
-  // Keep snapRect in sync so callbacks always close over fresh value
   snapRect.current = rect
 
   function handleDragDown(e) {
-    if (e.target.dataset.resize) return // let resize handle it
+    if (e.target.dataset.resize) return
     const { left, top, width, height } = snapRect.current
     startDrag(e, (dx, dy) => onRectChange(id, { left: left + dx, top: top + dy, width, height }))
   }
@@ -54,7 +53,6 @@ function Overlay({ id, label, color, rect, onRectChange }) {
         pointerEvents: 'all',
       }}
     >
-      {/* Label tab */}
       <div style={{
         position: 'absolute', top: -22, left: 0,
         background: color, color: '#fff',
@@ -65,8 +63,6 @@ function Overlay({ id, label, color, rect, onRectChange }) {
       }}>
         {label}
       </div>
-
-      {/* Resize corner — data-resize marks it so drag handler skips it */}
       <div
         data-resize="true"
         onMouseDown={handleResizeDown}
@@ -90,6 +86,9 @@ export default function DevEditor({ items }) {
   const [active, setActive] = useState(false)
   const [rects, setRects] = useState({})
   const [copied, setCopied] = useState(false)
+  // Panel drag state
+  const [panelPos, setPanelPos] = useState(null) // null = default centred at bottom
+  const panelSnapPos = useRef(null)
   const origStyles = useRef({})
 
   useEffect(() => {
@@ -162,12 +161,35 @@ export default function DevEditor({ items }) {
     el.style.height = newRect.height + 'px'
   }, [items])
 
+  function handlePanelDragDown(e) {
+    // Don't drag if clicking the copy button
+    if (e.target.tagName === 'BUTTON') return
+    const startX = e.clientX, startY = e.clientY
+    const startPos = panelSnapPos.current ?? { x: window.innerWidth / 2, y: window.innerHeight - 16 }
+    e.preventDefault()
+    function move(ev) {
+      setPanelPos({
+        x: startPos.x + (ev.clientX - startX),
+        y: startPos.y + (ev.clientY - startY),
+      })
+    }
+    function up() {
+      window.removeEventListener('mousemove', move)
+      window.removeEventListener('mouseup', up)
+    }
+    window.addEventListener('mousemove', move)
+    window.addEventListener('mouseup', up)
+  }
+
+  // Keep snap ref in sync
+  useEffect(() => { panelSnapPos.current = panelPos }, [panelPos])
+
   function buildOutput() {
     const vw = window.innerWidth
     const vh = window.innerHeight
     return items.map(item => {
       const r = rects[item.id]
-      if (!r) return `  ${item.label}: (not measured)`
+      if (!r) return `  ${item.label}: (not measured — navigate to that room first)`
       return [
         `  ${item.label}:`,
         `    left:   ${Math.round(r.left)}px  (${((r.left / vw) * 100).toFixed(1)}vw)`,
@@ -184,6 +206,11 @@ export default function DevEditor({ items }) {
       setTimeout(() => setCopied(false), 2500)
     })
   }
+
+  // Panel position style — dragged or default (bottom-centre)
+  const panelStyle = panelPos
+    ? { position: 'fixed', left: panelPos.x, top: panelPos.y, transform: 'translate(-50%, -100%)' }
+    : { position: 'fixed', bottom: 16, left: '50%', transform: 'translateX(-50%)' }
 
   if (!active) return null
 
@@ -202,31 +229,57 @@ export default function DevEditor({ items }) {
         />
       ))}
 
-      <div style={{
-        position: 'fixed', bottom: 16, left: '50%', transform: 'translateX(-50%)',
-        background: 'rgba(8,8,18,0.97)', border: '1px solid #333', borderRadius: 8,
-        padding: '12px 16px', zIndex: 100001, fontFamily: 'monospace', fontSize: 12,
-        color: '#e0e0e0', maxWidth: '90vw', minWidth: 360,
-        boxShadow: '0 12px 40px rgba(0,0,0,0.7)',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 10 }}>
+      {/* Output panel — draggable via title bar */}
+      <div
+        style={{
+          ...panelStyle,
+          background: 'rgba(8,8,18,0.97)',
+          border: '1px solid #333',
+          borderRadius: 8,
+          zIndex: 100001,
+          fontFamily: 'monospace',
+          fontSize: 12,
+          color: '#e0e0e0',
+          maxWidth: '90vw',
+          minWidth: 360,
+          boxShadow: '0 12px 40px rgba(0,0,0,0.7)',
+          userSelect: 'none',
+        }}
+      >
+        {/* Drag handle bar */}
+        <div
+          onMouseDown={handlePanelDragDown}
+          style={{
+            padding: '8px 16px 0',
+            cursor: 'grab',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 6,
+          }}
+        >
           <span style={{ color: '#888', fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase' }}>
             ✦ Dev Editor — Ctrl+Shift+E to exit
           </span>
-          <button onClick={handleCopy} style={{
-            background: copied ? '#2ecc71' : '#0066cc', color: '#fff', border: 'none',
-            borderRadius: 4, padding: '5px 14px', fontFamily: 'monospace', fontSize: 11,
-            cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em', transition: 'background 0.2s',
-          }}>
-            {copied ? '✓ COPIED!' : 'COPY VALUES'}
-          </button>
+          <span style={{ color: '#444', fontSize: 14, marginLeft: 12 }}>⠿</span>
         </div>
-        <pre style={{ margin: 0, color: '#7dd3fc', lineHeight: 1.7, whiteSpace: 'pre' }}>
-          {buildOutput()}
-        </pre>
-        <div style={{ marginTop: 10, color: '#555', fontSize: 10, borderTop: '1px solid #222', paddingTop: 8 }}>
-          Drag box → move · Drag ↘ corner → resize · Copy values → paste to Claude
-          Navigate to the correct room first, then open editor (monitor desk requires monitor room)
+
+        <div style={{ padding: '0 16px 12px' }}>
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 8 }}>
+            <button onClick={handleCopy} style={{
+              background: copied ? '#2ecc71' : '#0066cc', color: '#fff', border: 'none',
+              borderRadius: 4, padding: '5px 14px', fontFamily: 'monospace', fontSize: 11,
+              cursor: 'pointer', fontWeight: 700, letterSpacing: '0.08em', transition: 'background 0.2s',
+            }}>
+              {copied ? '✓ COPIED!' : 'COPY VALUES'}
+            </button>
+          </div>
+          <pre style={{ margin: 0, color: '#7dd3fc', lineHeight: 1.7, whiteSpace: 'pre' }}>
+            {buildOutput()}
+          </pre>
+          <div style={{ marginTop: 10, color: '#555', fontSize: 10, borderTop: '1px solid #222', paddingTop: 8 }}>
+            Drag box → move · Drag ↘ corner → resize · Drag this panel to move it
+          </div>
         </div>
       </div>
     </>
