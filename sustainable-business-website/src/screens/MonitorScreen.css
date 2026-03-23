@@ -34,8 +34,8 @@
 .monitor-iso__front {
   position: absolute;
   inset: 0;
-  background: #1a1a1a;
-  box-shadow: 8px 8px 0 #000;
+  background: #b0b8c4;
+  box-shadow: 8px 8px 0 rgba(0,30,80,0.3);
 }
 
 .monitor-iso__screen {
@@ -56,10 +56,10 @@
   left: 0;
   width: var(--mon-w);
   height: var(--mon-depth-top);
-  background: #252525;
+  background: #c8d0da;
   transform-origin: bottom left;
   transform: skewX(-40deg) scaleY(0.6);
-  border-top: 1px solid #444;
+  border-top: 1px solid #9aa0aa;
 }
 
 .monitor-iso__side {
@@ -68,7 +68,7 @@
   right: calc(-1 * var(--mon-depth-side));
   width: var(--mon-depth-side);
   height: var(--mon-h);
-  background: #111;
+  background: #8a9099;
   transform-origin: top left;
   transform: skewY(-50deg) scaleX(0.65);
 }
@@ -101,14 +101,14 @@
 .monitor-stand__neck {
   width: 6px;
   height: 24px;
-  background: #222;
+  background: #9aa0aa;
 }
 
 .monitor-stand__base {
   width: 80px;
   height: 8px;
-  background: #1a1a1a;
-  box-shadow: 2px 2px 0 #000;
+  background: #b0b8c4;
+  box-shadow: 2px 2px 0 rgba(0,30,80,0.2);
 }
 
 /* Nametag */
@@ -121,7 +121,7 @@
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.18em;
-  color: rgba(242, 234, 216, 0.75);
+  color: rgba(0, 30, 80, 0.7);
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
@@ -135,20 +135,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dashed #e8a020;
+  border: 1px dashed #0066cc;
   animation: placeholder-pulse 2s ease-in-out infinite;
 }
 
 .monitor-placeholder span {
   font-family: var(--font-mono);
   font-size: 9px;
-  color: #e8a020;
+  color: #0066cc;
   letter-spacing: 0.15em;
 }
 
 @keyframes placeholder-pulse {
-  0%, 100% { border-color: rgba(232,160,32,0.6); }
-  50%       { border-color: rgba(232,160,32,0.2); }
+  0%, 100% { border-color: rgba(0,102,204,0.6); }
+  50%       { border-color: rgba(0,102,204,0.2); }
 }
 
 /* Play/pause overlay */
@@ -160,7 +160,7 @@
   justify-content: center;
   background: rgba(0,0,0,0.3);
   font-size: 28px;
-  color: #e8a020;
+  color: #0066cc;
   cursor: pointer;
   transition: background 150ms ease;
 }

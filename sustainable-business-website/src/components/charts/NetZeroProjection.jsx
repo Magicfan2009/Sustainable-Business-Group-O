@@ -29,9 +29,9 @@ export default function NetZeroProjection() {
   const [hoveredPt, setHoveredPt] = useState(null)
 
   return (
-    <div className="chart">
+    <div className="chart" style={{ justifyContent: 'flex-start' }}>
       <div className="chart__title">Net Zero Trajectory — 2024→2050</div>
-      <svg width={W} height={H} style={{ overflow: 'visible' }}>
+      <svg viewBox="0 0 380 240" width="100%" style={{ flex: 1, minHeight: 0, overflow: 'visible' }}>
         {/* Grid lines */}
         {mts.map(m => (
           <line key={m} x1={PAD.left} x2={W - PAD.right} y1={toY(m)} y2={toY(m)} stroke="#1a1a1a" strokeWidth="1" />

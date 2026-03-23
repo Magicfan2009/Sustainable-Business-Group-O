@@ -171,22 +171,22 @@ export default function ReadingScreen({ sectionCode, onBack }) {
         >
           {/* Mini tablet SVG */}
           <svg viewBox="0 0 110 150" width="90" height="123" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="1" y="1" width="108" height="148" rx="12" fill="#111" stroke="#2a2a2a" strokeWidth="1.5"/>
+            <rect x="1" y="1" width="108" height="148" rx="12" fill="#c8cdd8" stroke="#9aa0aa" strokeWidth="1.5"/>
             <rect x="4" y="4" width="102" height="142" rx="10" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="0.75"/>
             <rect x="8" y="20" width="94" height="106" rx="4" fill="url(#miniScreenBg)"/>
-            <circle cx="55" cy="10" r="3.5" fill="#1e1e1e" stroke="#3a3a3a" strokeWidth="0.75"/>
-            <circle cx="55" cy="137" r="7" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1"/>
-            <circle cx="55" cy="137" r="5" fill="none" stroke="#444" strokeWidth="0.75"/>
+            <circle cx="55" cy="10" r="3.5" fill="#8a9099" stroke="#6a7080" strokeWidth="0.75"/>
+            <circle cx="55" cy="137" r="7" fill="#8a9099" stroke="#6a7080" strokeWidth="1"/>
+            <circle cx="55" cy="137" r="5" fill="none" stroke="#8a9099" strokeWidth="0.75"/>
             <defs>
               <linearGradient id="miniScreenBg" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#1a2a3a"/>
-                <stop offset="100%" stopColor="#0d1820"/>
+                <stop offset="0%" stopColor="#e8eef5"/>
+                <stop offset="100%" stopColor="#d0dae8"/>
               </linearGradient>
             </defs>
           </svg>
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: '9px',
-            color: 'rgba(232,160,32,0.8)', letterSpacing: '0.1em',
+            color: 'rgba(0,102,204,0.8)', letterSpacing: '0.1em',
             textTransform: 'uppercase',
           }}>view chart</span>
         </motion.div>
@@ -219,10 +219,10 @@ export default function ReadingScreen({ sectionCode, onBack }) {
               style={{
                 width: 'min(86vw, 780px)',
                 height: 'min(58vh, 520px)',
-                background: '#111',
+                background: '#c8cdd8',
                 borderRadius: '18px',
-                border: '2px solid #333',
-                boxShadow: '0 0 0 1px #000, 0 24px 60px rgba(0,0,0,0.85)',
+                border: '2px solid #9aa0aa',
+                boxShadow: '0 0 0 1px #9aa0aa, 0 24px 60px rgba(0,30,80,0.25)',
                 position: 'relative',
                 overflow: 'hidden',
                 flexShrink: 0,
@@ -231,25 +231,25 @@ export default function ReadingScreen({ sectionCode, onBack }) {
               {/* Amber bezel ring */}
               <div style={{
                 position: 'absolute', inset: '5px', borderRadius: '14px',
-                border: '1px solid rgba(232,160,32,0.2)', pointerEvents: 'none', zIndex: 2,
+                border: '1px solid rgba(0,102,204,0.25)', pointerEvents: 'none', zIndex: 2,
               }} />
               {/* Camera left */}
               <div style={{
                 position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
                 width: '8px', height: '8px', borderRadius: '50%',
-                background: '#2a2a2a', border: '1px solid #444', zIndex: 3,
+                background: '#8a9099', border: '1px solid #6a7080', zIndex: 3,
               }} />
               {/* Home button right */}
               <div style={{
                 position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
                 width: '38px', height: '38px', borderRadius: '50%',
-                background: '#1e1e1e', border: '2px solid #444', zIndex: 3,
+                background: '#b8bec8', border: '2px solid #8a90a0', zIndex: 3,
               }} />
               {/* Screen */}
               <div style={{
                 position: 'absolute',
                 top: '12px', left: '32px', right: '60px', bottom: '12px',
-                background: '#0d1520', borderRadius: '6px', overflow: 'hidden',
+                background: '#f5f7fa', borderRadius: '6px', overflow: 'hidden',
               }}>
                 {chart}
               </div>
@@ -257,7 +257,7 @@ export default function ReadingScreen({ sectionCode, onBack }) {
               <div style={{
                 position: 'absolute', top: '8px', right: '68px',
                 fontFamily: 'var(--font-mono)', fontSize: '9px',
-                color: 'rgba(232,160,32,0.6)', letterSpacing: '0.08em', zIndex: 4,
+                color: 'rgba(0,102,204,0.6)', letterSpacing: '0.08em', zIndex: 4,
               }}>click outside to close</div>
             </motion.div>
           </motion.div>
