@@ -215,85 +215,14 @@
   letter-spacing: 0.04em;
 }
 
-/* ── Annotation styles — marker highlights & pen marks ── */
+/* ── Annotation styles ── */
 
-/* Yellow marker highlight */
-.mark-yellow {
-  background: rgba(255, 220, 50, 0.45);
-  border-bottom: 2px solid rgba(200, 160, 0, 0.5);
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-/* Green marker — positive/strength */
-.mark-green {
-  background: rgba(80, 200, 100, 0.3);
-  border-bottom: 2px solid rgba(40, 160, 60, 0.5);
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-/* Red marker — risk/warning */
+/* Red marker — risk/warning (critical figures only) */
 .mark-red {
   background: rgba(240, 80, 70, 0.18);
   border-bottom: 2px solid rgba(200, 40, 30, 0.5);
   padding: 0 2px;
   border-radius: 2px;
-}
-
-/* Blue marker — framework/theory */
-.mark-blue {
-  background: rgba(60, 130, 220, 0.18);
-  border-bottom: 2px solid rgba(30, 90, 180, 0.5);
-  padding: 0 2px;
-  border-radius: 2px;
-}
-
-/* Red pen underline — circled/flagged */
-.pen-red {
-  text-decoration: underline;
-  text-decoration-color: #cc2200;
-  text-decoration-style: wavy;
-  text-decoration-thickness: 2px;
-}
-
-/* Blue pen underline */
-.pen-blue {
-  text-decoration: underline;
-  text-decoration-color: #1a4fcc;
-  text-decoration-style: wavy;
-  text-decoration-thickness: 2px;
-}
-
-/* Green pen underline */
-.pen-green {
-  text-decoration: underline;
-  text-decoration-color: #1a8c3a;
-  text-decoration-style: wavy;
-  text-decoration-thickness: 2px;
-}
-
-/* Margin annotation — handwritten-style note in the margin */
-.margin-note {
-  display: block;
-  font-size: 9px;
-  font-style: italic;
-  color: #1a4fcc;
-  border-left: 2px solid #1a4fcc;
-  padding: 2px 6px;
-  margin: 6px 0 10px 0;
-  opacity: 0.85;
-  letter-spacing: 0.03em;
-}
-
-.margin-note--red {
-  color: #cc2200;
-  border-left-color: #cc2200;
-}
-
-.margin-note--green {
-  color: #1a6e30;
-  border-left-color: #1a6e30;
 }
 
 /* Circled text — red pen circle effect */
@@ -302,20 +231,6 @@
   outline-offset: 3px;
   border-radius: 50%;
   padding: 1px 4px;
-}
-
-.circle-green {
-  outline: 2px solid #1a8c3a;
-  outline-offset: 3px;
-  border-radius: 50%;
-  padding: 1px 4px;
-}
-
-/* Star / flag inline */
-.flag {
-  color: #cc2200;
-  font-style: normal;
-  margin-right: 2px;
 }
 
 /* Data table */
