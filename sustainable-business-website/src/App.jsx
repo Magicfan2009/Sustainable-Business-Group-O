@@ -112,7 +112,7 @@ function App() {
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
           {/* Picture frame — hung on wall, visible across all rooms */}
-          <div ref={deFrameRef} style={{ position: 'absolute', left: '2%', top: '50%', transform: 'translateY(-50%)', zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '192px' }}>
+          <div ref={deFrameRef} style={{ position: 'absolute', left: '64.4vw', top: '18.8vh', zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
             <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)', flexShrink: 0 }} />
             <svg width="100%" height="28" viewBox="0 0 192 28" preserveAspectRatio="none" style={{ display: 'block', marginBottom: '-2px', flexShrink: 0 }}>
               <line x1="96" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
@@ -125,7 +125,7 @@ function App() {
           {/* Office decorations — background layer */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
             {/* Left floor: cactus on stool */}
-            <div ref={deCactusRef} style={{ position: 'absolute', bottom: '8%', left: '3%', width: '70px', height: '90px' }}>
+            <div ref={deCactusRef} style={{ position: 'absolute', left: '19.3vw', top: '39.7vh', width: '239px', height: '346px' }}>
               <svg width="100%" height="100%" viewBox="0 0 70 90" fill="none">
                 <rect x="22" y="52" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
                 <rect x="18" y="50" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
@@ -144,7 +144,7 @@ function App() {
               </svg>
             </div>
             {/* Right floor: leafy plant in pot */}
-            <div ref={dePlantRef} style={{ position: 'absolute', bottom: '8%', right: '3%', width: '60px', height: '80px' }}>
+            <div ref={dePlantRef} style={{ position: 'absolute', left: '60.6vw', top: '39.9vh', width: '227px', height: '395px' }}>
               <svg width="100%" height="100%" viewBox="0 0 60 80" fill="none">
                 <rect x="17" y="50" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
                 <rect x="13" y="48" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
