@@ -345,7 +345,7 @@ const SEC04_PAGES = [
       <tbody>
         <tr><td>Volkswagen</td><td>Reasonable Assurance; S-Rating hard-block for 63,000+ suppliers; #1 EV Europe 2025</td><td>Razor-thin 2025 EU compliance margin; Scope 3 not SBTi-validated</td></tr>
         <tr><td>Mercedes-Benz</td><td>Net Zero 2039; Ambition Letter ties CO₂ neutrality into supplier contracts</td><td>Walked back full-electrification pledge; primarily Limited Assurance</td></tr>
-        <tr><td>Stellantis</td><td>Industry-leading 2038 Net Zero; Mirafiori 4R Hub as circular economy benchmark</td><td>Scaled back "Dare Forward 2030" plan in 2024 after profit warnings; brand integration risk</td></tr>
+        <tr><td>Stellantis</td><td>Industry-leading 2038 Net Zero; Mirafiori 4R Hub as circular economy benchmark</td><td>⚠ Scaled back "Dare Forward 2030" in 2024 following major profit warnings — itself evidence of the Ambition vs. Integration conflict. The 2038 target remains, but execution credibility is under scrutiny.</td></tr>
         <tr><td>Toyota</td><td>TPS/Kaizen operational excellence; Life Cycle Zero commitment across full vehicle life</td><td>EU 2035 BEV mandate compliance risk; Limited Assurance standard</td></tr>
       </tbody>
     </table>
@@ -365,7 +365,7 @@ const SEC04_PAGES = [
       <tbody>
         <tr><td><strong>Volkswagen</strong></td><td>Scale vs. Agility — transforming 600,000-employee super-tanker while needing software-driven speed</td><td>HIGH — €89B Capex commitment</td><td>LOW — aligned with EU 2035 mandate</td></tr>
         <tr><td>Mercedes-Benz</td><td>Luxury vs. Weight — heavy materials conflict with carbon-neutral fleet target by 2039</td><td>MEDIUM — selective investment</td><td>LOW-MEDIUM — slight compliance buffer</td></tr>
-        <tr><td>Stellantis</td><td>Ambition vs. Integration — 2038 Net Zero while merging cultures/supply chains of 14 global brands</td><td>MEDIUM — restructuring costs</td><td>LOW-MEDIUM — ahead of EU timeline</td></tr>
+        <tr><td>Stellantis</td><td>Ambition vs. Integration — 2038 Net Zero while merging 14 global brands. ⚠ Note: Stellantis scaled back its "Dare Forward 2030" plan in 2024 following major profit warnings — this is not a contradiction of the framework, it is direct evidence of the conflict playing out in real time.</td><td>MEDIUM-HIGH — restructuring costs + plan rollback</td><td>LOW-MEDIUM — Net Zero target still ahead of EU timeline</td></tr>
         <tr><td>Toyota</td><td>Diversity vs. Regulation — Multi-Pathway pragmatism vs. EU 2035 BEV mandate squeeze</td><td>LOW — leverages existing hybrid tech</td><td>HIGH — EU 2035 BEV mandate risk</td></tr>
       </tbody>
     </table>
