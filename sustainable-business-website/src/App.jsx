@@ -68,12 +68,12 @@ function App() {
     const targetEl = document.querySelector(`[data-room="${targetRoom}"]`)
     if (!currentEl || !targetEl) { panningRef.current = false; return }
 
-    gsap.set(targetEl, { x: enterX, zIndex: 2 })
-    gsap.set(currentEl, { zIndex: 1 })
+    gsap.set(targetEl, { x: enterX, zIndex: 2, visibility: 'visible' })
+    gsap.set(currentEl, { zIndex: 1, visibility: 'visible' })
 
     const tl = gsap.timeline({
       onComplete: () => {
-        gsap.set(currentEl, { x: 0, zIndex: 1 })
+        gsap.set(currentEl, { x: 0, zIndex: 1, visibility: 'hidden' })
         roomRef.current = targetRoom
         setRoom(targetRoom)
         panningRef.current = false
@@ -105,7 +105,7 @@ function App() {
 
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
-          <div data-room="cabinet" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div data-room="cabinet" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', visibility: 'visible' }}>
             <CabinetScreen
               onOpenFile={openFile}
               onOpenAI={openAI}
@@ -115,7 +115,7 @@ function App() {
               panning={panningRef}
             />
           </div>
-          <div data-room="tablet" style={{ position: 'absolute', inset: 0 }}>
+          <div data-room="tablet" style={{ position: 'absolute', inset: 0, visibility: 'hidden' }}>
             <TabletScreen
               onPanLeft={() => panToRoom('left')}
               onPanRight={() => panToRoom('right')}
@@ -123,7 +123,7 @@ function App() {
               panning={panningRef}
             />
           </div>
-          <div data-room="monitor" style={{ position: 'absolute', inset: 0 }}>
+          <div data-room="monitor" style={{ position: 'absolute', inset: 0, visibility: 'hidden' }}>
             <MonitorScreen
               onPanLeft={() => panToRoom('left')}
               onPanRight={() => panToRoom('right')}
