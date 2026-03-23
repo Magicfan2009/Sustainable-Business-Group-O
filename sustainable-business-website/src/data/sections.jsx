@@ -759,23 +759,6 @@ const SEC06_PAGES = [
       </tbody>
     </table>
   </div>,
-
-  /* Page 3 — Video placeholder */
-  <div key="sec06-p3">
-    <h2>Advisory Video — Executive Briefing</h2>
-    <p>
-      VW Sustainability Strategy 2035 — Executive Advisory Summary<br/>
-      Imperial College London Business School | Group O | Duration: ~2 minutes
-    </p>
-    <div className="video-block" style={{ background: '#0f0f0f', aspectRatio: '16/9', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #000' }}>
-      <span style={{ color: '#e8a020', fontFamily: 'var(--font-mono)', fontSize: '13px', letterSpacing: '0.1em' }}>
-        VIDEO — TO BE RECORDED AND EMBEDDED
-      </span>
-    </div>
-    <p style={{ marginTop: '12px', color: 'rgba(15,15,15,0.6)', fontSize: '13px' }}>
-      Placeholder. Replace with an mp4 src or YouTube embed once the recording is complete.
-    </p>
-  </div>,
 ]
 
 const SECTIONS = {
