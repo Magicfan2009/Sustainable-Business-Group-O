@@ -32,16 +32,16 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
 
       <div className="cabinet-scene" ref={sceneRef}>
 
+        {/* Nametag — floats above the cabinet, centred in scene */}
+        <div className="cabinet-nametag" ref={nametagRef}>
+          GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
+        </div>
+
         {/* ── Isometric cabinet shell ── */}
         <div className="cabinet-iso">
 
           {/* Top face */}
           <div className="cabinet-iso__top" />
-
-          {/* Nametag — floats above the cabinet */}
-          <div className="cabinet-nametag" ref={nametagRef}>
-            GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
-          </div>
 
           {/* Right side face */}
           <div className="cabinet-iso__side" />
