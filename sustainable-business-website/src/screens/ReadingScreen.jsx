@@ -253,12 +253,6 @@ export default function ReadingScreen({ sectionCode, onBack }) {
               }}>
                 {chart}
               </div>
-              {/* Close hint */}
-              <div style={{
-                position: 'absolute', top: '8px', right: '68px',
-                fontFamily: 'var(--font-mono)', fontSize: '9px',
-                color: 'rgba(0,102,204,0.6)', letterSpacing: '0.08em', zIndex: 4,
-              }}>click outside to close</div>
             </motion.div>
           </motion.div>
         )}

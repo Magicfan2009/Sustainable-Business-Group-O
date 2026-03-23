@@ -58,7 +58,7 @@ const SEC01_PAGES = [
       </thead>
       <tbody>
         <tr><td>1st</td><td>Rejection</td><td>Pre-1990s</td><td>Maximise profit with minimal environmental consideration</td></tr>
-        <tr><td>2nd</td><td>Compliance</td><td>1990–2015</td><td><span className="mark-red">Meeting legal minimums — culminating in the 2015 Dieselgate defeat device scandal</span></td></tr>
+        <tr><td>2nd</td><td>Compliance</td><td>1990–2015</td><td>Meeting legal minimums — culminating in the 2015 Dieselgate defeat device scandal</td></tr>
         <tr><td>3rd (current)</td><td>Transformation</td><td>2016–Present</td><td>The "regenerate+" strategy: reinterpreting VW as an integral part of society</td></tr>
       </tbody>
     </table>
@@ -145,7 +145,7 @@ const SEC02_PAGES = [
         <tr><th>Scope 3 Category</th><th>Volume</th><th>Detail</th></tr>
       </thead>
       <tbody>
-        <tr><td>Cat.11 Use of Sold Products</td><td><span className="mark-red">688 Mt (92%)</span></td><td>Emissions from customers driving ICE vehicles. EV transition is VW's primary lever.</td></tr>
+        <tr><td>Cat.11 Use of Sold Products</td><td>688 Mt (92%)</td><td>Emissions from customers driving ICE vehicles. EV transition is VW's primary lever.</td></tr>
         <tr><td>Cat.1 Purchased Goods</td><td>38 Mt (5%)</td><td>Upstream supply chain. 63,000+ suppliers in 96 countries.</td></tr>
         <tr><td>Cat.4 Upstream Transport</td><td>~1%</td><td>—</td></tr>
         <tr><td>Other Scope 3</td><td>~2%</td><td>—</td></tr>
@@ -217,7 +217,7 @@ const SEC02_PAGES = [
       <li>Supply chain S-Rating system</li>
       <li>Circular economy — 40% recycled materials by 2040</li>
     </ul>
-    <h3>3. <span className="mark-red">Compensate</span> — Residuals Only (Last Resort)</h3>
+    <h3>3. Compensate — Residuals Only (Last Resort)</h3>
     <ul>
       <li>Carbon credits for genuinely residual emissions only</li>
       <li>Nature-based solutions</li>
@@ -285,7 +285,7 @@ const SEC03_PAGES = [
     <h2>Ethics &amp; Trust — Rebuilding Post-Dieselgate</h2>
     <p>
       The Edelman Trust Barometer shows the automotive sector at ~67% global trust.
-      VW carries a <span className="mark-red">specific trust deficit post-2015</span> that demands higher transparency standards.
+      VW carries a specific trust deficit post-2015 that demands higher transparency standards.
     </p>
     <table>
       <thead>
@@ -331,8 +331,8 @@ const SEC03_PAGES = [
         <tr><th>Impact Topic</th><th>Financial</th><th>Impact on World</th><th>CSRD Status</th></tr>
       </thead>
       <tbody>
-        <tr><td><span className="mark-red">Climate Change / GHG</span></td><td>High</td><td>Critical</td><td>Material</td></tr>
-        <tr><td><span className="mark-red">Battery Mineral Supply Chain</span></td><td>High</td><td>High</td><td>Material</td></tr>
+        <tr><td>Climate Change / GHG</td><td>High</td><td>Critical</td><td>Material</td></tr>
+        <tr><td>Battery Mineral Supply Chain</td><td>High</td><td>High</td><td>Material</td></tr>
         <tr><td>Human Rights in Supply Chain</td><td>Medium</td><td>Critical</td><td>Material</td></tr>
         <tr><td>Product Carbon Footprint</td><td>High</td><td>High</td><td>Material</td></tr>
         <tr><td>Data Security &amp; Privacy</td><td>High</td><td>Medium</td><td>Material</td></tr>
@@ -562,7 +562,7 @@ const SEC05_PAGES = [
         <tr><th>Assessment</th><th>Finding</th></tr>
       </thead>
       <tbody>
-        <tr><td><span className="mark-red">Key Risk</span></td><td>0g EU compliance margin for 2025. Any EV sales shortfall = multi-billion fines.</td></tr>
+        <tr><td>Key Risk</td><td>0g EU compliance margin for 2025. Any EV sales shortfall = multi-billion fines.</td></tr>
         <tr><td>Key Gap</td><td>SBTi Scope 3 validation not yet completed. This is the #1 credibility gap.</td></tr>
         <tr><td>Key Strength</td><td>Scale and portfolio breadth. #1 EV in Europe 2025. €15B green bond momentum.</td></tr>
       </tbody>
@@ -737,7 +737,7 @@ const SEC06_PAGES = [
       </thead>
       <tbody>
         <tr><td><span className="circle-red">01</span></td><td>Submit Scope 3 targets to SBTi for validation — close the #1 credibility gap vs Mercedes-Benz</td><td>Immediate</td></tr>
-        <tr><td><span className="circle-red">02</span></td><td><span className="mark-red">Execute 2025 EU CO₂ compliance</span> at 0g margin — any delay = billions in fines</td><td>Critical</td></tr>
+        <tr><td><span className="circle-red">02</span></td><td>Execute 2025 EU CO₂ compliance at 0g margin — any delay = billions in fines</td><td>Critical</td></tr>
         <tr><td>03</td><td>Launch ID.2 entry-level BEV to drive Category 11 reductions at scale</td><td>2026</td></tr>
         <tr><td>04</td><td>Extend S-Rating to Tier 2 suppliers — complete the cobalt/lithium traceability chain</td><td>2027–2028</td></tr>
         <tr><td>05</td><td>Achieve CDP "A" rating and publish Sustainability Council challenge report annually</td><td>2026</td></tr>
