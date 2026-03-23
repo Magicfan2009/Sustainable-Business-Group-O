@@ -10,11 +10,18 @@
 }
 
 :root {
-  --mon-w: 320px;
-  --mon-h: 240px;
-  --mon-depth-top: 16px;
-  --mon-depth-side: 16px;
-  --mon-bezel: 16px;
+  --mon-w: 520px;
+  --mon-h: 390px;
+  --mon-depth-top: 22px;
+  --mon-depth-side: 22px;
+  --mon-bezel: 20px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --mon-w: 420px;
+    --mon-h: 315px;
+  }
 }
 
 .monitor-scene {

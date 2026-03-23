@@ -105,6 +105,17 @@ function App() {
 
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
+          {/* Picture frame — hung on wall, visible across all rooms */}
+          <div style={{ position: 'absolute', top: '6%', right: '8%', zIndex: 0, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)' }} />
+            <svg width="110" height="28" style={{ display: 'block', marginBottom: '-2px' }}>
+              <line x1="55" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
+              <line x1="55" y1="0" x2="106" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
+            </svg>
+            <div style={{ width: '110px', height: '80px', background: '#2a1f0f', border: '6px solid #4a3520', boxShadow: '3px 3px 0 #000, inset 0 0 0 2px #6a5030', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              <img src="/images/circula.jpg" alt="Circula Partners" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+          </div>
           <div data-room="cabinet" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', visibility: 'visible' }}>
             <CabinetScreen
               onOpenFile={openFile}
