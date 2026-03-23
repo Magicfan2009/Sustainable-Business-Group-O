@@ -43,7 +43,7 @@
 /* Bezel */
 .tablet-iso__bezel {
   position: absolute;
-  inset: 12px;
+  inset: 28px;
   border: 1px solid #e8a020;
   pointer-events: none;
 }
@@ -51,7 +51,10 @@
 /* Screen area */
 .tablet-iso__screen {
   position: absolute;
-  inset: 14px;
+  top: 58px;
+  left: 30px;
+  right: 30px;
+  bottom: 78px;
   background: #080c10;
   overflow: hidden;
   cursor: default;
@@ -60,7 +63,21 @@
 /* Home button */
 .tablet-iso__home-btn {
   position: absolute;
-  bottom: 4px;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2a2a2a;
+  border: 2px solid #555;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8), 0 1px 0 rgba(255,255,255,0.06);
+}
+
+/* Camera dot */
+.tablet-iso__camera {
+  position: absolute;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
   width: 10px;
@@ -68,19 +85,6 @@
   border-radius: 50%;
   background: #2a2a2a;
   border: 1px solid #444;
-}
-
-/* Camera dot */
-.tablet-iso__camera {
-  position: absolute;
-  top: 5px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #2a2a2a;
-  border: 1px solid #333;
 }
 
 /* Top face */
@@ -164,11 +168,26 @@
 }
 
 .tablet-scene--zoomed .tablet-iso__screen {
-  inset: 20px;
+  top: 72px;
+  left: 40px;
+  right: 40px;
+  bottom: 100px;
 }
 
 .tablet-scene--zoomed .tablet-iso__bezel {
-  inset: 18px;
+  inset: 36px;
+}
+
+.tablet-scene--zoomed .tablet-iso__home-btn {
+  width: 60px;
+  height: 60px;
+  bottom: 18px;
+}
+
+.tablet-scene--zoomed .tablet-iso__camera {
+  width: 12px;
+  height: 12px;
+  top: 14px;
 }
 
 /* Mobile scale (only when not zoomed) */
