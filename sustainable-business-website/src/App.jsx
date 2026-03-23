@@ -106,7 +106,7 @@ function App() {
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
           {/* Picture frame — hung on wall, visible across all rooms */}
-          <div style={{ position: 'absolute', top: '6%', right: '8%', zIndex: 0, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ position: 'absolute', top: '6%', right: '8%', zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)' }} />
             <svg width="110" height="28" style={{ display: 'block', marginBottom: '-2px' }}>
               <line x1="55" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />

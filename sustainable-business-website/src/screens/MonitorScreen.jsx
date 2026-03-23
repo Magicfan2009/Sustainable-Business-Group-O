@@ -3,6 +3,11 @@ import './MonitorScreen.css'
 
 const YT_ID = 'Y-VoPkpcchs'
 
+// SVG viewBox dimensions
+const W = 480, H = 420
+// Screen area within the bezel
+const SX = 48, SY = 36, SW = 384, SH = 260
+
 export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
   return (
     <div className="monitor-screen" style={{ position: 'relative' }}>
@@ -10,35 +15,86 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
       <PanArrow direction="right" onClick={onPanRight} panning={panning} label="Chart Tablet" />
 
       <div className="monitor-scene">
-        <div className="monitor-iso">
-          <div className="monitor-iso__top" />
-          <div className="monitor-iso__side" />
-          <div className="monitor-nametag">EXECUTIVE BRIEFING</div>
+        <div className="monitor-nametag">EXECUTIVE BRIEFING</div>
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          width="min(560px, 90vw)"
+          style={{ display: 'block', overflow: 'visible' }}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* ── Outer bezel ── */}
+          <rect x="8" y="8" width="464" height="340" rx="14" ry="14"
+            fill="#b0b8c4" stroke="#000" strokeWidth="3" />
+          {/* Inner bezel bevel — top/left highlight */}
+          <rect x="12" y="12" width="456" height="332" rx="11" ry="11"
+            fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="2" />
+          {/* Inner bezel bevel — bottom/right shadow */}
+          <rect x="14" y="14" width="452" height="328" rx="10" ry="10"
+            fill="none" stroke="rgba(0,0,0,0.25)" strokeWidth="1.5" />
 
-          <div className="monitor-iso__front">
-            <div className="monitor-iso__screen">
-              {YT_ID ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/${YT_ID}?rel=0&modestbranding=1`}
-                  title="Executive Briefing"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
-                />
-              ) : (
-                <div className="monitor-placeholder">
-                  <span>[ VIDEO PENDING ]</span>
-                </div>
-              )}
-            </div>
-            <div className="monitor-iso__led" />
-          </div>
-        </div>
+          {/* ── Screen recess ── */}
+          <rect x={SX - 4} y={SY - 4} width={SW + 8} height={SH + 8} rx="4" ry="4"
+            fill="#1a1a22" stroke="#000" strokeWidth="2" />
+          {/* Screen background + scanline texture via pattern */}
+          <defs>
+            <pattern id="scanlines" x="0" y="0" width="1" height="4" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="1" height="2" fill="rgba(255,255,255,0.018)" />
+            </pattern>
+          </defs>
+          <rect x={SX} y={SY} width={SW} height={SH} fill="#050508" />
+          <rect x={SX} y={SY} width={SW} height={SH} fill="url(#scanlines)" />
 
-        <div className="monitor-stand">
-          <div className="monitor-stand__neck" />
-          <div className="monitor-stand__base" />
-        </div>
+          {/* YouTube iframe inside screen via foreignObject */}
+          <foreignObject x={SX} y={SY} width={SW} height={SH}>
+            <iframe
+              xmlns="http://www.w3.org/1999/xhtml"
+              src={`https://www.youtube.com/embed/${YT_ID}?rel=0&modestbranding=1`}
+              title="Executive Briefing"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: '100%', height: '100%', border: 'none', display: 'block' }}
+            />
+          </foreignObject>
+
+          {/* Screen glare overlay */}
+          <rect x={SX} y={SY} width={SW} height={SH}
+            fill="url(#glare)" pointerEvents="none" />
+          <defs>
+            <linearGradient id="glare" x1="0" y1="0" x2="0.4" y2="1">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.06)" />
+              <stop offset="40%" stopColor="rgba(255,255,255,0)" />
+            </linearGradient>
+          </defs>
+
+          {/* ── Bottom bezel controls ── */}
+          {/* Power LED */}
+          <circle cx="240" cy="362" r="4" fill="#4ade80">
+            <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
+          </circle>
+          {/* Brand pixel text */}
+          <text x="240" y="374" textAnchor="middle"
+            fontFamily="monospace" fontSize="8" fill="rgba(0,30,80,0.45)" letterSpacing="3">
+            VW GROUP O
+          </text>
+          {/* Decorative pixel buttons */}
+          <rect x="180" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
+          <rect x="200" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
+          <rect x="286" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
+          <rect x="306" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
+
+          {/* ── Stand neck ── */}
+          <rect x="218" y="348" width="44" height="28" fill="#9aa0aa" stroke="#000" strokeWidth="1.5" />
+          {/* Stand base */}
+          <rect x="168" y="376" width="144" height="14" rx="4" ry="4"
+            fill="#b0b8c4" stroke="#000" strokeWidth="2" />
+          {/* Stand base shadow */}
+          <rect x="172" y="388" width="140" height="4" rx="2"
+            fill="rgba(0,0,0,0.18)" />
+
+          {/* ── Pixel shadow under whole unit ── */}
+          <rect x="16" y="348" width="448" height="6" rx="2"
+            fill="rgba(0,0,0,0.12)" />
+        </svg>
       </div>
     </div>
   )
