@@ -71,11 +71,6 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
           <circle cx="240" cy="362" r="4" fill="#4ade80">
             <animate attributeName="opacity" values="1;0.4;1" dur="2s" repeatCount="indefinite" />
           </circle>
-          {/* Brand pixel text */}
-          <text x="240" y="374" textAnchor="middle"
-            fontFamily="monospace" fontSize="8" fill="rgba(0,30,80,0.45)" letterSpacing="3">
-            VW GROUP O
-          </text>
           {/* Decorative pixel buttons */}
           <rect x="180" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
           <rect x="200" y="354" width="14" height="6" rx="1" fill="#9aa0aa" stroke="#6a7080" strokeWidth="0.5" />
@@ -94,6 +89,24 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
           {/* ── Pixel shadow under whole unit ── */}
           <rect x="16" y="348" width="448" height="6" rx="2"
             fill="rgba(0,0,0,0.12)" />
+        </svg>
+        {/* Desk surface under monitor */}
+        <svg width="min(560px, 90vw)" viewBox="0 0 480 60" style={{ display: 'block', marginTop: '-4px' }}>
+          {/* Desk surface */}
+          <rect x="0" y="0" width="480" height="18" rx="3" fill="#9a7048" stroke="#5a3a1a" strokeWidth="2"/>
+          {/* Desk front face */}
+          <rect x="0" y="16" width="480" height="10" fill="#7a5230" stroke="#4a2e10" strokeWidth="1.5"/>
+          {/* Left leg */}
+          <rect x="20" y="24" width="18" height="36" fill="#8a6038" stroke="#4a2e10" strokeWidth="1.5"/>
+          {/* Right leg */}
+          <rect x="442" y="24" width="18" height="36" fill="#8a6038" stroke="#4a2e10" strokeWidth="1.5"/>
+          {/* Cactus pot on desk right */}
+          <rect x="400" y="-28" width="18" height="22" rx="2" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.2"/>
+          <rect x="397" y="-30" width="24" height="5" rx="1" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.2"/>
+          <rect x="406" y="-54" width="8" height="26" rx="4" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1"/>
+          <line x1="410" y1="-52" x2="410" y2="-58" stroke="#c8d0a0" strokeWidth="1"/>
+          <rect x="399" y="-44" width="6" height="4" rx="2" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1"/>
+          <rect x="415" y="-42" width="6" height="4" rx="2" fill="#4a8c4a" stroke="#2d5e2d" strokeWidth="1"/>
         </svg>
       </div>
     </div>
