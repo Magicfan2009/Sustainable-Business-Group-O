@@ -1,8 +1,22 @@
 import { useState, useRef } from 'react'
 import './PasswordScreen.css'
 
-// Update this before submission — agree with group first
 const PASSWORD = 'groupO2026'
+
+const KEYS = [
+  { num: '1', sub: '' },
+  { num: '2', sub: 'ABC' },
+  { num: '3', sub: 'DEF' },
+  { num: '4', sub: 'GHI' },
+  { num: '5', sub: 'JKL' },
+  { num: '6', sub: 'MNO' },
+  { num: '7', sub: 'PQRS' },
+  { num: '8', sub: 'TUV' },
+  { num: '9', sub: 'WXYZ' },
+  { num: '*', sub: '', symbol: true },
+  { num: '0', sub: '+' },
+  { num: '#', sub: '', symbol: true },
+]
 
 export default function PasswordScreen({ onSuccess }) {
   const [value, setValue] = useState('')
@@ -28,25 +42,48 @@ export default function PasswordScreen({ onSuccess }) {
 
   return (
     <div className="password-screen">
-      <span className="password-screen__label">Restricted Access</span>
-      <h1 className="password-screen__title">VW Sustainability Advisory — Group O</h1>
-      <p className="password-screen__institution">Imperial College London · 2026</p>
-      <input
-        ref={inputRef}
-        className={`password-screen__input${shake ? ' password-screen__input--shake' : ''}`}
-        type="password"
-        placeholder="Enter access code"
-        value={value}
-        onChange={e => setValue(e.target.value)}
-        onKeyDown={handleKey}
-        autoFocus
-      />
-      <button
-        className={`password-screen__btn${value.length > 0 ? ' password-screen__btn--visible' : ''}`}
-        onClick={handleSubmit}
-      >
-        Enter →
-      </button>
+      <div className="keypad">
+        <div className="keypad__label">Access Control</div>
+
+        {/* LED display / text input */}
+        <div className="keypad__display">
+          <input
+            ref={inputRef}
+            className={`keypad__input${shake ? ' keypad__input--shake' : ''}`}
+            type="password"
+            placeholder="Enter password"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+            onKeyDown={handleKey}
+            autoFocus
+          />
+        </div>
+
+        {/* Number grid — decorative, clicking focuses input */}
+        <div className="keypad__grid">
+          {KEYS.map(k => (
+            <button
+              key={k.num}
+              className={`keypad__key${k.symbol ? ' keypad__key--symbol' : ''}`}
+              onClick={() => inputRef.current?.focus()}
+              tabIndex={-1}
+            >
+              {k.num}
+              {k.sub && <span className="keypad__key-sub">{k.sub}</span>}
+            </button>
+          ))}
+        </div>
+
+        {/* Confirm — appears once typing starts */}
+        <button
+          className={`keypad__btn${value.length > 0 ? ' keypad__btn--visible' : ''}`}
+          onClick={handleSubmit}
+        >
+          Confirm →
+        </button>
+
+        <div className="keypad__restricted">Restricted Access</div>
+      </div>
     </div>
   )
 }

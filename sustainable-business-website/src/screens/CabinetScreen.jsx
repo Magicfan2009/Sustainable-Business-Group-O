@@ -12,7 +12,7 @@ const DRAWERS = [
   { code: 'SEC-06', label: 'EXECUTIVE SUMMARY' },
 ]
 
-export default function CabinetScreen({ onOpenFile, onOpenAI }) {
+export default function CabinetScreen({ onOpenFile, onOpenAI, onHome }) {
   const sceneRef = useRef(null)
 
   useGSAP(() => {
@@ -26,50 +26,73 @@ export default function CabinetScreen({ onOpenFile, onOpenAI }) {
 
   return (
     <div className="cabinet-screen">
+
       <div className="cabinet-scene" ref={sceneRef}>
+
+        {/* ── Isometric cabinet shell ── */}
         <div className="cabinet-iso">
 
-          {/* Front face — drawers */}
+          {/* Top face */}
+          <div className="cabinet-iso__top" />
+
+          {/* Nametag — floats above the cabinet */}
+          <div className="cabinet-nametag">
+            GROUP O · SUSTAINABILITY ADVISORY · VW GROUP
+          </div>
+
+          {/* Right side face */}
+          <div className="cabinet-iso__side" />
+
+          {/* Front face — all drawers live here */}
           <div className="cabinet-iso__front">
-            {DRAWERS.map((drawer) => (
+            {DRAWERS.map((drawer, i) => (
               <button
                 key={drawer.code}
                 className="cabinet-drawer"
                 onClick={() => onOpenFile(drawer.code)}
               >
+                {/* Drawer inset shadow line at top */}
+                <div className="cabinet-drawer__inset" />
+
+                {/* Handle bar */}
                 <div className="cabinet-drawer__handle-wrap">
                   <div className="cabinet-drawer__handle" />
                 </div>
-                <div className="cabinet-drawer__labels">
-                  <span className="cabinet-drawer__code">{drawer.code}</span>
-                  <span className="cabinet-drawer__name">{drawer.label}</span>
+
+                {/* Metal nametag */}
+                <div className="cabinet-drawer__tag">
+                  <span className="cabinet-drawer__tag-screw cabinet-drawer__tag-screw--tl" />
+                  <span className="cabinet-drawer__tag-screw cabinet-drawer__tag-screw--tr" />
+                  <span className="cabinet-drawer__tag-screw cabinet-drawer__tag-screw--bl" />
+                  <span className="cabinet-drawer__tag-screw cabinet-drawer__tag-screw--br" />
+                  <div className="cabinet-drawer__labels">
+                    <span className="cabinet-drawer__code">{drawer.code}</span>
+                    <span className="cabinet-drawer__name">{drawer.label}</span>
+                  </div>
                 </div>
+
+                {/* Arrow */}
                 <span className="cabinet-drawer__arrow">›</span>
               </button>
             ))}
           </div>
 
-          {/* Back face */}
-          <div className="cabinet-iso__back" />
-
-          {/* Top face */}
-          <div className="cabinet-iso__top" />
-
-          {/* Bottom face */}
-          <div className="cabinet-iso__bottom-face" />
-
-          {/* Right side */}
-          <div className="cabinet-iso__right" />
-
-          {/* Left side */}
-          <div className="cabinet-iso__left" />
-
         </div>
+
+        {/* Floor shadow */}
+        <div className="cabinet-shadow" />
+
       </div>
 
-      <button className="cabinet-screen__ai-link" onClick={onOpenAI}>
-        AI USE STATEMENT
-      </button>
+      {/* Bottom links */}
+      <div className="cabinet-screen__links">
+        <button className="cabinet-screen__home-btn" onClick={onHome}>
+          ← HOME
+        </button>
+        <button className="cabinet-screen__ai-link" onClick={onOpenAI}>
+          AI USE STATEMENT
+        </button>
+      </div>
     </div>
   )
 }

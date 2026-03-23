@@ -55,7 +55,7 @@ function App() {
         <PasswordScreen onSuccess={handlePasswordSuccess} />
       )}
       {screen === SCREENS.CABINET && (
-        <CabinetScreen onOpenFile={openFile} onOpenAI={openAI} />
+        <CabinetScreen onOpenFile={openFile} onOpenAI={openAI} onHome={() => transition(600, () => setScreen(SCREENS.PASSWORD))} />
       )}
       {screen === SCREENS.READING && (
         <ReadingScreen sectionCode={activeFile} onBack={goBack} />

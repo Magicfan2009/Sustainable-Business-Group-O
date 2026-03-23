@@ -10,222 +10,396 @@
   gap: 36px;
 }
 
-/*
-  TRUE 3D CABINET — perspective container + preserve-3d
-  All six faces share the same 3D coordinate space so edges
-  always meet perfectly. No manual skew maths needed.
+/* ── Scene wrapper (holds iso cabinet + shadow) ── */
+.cabinet-scene {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Slight upward shift to give shadow room */
+  margin-bottom: -20px;
+}
 
-  Cabinet box: 240px wide × 480px tall × 120px deep
-  Camera angle: rotateX(20deg) rotateY(-30deg)
-  — approximately AutoCAD home view (above-right-front)
-*/
+/* ─────────────────────────────────────────────────────────────
+   ISOMETRIC CABINET
+   AutoCAD "home view" = front-right-top perspective.
+   Achieved with CSS 3D transforms on three flat faces.
+
+   Cabinet dimensions (front face):
+     width:  300px
+     height: 480px  (6 drawers × 80px each)
+
+   ISO angles (approx AutoCAD home view):
+     - Cabinet wrapper: rotateX(30deg) rotateY(-40deg)
+     - Top face: skewed to match the top edge of the front face
+     - Right side: skewed to match the right edge of the front face
+
+   Depth tokens:
+     --depth-top:   80px   (how tall the top face looks in perspective)
+     --depth-side:  60px   (how wide the right side looks in perspective)
+───────────────────────────────────────────────────────────── */
 
 :root {
-  --cab-w: 240px;
-  --cab-h: 480px;
-  --cab-d: 120px;   /* depth */
+  --cab-w: 300px;
+  --cab-h: 520px;
+  --depth-top: 72px;
+  --depth-side: 56px;
 }
 
-/* Perspective wrapper */
-.cabinet-scene {
-  perspective: 900px;
-  perspective-origin: 50% 40%;
-}
-
-/* The actual 3D box */
 .cabinet-iso {
   position: relative;
   width: var(--cab-w);
   height: var(--cab-h);
-  transform-style: preserve-3d;
-  /* AutoCAD home-view angle */
-  transform: rotateX(22deg) rotateY(-32deg);
+  /* Give space for top and side faces that bleed outside the box */
+  margin-top: var(--depth-top);
+  margin-right: var(--depth-side);
 }
 
-/* ── SHARED FACE BASE ── */
-.cabinet-iso__front,
-.cabinet-iso__back,
-.cabinet-iso__top,
-.cabinet-iso__bottom-face,
-.cabinet-iso__left,
-.cabinet-iso__right {
-  position: absolute;
-  border: 3px solid #000;
-  box-sizing: border-box;
-}
-
-/* ── FRONT FACE ── */
+/* ── Front face ── */
 .cabinet-iso__front {
-  width: var(--cab-w);
-  height: var(--cab-h);
-  background: #1e3a3a;
-  /* Sits at z = +depth/2 (front of the box) */
-  transform: translateZ(calc(var(--cab-d) / 2));
+  position: absolute;
+  inset: 0;
+  background: var(--color-cabinet);
+  border: 3px solid #000;
   display: flex;
   flex-direction: column;
-  padding: 10px;
   gap: 6px;
-  /* Front face is on top — no z clipping issues */
-  backface-visibility: hidden;
+  padding: 10px;
+  z-index: 1;
 }
 
-/* ── BACK FACE ── (not visible but needed to close the box) */
-.cabinet-iso__back {
-  width: var(--cab-w);
-  height: var(--cab-h);
-  background: #0f2222;
-  transform: translateZ(calc(var(--cab-d) / -2)) rotateY(180deg);
-  backface-visibility: hidden;
-}
-
-/* ── TOP FACE ── */
+/* ── Top face ── */
 .cabinet-iso__top {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: var(--cab-w);
-  height: var(--cab-d);
-  background: #2d5c5c;
-  /* Rotate up from top edge of front face */
-  transform: rotateX(-90deg) translateZ(calc(var(--cab-h) / -2)) translateY(calc(var(--cab-d) / -2));
-  backface-visibility: hidden;
-  /* Faint lines to show it's a solid top */
-}
-
-/* ── BOTTOM FACE ── */
-.cabinet-iso__bottom-face {
-  width: var(--cab-w);
-  height: var(--cab-d);
-  background: #0f2222;
-  transform: rotateX(90deg) translateZ(calc(var(--cab-h) / 2)) translateY(calc(var(--cab-d) / 2));
-  backface-visibility: hidden;
-}
-
-/* ── RIGHT SIDE FACE ── */
-.cabinet-iso__right {
-  width: var(--cab-d);
-  height: var(--cab-h);
-  background: #142828;
-  transform: rotateY(90deg) translateZ(calc(var(--cab-w) / -2)) translateX(calc(var(--cab-d) / -2));
-  backface-visibility: hidden;
-}
-
-/* ── LEFT SIDE FACE ── (rarely visible but closes the box) */
-.cabinet-iso__left {
-  width: var(--cab-d);
-  height: var(--cab-h);
-  background: #142828;
-  transform: rotateY(-90deg) translateZ(calc(var(--cab-w) / 2)) translateX(calc(var(--cab-d) / 2));
-  backface-visibility: hidden;
-}
-
-/* ─────────────────────────────────────────────────────────────
-   DRAWERS — sit on the front face as flat children.
-   They are NOT 3D themselves — they just paint the front face.
-   The cabinet box gives all the 3D illusion.
-─────────────────────────────────────────────────────────────── */
-
-.cabinet-drawer {
-  flex: 1;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  text-align: left;
-  font-family: var(--font-mono);
-  padding: 0;
-  background: #254a4a;
-  border: 2px solid #000;
-
-  /* Inset shadow — top and left edges darker = recessed into front panel */
-  box-shadow:
-    inset 2px 2px 0 0 rgba(0,0,0,0.55),
-    inset -1px -1px 0 0 rgba(255,255,255,0.05);
-
-  transition:
-    background var(--transition-snap),
-    box-shadow var(--transition-snap);
-}
-
-.cabinet-drawer:hover {
-  background: #2d5858;
-  box-shadow:
-    inset 2px 2px 0 0 rgba(0,0,0,0.4),
-    inset -1px -1px 0 0 rgba(255,255,255,0.07),
-    inset 0 0 0 1px rgba(232,160,32,0.3);
-}
-
-.cabinet-drawer:active {
-  background: #1e3a3a;
-  box-shadow: inset 4px 4px 0 0 rgba(0,0,0,0.65);
-  transform: translateX(1px);
-}
-
-/* ── Handle bar ── */
-.cabinet-drawer__handle-wrap {
+  height: var(--depth-top);
+  background: #3a3a3a; /* slightly lighter than cabinet — top face */
+  border: 3px solid #000;
+  border-bottom: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 12px;
+  overflow: hidden;
+
+  /* Skew to form the top plane — parallelogram */
+  transform:
+    translateY(calc(-1 * var(--depth-top) + 3px))
+    skewX(-40deg)
+    scaleY(0.6);
+  transform-origin: bottom left;
+  z-index: 2;
+}
+
+
+/* ── Right side face ── */
+.cabinet-iso__side {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--depth-side);
+  height: var(--cab-h);
+  background: #1a1a1a; /* darker — shadow side */
+  border: 3px solid #000;
+  border-left: none;
+
+  /* Skew to form the right plane */
+  transform:
+    translateX(calc(var(--depth-side) - 3px))
+    skewY(-50deg)
+    scaleX(0.65);
+  transform-origin: top left;
+  z-index: 0;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   DRAWERS — sit inside .cabinet-iso__front
+   Each drawer is a button that opens a section directly.
+───────────────────────────────────────────────────────────── */
+
+.cabinet-drawer {
+  flex: 1;
+  background: var(--color-cabinet-light);
+  border: 2px solid #000;
+  margin-bottom: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 10px 0 8px;
+  position: relative;
+  text-align: left;
+  font-family: var(--font-mono);
+  transition:
+    background var(--transition-snap),
+    box-shadow var(--transition-snap),
+    transform 80ms ease;
+}
+
+.cabinet-drawer:last-child {
+  margin-bottom: 0;
+}
+
+.cabinet-drawer:hover {
+  background: #424242;
+  box-shadow: inset 0 0 0 1px rgba(232, 160, 32, 0.4);
+}
+
+.cabinet-drawer:hover .cabinet-drawer__handle {
+  background: linear-gradient(180deg,
+    #f4f6f8 0%,
+    #c8d0d4 30%,
+    #9aa4a8 65%,
+    #d0d8dc 100%
+  );
+  box-shadow:
+    0 3px 4px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.8),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+.cabinet-drawer:active .cabinet-drawer__handle {
+  box-shadow:
+    0 1px 1px rgba(0,0,0,0.4),
+    inset 0 2px 3px rgba(0,0,0,0.3);
+}
+
+.cabinet-drawer:active {
+  transform: translateX(2px);
+}
+
+/* Inset shadow at top of each drawer face */
+.cabinet-drawer__inset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+
+/* Handle */
+.cabinet-drawer__handle-wrap {
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 
 .cabinet-drawer__handle {
-  width: 40px;
-  height: 8px;
-  background: var(--color-amber);
-  border: 2px solid #000;
-  box-shadow: 1px 1px 0 0 #000;
-  transition: background var(--transition-snap), box-shadow var(--transition-snap);
+  width: 44px;
+  height: 10px;
+  background: linear-gradient(180deg,
+    #e8eaec 0%,
+    #b0b8bc 30%,
+    #8a9498 65%,
+    #c0c8cc 100%
+  );
+  border: 1px solid #505a60;
+  border-top-color: #f0f2f4;
+  box-shadow:
+    0 2px 3px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -1px 0 rgba(0,0,0,0.3);
   flex-shrink: 0;
+  transition:
+    box-shadow var(--transition-snap),
+    background var(--transition-snap);
 }
 
-.cabinet-drawer:hover .cabinet-drawer__handle {
-  background: #ffb830;
-  box-shadow: 2px 2px 0 0 #000;
+/* ── Metal nametag ── */
+.cabinet-drawer__tag {
+  flex: 1;
+  position: relative;
+  background: linear-gradient(145deg, #5a5a5a 0%, #3a3a3a 50%, #4a4a4a 100%);
+  border: 1px solid #222;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.2),
+    inset 0 -1px 0 rgba(0,0,0,0.2),
+    1px 1px 2px rgba(0,0,0,0.4);
+  padding: 5px 14px;
+  display: flex;
+  align-items: center;
+  margin: 4px 0;
 }
 
-.cabinet-drawer:active .cabinet-drawer__handle {
-  box-shadow: 0 0 0 0 #000;
+/* Screws */
+.cabinet-drawer__tag-screw {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #888, #333);
+  border: 1px solid #1a1a1a;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.6), 0 1px 1px rgba(0,0,0,0.4);
 }
 
-/* ── Labels ── */
+/* Slot line on each screw */
+.cabinet-drawer__tag-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 1px;
+  background: rgba(0,0,0,0.5);
+  transform: translateY(-50%);
+}
+
+.cabinet-drawer__tag-screw--tl { top: 4px;  left: 5px; }
+.cabinet-drawer__tag-screw--tr { top: 4px;  right: 5px; }
+.cabinet-drawer__tag-screw--bl { bottom: 4px; left: 5px; }
+.cabinet-drawer__tag-screw--br { bottom: 4px; right: 5px; }
+
+/* Labels */
 .cabinet-drawer__labels {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  padding: 0 4px;
+  gap: 1px;
 }
 
 .cabinet-drawer__code {
   font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.2em;
-  color: var(--color-amber);
+  letter-spacing: 0.18em;
+  color: transparent;
   text-transform: uppercase;
-  line-height: 1;
+  background: linear-gradient(180deg, #c8c8c8 0%, #888 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.15),
+    0 -1px 0 rgba(0,0,0,0.6);
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.5));
 }
 
 .cabinet-drawer__name {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.07em;
-  color: var(--color-cream);
+  letter-spacing: 0.08em;
+  color: transparent;
   text-transform: uppercase;
-  line-height: 1.2;
+  background: linear-gradient(180deg, #e0e0e0 0%, #999 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  text-shadow:
+    0 1px 0 rgba(255,255,255,0.15),
+    0 -1px 0 rgba(0,0,0,0.6);
+  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.5));
 }
 
-/* ── Arrow ── */
+/* Arrow */
 .cabinet-drawer__arrow {
-  font-size: 14px;
-  color: rgba(242,234,216,0.3);
+  font-size: 16px;
+  color: var(--color-cream-muted);
   flex-shrink: 0;
-  padding-right: 10px;
   transition: color var(--transition-snap), transform var(--transition-snap);
 }
 
 .cabinet-drawer:hover .cabinet-drawer__arrow {
   color: var(--color-amber);
   transform: translateX(2px);
+}
+
+/* ── Floor shadow (isometric ground plane illusion) ── */
+.cabinet-shadow {
+  width: calc(var(--cab-w) + var(--depth-side));
+  height: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(8px);
+  margin-top: -4px;
+  /* Skew to match the isometric floor */
+  transform: skewX(-40deg) translateX(20px) scaleY(0.5);
+}
+
+/* ── MOCKUP: flat front face ── */
+.cabinet-mockup {
+  background: var(--color-cabinet);
+  border: 3px solid #000;
+  width: 300px;
+  height: var(--cab-h);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Override skew on mockup drawers — stay flat */
+.cabinet-drawer--mockup {
+  transform: none !important;
+}
+
+.cabinet-drawer--mockup:active {
+  transform: translateX(1px) !important;
+}
+
+/* ── Nametag ── bare text, hovering above the cabinet */
+.cabinet-nametag {
+  position: absolute;
+  top: calc(var(--depth-top) * -1 - 36px);
+  left: 60%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  font-size: 22px;
+  color: rgba(242, 234, 216, 0.55);
+  text-transform: uppercase;
+  white-space: nowrap;
+  z-index: 10;
+  animation: nametag-float 3s ease-in-out infinite;
+}
+
+/* Shadow cast onto the top face of the cabinet */
+.cabinet-nametag::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.35);
+  filter: blur(4px);
+  border-radius: 50%;
+  animation: nametag-shadow 3s ease-in-out infinite;
+}
+
+@keyframes nametag-float {
+  0%, 100% { transform: translateX(-50%) translateY(0px); }
+  50%       { transform: translateX(-50%) translateY(-6px); }
+}
+
+
+@keyframes nametag-shadow {
+  0%, 100% { opacity: 0.35; width: 70%; }
+  50%       { opacity: 0.15; width: 50%; }
+}
+
+/* ── Bottom links row ── */
+.cabinet-screen__links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.cabinet-screen__home-btn {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-cream-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  transition: color var(--transition-snap);
+}
+
+.cabinet-screen__home-btn:hover {
+  color: var(--color-cream);
 }
 
 /* ── AI link ── */
