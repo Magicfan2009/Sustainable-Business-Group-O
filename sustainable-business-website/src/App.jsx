@@ -6,6 +6,7 @@ import ReadingScreen from './screens/ReadingScreen'
 import AIScreen from './screens/AIScreen'
 import TabletScreen from './screens/TabletScreen'
 import MonitorScreen from './screens/MonitorScreen'
+import DevEditor from './components/DevEditor'
 
 const SCREENS = { PASSWORD: 'password', ROOMS: 'rooms', READING: 'reading', AI: 'ai' }
 
@@ -18,6 +19,11 @@ function App() {
   const roomRef = useRef('cabinet') // mirrors room state, always fresh in closures
   const panningRef = useRef(false)
   const bgRef = useRef(null)
+
+  // DevEditor refs
+  const deFrameRef = useRef(null)
+  const deCactusRef = useRef(null)
+  const dePlantRef = useRef(null)
 
   function transition(ms, callback) {
     setFadeDuration(ms)
@@ -106,7 +112,7 @@ function App() {
       {screen === SCREENS.ROOMS && (
         <div style={{ width: '100%', height: '100%', position: 'relative', isolation: 'isolate' }}>
           {/* Picture frame — hung on wall, visible across all rooms */}
-          <div style={{ position: 'absolute', left: '2%', top: '50%', transform: 'translateY(-50%)', zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div ref={deFrameRef} style={{ position: 'absolute', left: '2%', top: '50%', transform: 'translateY(-50%)', zIndex: 4, pointerEvents: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)' }} />
             <svg width="192" height="28" style={{ display: 'block', marginBottom: '-2px' }}>
               <line x1="96" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
@@ -119,7 +125,7 @@ function App() {
           {/* Office decorations — background layer */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>
             {/* Left floor: cactus on stool */}
-            <div style={{ position: 'absolute', bottom: '8%', left: '3%' }}>
+            <div ref={deCactusRef} style={{ position: 'absolute', bottom: '8%', left: '3%' }}>
               <svg width="70" height="90" viewBox="0 0 70 90" fill="none">
                 <rect x="22" y="52" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
                 <rect x="18" y="50" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
@@ -138,7 +144,7 @@ function App() {
               </svg>
             </div>
             {/* Right floor: leafy plant in pot */}
-            <div style={{ position: 'absolute', bottom: '8%', right: '3%' }}>
+            <div ref={dePlantRef} style={{ position: 'absolute', bottom: '8%', right: '3%' }}>
               <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
                 <rect x="17" y="50" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
                 <rect x="13" y="48" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
@@ -177,6 +183,11 @@ function App() {
               panning={panningRef}
             />
           </div>
+          <DevEditor items={[
+            { id: 'frame',  label: 'Circula Frame', ref: deFrameRef },
+            { id: 'cactus', label: 'Left Cactus',   ref: deCactusRef },
+            { id: 'plant',  label: 'Right Plant',   ref: dePlantRef },
+          ]} />
         </div>
       )}
 
