@@ -1,15 +1,24 @@
 import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import Paperclip from '../components/Paperclip'
 import PageNav from '../components/PageNav'
 import { getSectionData } from '../data/sections'
+import DunphyTimeline from '../components/charts/DunphyTimeline'
+import ScopeDonut from '../components/charts/ScopeDonut'
+import NetZeroProjection from '../components/charts/NetZeroProjection'
+import TBLScorecard from '../components/charts/TBLScorecard'
+import CompetitorRadar from '../components/charts/CompetitorRadar'
+import NetZeroTimeline from '../components/charts/NetZeroTimeline'
+import StrategicRoadmap from '../components/charts/StrategicRoadmap'
 import './ReadingScreen.css'
 
 export default function ReadingScreen({ sectionCode, onBack }) {
   const section = getSectionData(sectionCode)
   const [pageIndex, setPageIndex] = useState(0)
   const [pendingIndex, setPendingIndex] = useState(null)
+  const [chartOpen, setChartOpen] = useState(false)
   const [pageDirection, setPageDirection] = useState(1)
   const wrapperRef = useRef(null)
   const docRef = useRef(null)
@@ -86,8 +95,19 @@ export default function ReadingScreen({ sectionCode, onBack }) {
   useEffect(() => {
     setPageIndex(0)
     setPendingIndex(null)
+    setChartOpen(false)
     animatingRef.current = false
   }, [sectionCode])
+
+  function getChart() {
+    if (sectionCode === 'SEC-01') return <DunphyTimeline />
+    if (sectionCode === 'SEC-02') return pageIndex === 0 ? <ScopeDonut /> : <NetZeroProjection />
+    if (sectionCode === 'SEC-03') return <TBLScorecard />
+    if (sectionCode === 'SEC-04') return pageIndex === 0 ? <CompetitorRadar /> : <NetZeroTimeline />
+    if (sectionCode === 'SEC-05') return <StrategicRoadmap />
+    return null
+  }
+  const chart = getChart()
 
   return (
     <div className="reading-screen" ref={wrapperRef}>
@@ -127,6 +147,122 @@ export default function ReadingScreen({ sectionCode, onBack }) {
           />
         </div>
       </div>
+
+      {/* Mini tablet prop — appears at right if section has a chart */}
+      {chart && !chartOpen && (
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: 40 }}
+          transition={{ type: 'spring', stiffness: 260, damping: 22, delay: 0.4 }}
+          onClick={() => setChartOpen(true)}
+          style={{
+            position: 'absolute',
+            right: 'max(16px, calc(50% - 420px))',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            cursor: 'pointer',
+            zIndex: 3,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '8px',
+          }}
+        >
+          {/* Mini tablet SVG */}
+          <svg viewBox="0 0 110 150" width="90" height="123" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="1" y="1" width="108" height="148" rx="12" fill="#111" stroke="#2a2a2a" strokeWidth="1.5"/>
+            <rect x="4" y="4" width="102" height="142" rx="10" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="0.75"/>
+            <rect x="8" y="20" width="94" height="106" rx="4" fill="url(#miniScreenBg)"/>
+            <circle cx="55" cy="10" r="3.5" fill="#1e1e1e" stroke="#3a3a3a" strokeWidth="0.75"/>
+            <circle cx="55" cy="137" r="7" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1"/>
+            <circle cx="55" cy="137" r="5" fill="none" stroke="#444" strokeWidth="0.75"/>
+            <defs>
+              <linearGradient id="miniScreenBg" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#1a2a3a"/>
+                <stop offset="100%" stopColor="#0d1820"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span style={{
+            fontFamily: 'var(--font-mono)', fontSize: '9px',
+            color: 'rgba(232,160,32,0.8)', letterSpacing: '0.1em',
+            textTransform: 'uppercase',
+          }}>view chart</span>
+        </motion.div>
+      )}
+
+      {/* Chart overlay — landscape tablet */}
+      <AnimatePresence>
+        {chartOpen && (
+          <motion.div
+            key="chart-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setChartOpen(false)}
+            style={{
+              position: 'absolute', inset: 0, zIndex: 10,
+              background: 'rgba(10, 10, 10, 0.75)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              backdropFilter: 'blur(2px)',
+            }}
+          >
+            {/* Tablet shell — landscape */}
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.85, opacity: 0 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 26 }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                width: 'min(86vw, 780px)',
+                height: 'min(58vh, 520px)',
+                background: '#111',
+                borderRadius: '18px',
+                border: '2px solid #333',
+                boxShadow: '0 0 0 1px #000, 0 24px 60px rgba(0,0,0,0.85)',
+                position: 'relative',
+                overflow: 'hidden',
+                flexShrink: 0,
+              }}
+            >
+              {/* Amber bezel ring */}
+              <div style={{
+                position: 'absolute', inset: '5px', borderRadius: '14px',
+                border: '1px solid rgba(232,160,32,0.2)', pointerEvents: 'none', zIndex: 2,
+              }} />
+              {/* Camera left */}
+              <div style={{
+                position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)',
+                width: '8px', height: '8px', borderRadius: '50%',
+                background: '#2a2a2a', border: '1px solid #444', zIndex: 3,
+              }} />
+              {/* Home button right */}
+              <div style={{
+                position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
+                width: '38px', height: '38px', borderRadius: '50%',
+                background: '#1e1e1e', border: '2px solid #444', zIndex: 3,
+              }} />
+              {/* Screen */}
+              <div style={{
+                position: 'absolute',
+                top: '12px', left: '32px', right: '60px', bottom: '12px',
+                background: '#0d1520', borderRadius: '6px', overflow: 'hidden',
+              }}>
+                {chart}
+              </div>
+              {/* Close hint */}
+              <div style={{
+                position: 'absolute', top: '8px', right: '68px',
+                fontFamily: 'var(--font-mono)', fontSize: '9px',
+                color: 'rgba(232,160,32,0.6)', letterSpacing: '0.08em', zIndex: 4,
+              }}>click outside to close</div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

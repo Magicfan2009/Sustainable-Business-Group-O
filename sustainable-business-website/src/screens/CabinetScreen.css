@@ -212,16 +212,13 @@
     background var(--transition-snap);
 }
 
-/* ── Metal nametag ── */
+/* ── Paper nametag ── */
 .cabinet-drawer__tag {
   flex: 1;
   position: relative;
-  background: linear-gradient(145deg, #5a5a5a 0%, #3a3a3a 50%, #4a4a4a 100%);
-  border: 1px solid #222;
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.2),
-    inset 0 -1px 0 rgba(0,0,0,0.2),
-    1px 1px 2px rgba(0,0,0,0.4);
+  background: #f2ead8;
+  border: 1px solid #aaa;
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.35);
   padding: 5px 14px;
   display: flex;
   align-items: center;
@@ -268,30 +265,16 @@
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 0.18em;
-  color: transparent;
+  color: #333;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #c8c8c8 0%, #888 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.15),
-    0 -1px 0 rgba(0,0,0,0.6);
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.5));
 }
 
 .cabinet-drawer__name {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: transparent;
+  color: #111;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #e0e0e0 0%, #999 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  text-shadow:
-    0 1px 0 rgba(255,255,255,0.15),
-    0 -1px 0 rgba(0,0,0,0.6);
-  filter: drop-shadow(0 1px 0 rgba(0,0,0,0.5));
 }
 
 /* Arrow */
