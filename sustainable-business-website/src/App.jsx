@@ -50,22 +50,15 @@ function App() {
     transition(300, () => setScreen(SCREENS.ROOMS))
   }
 
-  function panToRoom(targetRoom) {
+  // dir: 'right' = current exits left, new enters from right
+  //      'left'  = current exits right, new enters from left
+  function panToRoom(targetRoom, dir) {
     if (panningRef.current) return
     panningRef.current = true
 
-    const ROOM_ORDER = ['cabinet', 'tablet', 'monitor']
     const currentRoom = roomRef.current
-    const currentIdx = ROOM_ORDER.indexOf(currentRoom)
-    const targetIdx = ROOM_ORDER.indexOf(targetRoom)
-    // Determine direction: +1 = right (exit left), -1 = left (exit right)
-    let direction = targetIdx > currentIdx ? 1 : -1
-    // Handle wrap: if distance > 1 in one direction, it's a loop wrap
-    const dist = Math.abs(targetIdx - currentIdx)
-    if (dist > 1) direction = -direction
-
-    const exitX = direction > 0 ? '-120vw' : '120vw'
-    const enterX = direction > 0 ? '120vw' : '-120vw'
+    const exitX  = dir === 'right' ? '-120vw' : '120vw'
+    const enterX = dir === 'right' ? '120vw'  : '-120vw'
 
     const currentEl = document.querySelector(`[data-room="${currentRoom}"]`)
     const targetEl = document.querySelector(`[data-room="${targetRoom}"]`)
@@ -84,7 +77,7 @@ function App() {
     })
 
     tl.to(currentEl, { x: exitX, duration: 0.55, ease: 'power2.inOut' }, 0)
-    tl.to(bgRef.current, { x: direction > 0 ? '-48vw' : '48vw', duration: 0.55, ease: 'power2.inOut' }, 0)
+    tl.to(bgRef.current, { x: dir === 'right' ? '-48vw' : '48vw', duration: 0.55, ease: 'power2.inOut' }, 0)
     tl.to(targetEl, { x: 0, duration: 0.5, ease: 'back.out(1.15)' }, 0.05)
     tl.set(bgRef.current, { x: 0 })
   }
@@ -113,23 +106,23 @@ function App() {
               onOpenFile={openFile}
               onOpenAI={openAI}
               onHome={() => transition(600, () => setScreen(SCREENS.PASSWORD))}
-              onPanLeft={() => panToRoom('monitor')}
-              onPanRight={() => panToRoom('tablet')}
+              onPanLeft={() => panToRoom('tablet', 'left')}
+              onPanRight={() => panToRoom('monitor', 'right')}
               panning={panningRef}
             />
           </div>
           <div data-room="tablet" style={{ position: 'absolute', inset: 0 }}>
             <TabletScreen
-              onPanLeft={() => panToRoom('cabinet')}
-              onPanRight={() => panToRoom('monitor')}
-              onPanToMonitor={() => panToRoom('monitor')}
+              onPanLeft={() => panToRoom('monitor', 'left')}
+              onPanRight={() => panToRoom('cabinet', 'right')}
+              onPanToMonitor={() => panToRoom('monitor', 'left')}
               panning={panningRef}
             />
           </div>
           <div data-room="monitor" style={{ position: 'absolute', inset: 0 }}>
             <MonitorScreen
-              onPanLeft={() => panToRoom('tablet')}
-              onPanRight={() => panToRoom('cabinet')}
+              onPanLeft={() => panToRoom('cabinet', 'left')}
+              onPanRight={() => panToRoom('tablet', 'right')}
               panning={panningRef}
             />
           </div>
