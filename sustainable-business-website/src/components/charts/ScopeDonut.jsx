@@ -22,7 +22,7 @@ export default function ScopeDonut() {
         style={{ position: 'relative', width: '140px', height: '140px', margin: '16px auto' }}
       >
         <div style={{ width: '140px', height: '140px', borderRadius: '50%', background: gradient }} />
-        <div style={{ position: 'absolute', top: '30px', left: '30px', width: '80px', height: '80px', borderRadius: '50%', background: '#080c10', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ position: 'absolute', top: '30px', left: '30px', width: '80px', height: '80px', borderRadius: '50%', background: '#f0f2f5', border: '1px solid #ccd3dd', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <AnimatePresence mode="wait">
             <motion.span
               key={hovered ?? 'total'}
@@ -30,7 +30,7 @@ export default function ScopeDonut() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.7 }}
               transition={{ duration: 0.15 }}
-              style={{ fontSize: '10px', color: hovered !== null ? SCOPES[hovered].color : '#666', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre', fontWeight: 700 }}
+              style={{ fontSize: '10px', color: hovered !== null ? SCOPES[hovered].color : '#334', fontFamily: 'var(--font-mono)', textAlign: 'center', lineHeight: 1.3, whiteSpace: 'pre', fontWeight: 700 }}
             >
               {hovered !== null ? `${SCOPES[hovered].pct}%` : '695Mt\ntotal'}
             </motion.span>
@@ -46,10 +46,10 @@ export default function ScopeDonut() {
             transition={{ delay: 0.3 + i * 0.1, type: 'spring', stiffness: 300, damping: 24 }}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 6px', cursor: 'default', background: hovered === i ? '#0d1117' : 'transparent', border: hovered === i ? `1px solid ${s.color}` : '1px solid transparent', borderRadius: '2px' }}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 6px', cursor: 'default', background: hovered === i ? 'rgba(0,102,204,0.06)' : 'transparent', border: hovered === i ? `1px solid ${s.color}` : '1px solid transparent', borderRadius: '2px' }}
           >
             <motion.div whileHover={{ scale: 1.3 }} style={{ width: '12px', height: '12px', background: s.color, borderRadius: '2px', flexShrink: 0 }} />
-            <span style={{ fontSize: '11px', color: '#f2ead8', fontFamily: 'var(--font-mono)', flex: 1 }}>{s.label}</span>
+            <span style={{ fontSize: '11px', color: '#001e50', fontFamily: 'var(--font-mono)', flex: 1 }}>{s.label}</span>
             <span style={{ fontSize: '11px', color: s.color, fontFamily: 'var(--font-mono)', fontWeight: 700 }}>{s.value}Mt</span>
           </motion.div>
         ))}
@@ -62,7 +62,7 @@ export default function ScopeDonut() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.15 }}
-            style={{ marginTop: '8px', width: '100%', background: '#0d1117', border: `1px solid ${SCOPES[hovered].color}`, padding: '6px 8px', fontSize: '10px', color: '#f2ead8', fontFamily: 'var(--font-mono)', lineHeight: 1.5 }}
+            style={{ marginTop: '8px', width: '100%', background: '#ffffff', border: `1px solid ${SCOPES[hovered].color}`, padding: '6px 8px', fontSize: '10px', color: '#001e50', fontFamily: 'var(--font-mono)', lineHeight: 1.5, boxShadow: '0 2px 8px rgba(0,30,80,0.1)' }}
           >
             {SCOPES[hovered].desc}
           </motion.div>

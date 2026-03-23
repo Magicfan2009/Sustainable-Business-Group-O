@@ -9,8 +9,8 @@ const COMPANIES = [
   { name: 'Toyota',     year: 2050, color: '#cc5544', strategy: 'Env. Challenge 2050', caveat: 'EU BEV mandate compliance risk from hybrid focus' },
   { name: 'VW',         year: 2050, color: '#0066cc', strategy: 'regenerate+',         caveat: 'Reasonable Assurance leader — strongest governance' },
 ]
-const MIN_YEAR = 2024, MAX_YEAR = 2058, W = 360, Y_LINE = 80
-function toX(year) { return 10 + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (W - 20) }
+const MIN_YEAR = 2024, MAX_YEAR = 2058, W = 560, Y_LINE = 110
+function toX(year) { return 16 + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (W - 32) }
 
 // VW and Toyota both at 2050:
 // - centres 6px apart, midpoint = toX(2050), so overlap is ~8px (>50% of r=7 diameter)
@@ -19,25 +19,25 @@ function toX(year) { return 10 + (year - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * (W 
 const X_OFFSET = { VW: 3, Toyota: -3 }
 
 // Labels: stagger vertically to avoid collision
-const LABEL_YOFF = { VW: -48, Toyota: -28, Stellantis: -28, Mercedes: -44 }
+const LABEL_YOFF = { VW: -64, Toyota: -40, Stellantis: -40, Mercedes: -60 }
 
 export default function NetZeroTimeline() {
   const [hovered, setHovered] = useState(null)
   return (
     <div className="chart">
       <div className="chart__title">Net Zero Target Timeline</div>
-      <svg width={W} height={200} style={{ overflow: 'visible', marginTop: '8px' }}>
+      <svg viewBox={`0 0 ${W} 260`} width="100%" style={{ overflow: 'visible', flex: 1, minHeight: 0, marginTop: '4px' }}>
         <motion.line initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.5, ease: 'easeOut' }}
-          x1="10" y1={Y_LINE} x2={W-10} y2={Y_LINE} stroke="#b0bac8" strokeWidth="1.5" style={{ transformOrigin: '10px 0' }} />
+          x1="16" y1={Y_LINE} x2={W-16} y2={Y_LINE} stroke="#b0bac8" strokeWidth="2" style={{ transformOrigin: '16px 0' }} />
         {[2025,2030,2035,2040,2045,2050,2055].map(y => (
           <g key={y}>
-            <line x1={toX(y)} y1={Y_LINE-4} x2={toX(y)} y2={Y_LINE+4} stroke="#8090a8" strokeWidth="1" />
-            <text x={toX(y)} y={Y_LINE+14} fontSize="8" fill="#556" textAnchor="middle" fontFamily="monospace">{y}</text>
+            <line x1={toX(y)} y1={Y_LINE-6} x2={toX(y)} y2={Y_LINE+6} stroke="#8090a8" strokeWidth="1.5" />
+            <text x={toX(y)} y={Y_LINE+20} fontSize="11" fill="#556" textAnchor="middle" fontFamily="monospace">{y}</text>
           </g>
         ))}
         {/* TODAY marker */}
-        <line x1={toX(2026)} y1={Y_LINE-20} x2={toX(2026)} y2={Y_LINE+8} stroke="#0066cc" strokeWidth="1" strokeDasharray="2 2" />
-        <text x={toX(2026)} y={Y_LINE-23} fontSize="8" fill="#0066cc" textAnchor="middle" fontFamily="monospace">TODAY</text>
+        <line x1={toX(2026)} y1={Y_LINE-28} x2={toX(2026)} y2={Y_LINE+10} stroke="#0066cc" strokeWidth="1.5" strokeDasharray="3 3" />
+        <text x={toX(2026)} y={Y_LINE-32} fontSize="11" fill="#0066cc" textAnchor="middle" fontFamily="monospace">TODAY</text>
 
         {/* Non-2050 companies: render circles first */}
         {COMPANIES.map((c) => {
@@ -46,7 +46,7 @@ export default function NetZeroTimeline() {
           const isHov = hovered === c.name
           return (
             <circle key={`vis-${c.name}`} cx={cx} cy={Y_LINE}
-              r={isHov ? 10 : 7} fill={c.color}
+              r={isHov ? 14 : 10} fill={c.color}
               style={{ pointerEvents: 'none', transition: 'r 0.1s ease' }} />
           )
         })}
@@ -57,7 +57,7 @@ export default function NetZeroTimeline() {
           const isHov = hovered === c.name
           return (
             <circle key={`vis-${c.name}`} cx={cx} cy={Y_LINE}
-              r={isHov ? 10 : 7} fill={c.color}
+              r={isHov ? 14 : 10} fill={c.color}
               style={{ pointerEvents: 'none', transition: 'r 0.1s ease' }} />
           )
         })}
@@ -68,8 +68,8 @@ export default function NetZeroTimeline() {
           const isHov = hovered === c.name
           return (
             <circle key={`vis-${c.name}`} cx={cx} cy={Y_LINE}
-              r={isHov ? 10 : 7} fill={c.color}
-              stroke="white" strokeWidth="1.5"
+              r={isHov ? 14 : 10} fill={c.color}
+              stroke="white" strokeWidth="2"
               style={{ pointerEvents: 'none', transition: 'r 0.1s ease' }} />
           )
         })}
@@ -88,15 +88,15 @@ export default function NetZeroTimeline() {
               style={{ cursor: 'default' }}
             >
               {/* Connector from label to circle position */}
-              <line x1={cx} y1={Y_LINE - (isHov ? 10 : 7) - 1} x2={cx} y2={Y_LINE + yOff + 10}
-                stroke={c.color} strokeWidth="0.5" strokeDasharray="2 1" />
-              <text x={cx} y={Y_LINE + yOff} fontSize="10" fill={c.color}
+              <line x1={cx} y1={Y_LINE - (isHov ? 14 : 10) - 1} x2={cx} y2={Y_LINE + yOff + 14}
+                stroke={c.color} strokeWidth="1" strokeDasharray="3 2" />
+              <text x={cx} y={Y_LINE + yOff} fontSize="13" fill={c.color}
                 textAnchor="middle" fontFamily="monospace" fontWeight="700">{c.year}</text>
-              <text x={cx} y={Y_LINE + yOff + 12} fontSize="8" fill="#334"
-                textAnchor="middle" fontFamily="monospace">{c.name}</text>
+              <text x={cx} y={Y_LINE + yOff + 16} fontSize="11" fill="#334"
+                textAnchor="middle" fontFamily="monospace" fontWeight="600">{c.name}</text>
 
               {/* Large transparent hit area */}
-              <circle cx={cx} cy={Y_LINE} r={14} fill="transparent" style={{ cursor: 'crosshair' }}
+              <circle cx={cx} cy={Y_LINE} r={18} fill="transparent" style={{ cursor: 'crosshair' }}
                 onMouseEnter={() => setHovered(c.name)}
                 onMouseLeave={() => setHovered(null)}
               />
