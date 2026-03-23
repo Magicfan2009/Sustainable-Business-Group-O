@@ -112,8 +112,9 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
     setActiveSection(null)
   }
 
-  function handleTabletClick() {
-    if (!zoomed) setZoomed(true)
+  function exitZoom() {
+    setZoomed(false)
+    setActiveSection(null)
   }
 
   return (
@@ -121,75 +122,185 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
       {!zoomed && <PanArrow direction="left" onClick={onPanLeft} panning={panning} />}
       {!zoomed && <PanArrow direction="right" onClick={onPanRight} panning={panning} />}
 
-      {zoomed && (
-        <button
-          onClick={() => { setZoomed(false); setActiveSection(null) }}
-          style={{
-            position: 'absolute', top: '16px', left: '16px', zIndex: 10,
-            fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#e8a020',
-            background: '#1a1a1a', border: '1px solid #333', padding: '6px 12px',
-            cursor: 'pointer', letterSpacing: '0.1em',
-          }}
+      {/* ── Mini room view: decorative SVG tablet prop ── */}
+      {!zoomed && (
+        <motion.div
+          onClick={() => setZoomed(true)}
+          whileHover={{ scale: 1.04, y: -4 }}
+          whileTap={{ scale: 0.97 }}
+          style={{ cursor: 'pointer', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px' }}
         >
-          ← BACK
-        </button>
+          <TabletSVG />
+          <div style={{
+            fontFamily: 'var(--font-mono)', fontSize: '12px', fontWeight: 700,
+            letterSpacing: '0.18em', color: 'rgba(242,234,216,0.6)',
+            textTransform: 'uppercase',
+          }}>
+            CHARTS &amp; FIGURES
+          </div>
+          <div style={{
+            fontFamily: 'var(--font-mono)', fontSize: '10px',
+            color: 'rgba(232,160,32,0.7)', letterSpacing: '0.1em',
+          }}>
+            tap to open →
+          </div>
+        </motion.div>
       )}
 
-      <div
-        className={`tablet-scene${zoomed ? ' tablet-scene--zoomed' : ''}`}
-        onClick={handleTabletClick}
-        style={{ cursor: zoomed ? 'default' : 'pointer' }}
-      >
-        <div className="tablet-iso">
-          <div className="tablet-iso__top" />
-          <div className="tablet-iso__side" />
-          {!zoomed && <div className="tablet-nametag">CHARTS &amp; FIGURES</div>}
-
-          <div className="tablet-iso__front">
-            <div className="tablet-iso__camera" />
-            <div className="tablet-iso__bezel" />
-
-            <div
-              className="tablet-iso__screen"
-              onClick={e => { if (zoomed) e.stopPropagation() }}
+      {/* ── Zoomed full-screen overlay ── */}
+      <AnimatePresence>
+        {zoomed && (
+          <motion.div
+            key="zoomed"
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+            style={{
+              position: 'fixed', inset: 0, zIndex: 8,
+              background: 'var(--color-bg)',
+              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            {/* Back button */}
+            <button
+              onClick={exitZoom}
+              style={{
+                position: 'absolute', top: '16px', left: '16px', zIndex: 10,
+                fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#e8a020',
+                background: '#1a1a1a', border: '1px solid #333', padding: '6px 12px',
+                cursor: 'pointer', letterSpacing: '0.1em',
+              }}
             >
-              <AnimatePresence mode="wait">
-                {!activeSection ? (
-                  <motion.div
-                    key="home"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.2 }}
-                    style={{ height: '100%' }}
-                  >
-                    <TabletHome sections={SECTIONS} onOpen={zoomed ? openSection : null} zoomed={zoomed} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key={activeSection}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 30 }}
-                    transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-                    style={{ height: '100%' }}
-                  >
-                    <TabletChartView
-                      code={activeSection}
-                      onBack={closeSection}
-                      subPage={subPage}
-                      onSubPageChange={setSubPage}
-                    />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+              ← BACK
+            </button>
 
-            <div className="tablet-iso__home-btn" />
-          </div>
-        </div>
-      </div>
+            {/* Full-size tablet shell */}
+            <div style={{
+              width: 'min(480px, 90vw)',
+              height: 'min(680px, 88vh)',
+              background: '#111',
+              borderRadius: '24px',
+              border: '2px solid #333',
+              boxShadow: '0 0 0 1px #000, 0 32px 80px rgba(0,0,0,0.8)',
+              display: 'flex', flexDirection: 'column',
+              overflow: 'hidden',
+              position: 'relative',
+            }}>
+              {/* Camera */}
+              <div style={{
+                width: '10px', height: '10px', borderRadius: '50%',
+                background: '#2a2a2a', border: '1px solid #444',
+                position: 'absolute', top: '14px', left: '50%', transform: 'translateX(-50%)',
+                zIndex: 2,
+              }} />
+              {/* Amber bezel ring */}
+              <div style={{
+                position: 'absolute', inset: '6px',
+                borderRadius: '20px',
+                border: '1px solid rgba(232,160,32,0.25)',
+                pointerEvents: 'none', zIndex: 2,
+              }} />
+              {/* Screen */}
+              <div style={{
+                position: 'absolute',
+                top: '36px', left: '16px', right: '16px', bottom: '72px',
+                background: '#080c10',
+                borderRadius: '8px',
+                overflow: 'hidden',
+              }}>
+                <AnimatePresence mode="wait">
+                  {!activeSection ? (
+                    <motion.div
+                      key="home"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0, y: -20 }}
+                      transition={{ duration: 0.2 }}
+                      style={{ height: '100%' }}
+                    >
+                      <TabletHome sections={SECTIONS} onOpen={openSection} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={activeSection}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 30 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                      style={{ height: '100%' }}
+                    >
+                      <TabletChartView
+                        code={activeSection}
+                        onBack={closeSection}
+                        subPage={subPage}
+                        onSubPageChange={setSubPage}
+                      />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+              {/* Home button */}
+              <div style={{
+                position: 'absolute', bottom: '14px', left: '50%', transform: 'translateX(-50%)',
+                width: '48px', height: '48px', borderRadius: '50%',
+                background: '#1e1e1e', border: '2px solid #444',
+                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.8)',
+              }} />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
+  )
+}
+
+/* ── Decorative SVG tablet illustration (mini room prop) ── */
+function TabletSVG() {
+  return (
+    <svg
+      viewBox="0 0 220 300"
+      width="180"
+      height="245"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Body */}
+      <rect x="2" y="2" width="216" height="296" rx="22" fill="#111" stroke="#2a2a2a" strokeWidth="2"/>
+      {/* Amber bezel ring */}
+      <rect x="8" y="8" width="204" height="284" rx="18" fill="none" stroke="rgba(232,160,32,0.3)" strokeWidth="1"/>
+      {/* Screen area */}
+      <rect x="16" y="40" width="188" height="212" rx="6" fill="#080c10"/>
+      {/* Screen glow */}
+      <rect x="16" y="40" width="188" height="212" rx="6" fill="none" stroke="rgba(232,160,32,0.12)" strokeWidth="1"/>
+      {/* Faint screen content — decorative grid of icons */}
+      {[0,1,2].map(col => [0,1].map(row => (
+        <rect
+          key={`${col}-${row}`}
+          x={36 + col * 60} y={64 + row * 72}
+          width="38" height="38" rx="9"
+          fill={['rgba(45,106,159,0.5)','rgba(45,143,78,0.5)','rgba(122,61,159,0.5)','rgba(159,90,45,0.5)','rgba(45,74,143,0.5)','rgba(143,45,45,0.5)'][col + row * 3]}
+        />
+      )))}
+      {/* Gloss sheen on screen */}
+      <rect x="16" y="40" width="188" height="80" rx="6" fill="url(#screenGloss)"/>
+      {/* Camera dot */}
+      <circle cx="110" cy="22" r="5" fill="#1e1e1e" stroke="#3a3a3a" strokeWidth="1"/>
+      <circle cx="110" cy="22" r="2" fill="#0a0a0a"/>
+      {/* Home button */}
+      <circle cx="110" cy="274" r="14" fill="#1a1a1a" stroke="#3a3a3a" strokeWidth="1.5"/>
+      <circle cx="110" cy="274" r="10" fill="none" stroke="#444" strokeWidth="1"/>
+      {/* Side buttons */}
+      <rect x="216" y="70" width="4" height="28" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
+      <rect x="0" y="80" width="4" height="20" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
+      <rect x="0" y="108" width="4" height="20" rx="2" fill="#1e1e1e" stroke="#333" strokeWidth="1"/>
+      <defs>
+        <linearGradient id="screenGloss" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="rgba(255,255,255,0.06)"/>
+          <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+        </linearGradient>
+      </defs>
+    </svg>
   )
 }
 
