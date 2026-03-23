@@ -115,7 +115,7 @@
 .monitor-nametag {
   position: absolute;
   top: calc(-1 * var(--mon-depth-top) - 36px);
-  left: 60%;
+  left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-mono);
   font-size: 14px;

@@ -3,7 +3,7 @@ import PanArrow from '../components/PanArrow'
 import './MonitorScreen.css'
 
 // Set VIDEO_SRC to the path of the video when it's ready, e.g. '/video/sec06.mp4'
-const VIDEO_SRC = null
+const VIDEO_SRC = '/video/group-o.mp4'
 
 export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
   const [playing, setPlaying] = useState(false)
@@ -22,8 +22,8 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning }) {
 
   return (
     <div className="monitor-screen" style={{ position: 'relative' }}>
-      <PanArrow direction="left" onClick={onPanLeft} panning={panning} />
-      <PanArrow direction="right" onClick={onPanRight} panning={panning} />
+      <PanArrow direction="left" onClick={onPanLeft} panning={panning} label="Filing Cabinet" />
+      <PanArrow direction="right" onClick={onPanRight} panning={panning} label="Chart Tablet" />
 
       <div className="monitor-scene">
         <div className="monitor-iso">

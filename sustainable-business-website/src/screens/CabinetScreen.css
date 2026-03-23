@@ -369,8 +369,10 @@
 /* ── Bottom links row ── */
 .cabinet-screen__links {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .cabinet-screen__home-btn {
@@ -393,19 +395,23 @@
 /* ── AI link ── */
 .cabinet-screen__ai-link {
   font-family: var(--font-mono);
-  font-size: var(--text-xs);
-  letter-spacing: 0.2em;
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.15em;
   color: var(--color-amber);
   background: none;
   border: none;
+  box-shadow: none;
   cursor: pointer;
   text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
   padding: 4px 8px;
   transition: color var(--transition-snap);
 }
 
 .cabinet-screen__ai-link:hover {
-  color: var(--color-cream);
+  color: var(--color-black);
 }
 
 /* ── Mobile responsive ── */

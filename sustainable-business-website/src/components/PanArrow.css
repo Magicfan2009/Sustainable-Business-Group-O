@@ -2,28 +2,37 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 32px;
-  height: 32px;
-  background: #1a1a1a;
-  border: 2px solid #333;
-  box-shadow: 2px 2px 0 #000;
+  background: var(--color-cabinet);
+  border: var(--border);
+  box-shadow: var(--shadow-sm);
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 6px;
   cursor: pointer;
-  font-size: 18px;
-  color: #666;
-  transition: border-color 80ms ease-out, color 80ms ease-out;
+  color: var(--color-cream);
+  font-family: var(--font-mono);
+  padding: 6px 10px;
+  transition:
+    background var(--transition-snap),
+    color var(--transition-snap),
+    box-shadow var(--transition-snap),
+    transform var(--transition-snap);
   z-index: 5;
   user-select: none;
 }
 
-.pan-arrow--left  { left: 8px; }
-.pan-arrow--right { right: 8px; }
+.pan-arrow--left  { left: 8px; flex-direction: row; }
+.pan-arrow--right { right: 8px; flex-direction: row-reverse; }
 
 .pan-arrow:hover:not(.pan-arrow--disabled) {
-  border-color: #e8a020;
-  color: #e8a020;
+  background: var(--color-amber);
+  color: var(--color-black);
+  box-shadow: var(--shadow-md);
+}
+
+.pan-arrow:active:not(.pan-arrow--disabled) {
+  transform: translateY(-50%) translate(2px, 2px);
+  box-shadow: none;
 }
 
 .pan-arrow--disabled {
@@ -31,10 +40,21 @@
   cursor: not-allowed;
 }
 
+.pan-arrow__chevron {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.pan-arrow__label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
 @media (max-width: 700px) {
-  .pan-arrow {
-    width: 44px;
-    height: 44px;
-    font-size: 20px;
-  }
+  .pan-arrow__label { display: none; }
+  .pan-arrow { padding: 8px 10px; }
+  .pan-arrow__chevron { font-size: 22px; }
 }

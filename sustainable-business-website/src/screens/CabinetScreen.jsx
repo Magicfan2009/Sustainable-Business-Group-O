@@ -27,8 +27,8 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
 
   return (
     <div className="cabinet-screen" style={{ position: 'relative' }}>
-      <PanArrow direction="left" onClick={onPanLeft} panning={panning} />
-      <PanArrow direction="right" onClick={onPanRight} panning={panning} />
+      <PanArrow direction="left" onClick={onPanLeft} panning={panning} label="Chart Tablet" />
+      <PanArrow direction="right" onClick={onPanRight} panning={panning} label="Exec. Monitor" />
 
       <div className="cabinet-scene" ref={sceneRef}>
 

@@ -125,8 +125,8 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
 
   return (
     <div className="tablet-screen" style={{ position: 'relative' }}>
-      {!zoomed && <PanArrow direction="left" onClick={onPanLeft} panning={panning} />}
-      {!zoomed && <PanArrow direction="right" onClick={onPanRight} panning={panning} />}
+      {!zoomed && <PanArrow direction="left" onClick={onPanLeft} panning={panning} label="Exec. Monitor" />}
+      {!zoomed && <PanArrow direction="right" onClick={onPanRight} panning={panning} label="Filing Cabinet" />}
 
       {/* ── Mini room view: decorative SVG tablet prop ── */}
       {!zoomed && (
