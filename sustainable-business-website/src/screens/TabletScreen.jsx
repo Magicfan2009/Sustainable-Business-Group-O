@@ -159,12 +159,12 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
             style={{
               position: 'fixed', inset: 0, zIndex: 8,
               background: 'var(--color-bg)',
-              display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
             }}
           >
-            {/* Back button */}
+            {/* Back button — always top-left */}
             <button
-              onClick={exitZoom}
+              onClick={activeSection ? closeSection : exitZoom}
               style={{
                 position: 'absolute', top: '16px', left: '16px', zIndex: 10,
                 fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#e8a020',
@@ -172,51 +172,78 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                 cursor: 'pointer', letterSpacing: '0.1em',
               }}
             >
-              ← BACK
+              ← {activeSection ? 'HOME' : 'BACK'}
             </button>
 
-            {/* Full-size tablet shell */}
-            <div style={{
-              width: 'min(480px, 90vw)',
-              height: 'min(680px, 88vh)',
-              background: '#111',
-              borderRadius: '24px',
-              border: '2px solid #333',
-              boxShadow: '0 0 0 1px #000, 0 32px 80px rgba(0,0,0,0.8)',
-              display: 'flex', flexDirection: 'column',
-              overflow: 'hidden',
-              position: 'relative',
-            }}>
-              {/* Camera */}
-              <div style={{
-                width: '10px', height: '10px', borderRadius: '50%',
-                background: '#2a2a2a', border: '1px solid #444',
-                position: 'absolute', top: '14px', left: '50%', transform: 'translateX(-50%)',
-                zIndex: 2,
-              }} />
+            {/* Tablet shell — animates between portrait and landscape */}
+            <motion.div
+              animate={activeSection ? {
+                width:  'min(92vh, 96vw)',
+                height: 'min(64vh, 68vw)',
+                borderRadius: '20px',
+              } : {
+                width:  'min(420px, 88vw)',
+                height: 'min(640px, 86vh)',
+                borderRadius: '28px',
+              }}
+              transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+              style={{
+                background: '#111',
+                border: '2px solid #333',
+                boxShadow: '0 0 0 1px #000, 0 32px 80px rgba(0,0,0,0.8)',
+                overflow: 'hidden',
+                position: 'relative',
+                flexShrink: 0,
+              }}
+            >
+              {/* Camera — top-centre in portrait, left-centre in landscape */}
+              <motion.div
+                animate={activeSection ? {
+                  top: '50%', left: '14px',
+                  translateX: '0%', translateY: '-50%',
+                } : {
+                  top: '14px', left: '50%',
+                  translateX: '-50%', translateY: '0%',
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+                style={{
+                  width: '10px', height: '10px', borderRadius: '50%',
+                  background: '#2a2a2a', border: '1px solid #444',
+                  position: 'absolute', zIndex: 3,
+                }}
+              />
+
               {/* Amber bezel ring */}
               <div style={{
                 position: 'absolute', inset: '6px',
-                borderRadius: '20px',
+                borderRadius: '16px',
                 border: '1px solid rgba(232,160,32,0.25)',
                 pointerEvents: 'none', zIndex: 2,
               }} />
-              {/* Screen */}
-              <div style={{
-                position: 'absolute',
-                top: '36px', left: '16px', right: '16px', bottom: '72px',
-                background: '#080c10',
-                borderRadius: '8px',
-                overflow: 'hidden',
-              }}>
+
+              {/* Screen — inset adjusts for orientation */}
+              <motion.div
+                animate={activeSection ? {
+                  top: '14px', left: '36px', right: '14px', bottom: '14px',
+                } : {
+                  top: '34px', left: '14px', right: '14px', bottom: '68px',
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+                style={{
+                  position: 'absolute',
+                  background: '#0d1520',
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                }}
+              >
                 <AnimatePresence mode="wait">
                   {!activeSection ? (
                     <motion.div
                       key="home"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.2 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.18 }}
                       style={{ height: '100%' }}
                     >
                       <TabletHome sections={SECTIONS} onOpen={openSection} />
@@ -224,10 +251,10 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                   ) : (
                     <motion.div
                       key={activeSection}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 30 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 28 }}
+                      initial={{ opacity: 0, x: 40 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -40 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 0.15 }}
                       style={{ height: '100%' }}
                     >
                       <TabletChartView
@@ -239,15 +266,27 @@ export default function TabletScreen({ onPanLeft, onPanRight, onPanToMonitor, pa
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
-              {/* Home button */}
-              <div style={{
-                position: 'absolute', bottom: '14px', left: '50%', transform: 'translateX(-50%)',
-                width: '48px', height: '48px', borderRadius: '50%',
-                background: '#1e1e1e', border: '2px solid #444',
-                boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.8)',
-              }} />
-            </div>
+              </motion.div>
+
+              {/* Home button — bottom-centre portrait / right-centre landscape */}
+              <motion.div
+                animate={activeSection ? {
+                  top: '50%', right: '10px', left: 'auto', bottom: 'auto',
+                  translateX: '0%', translateY: '-50%',
+                } : {
+                  bottom: '12px', left: '50%', top: 'auto', right: 'auto',
+                  translateX: '-50%', translateY: '0%',
+                }}
+                transition={{ type: 'spring', stiffness: 220, damping: 28 }}
+                style={{
+                  position: 'absolute',
+                  width: '44px', height: '44px', borderRadius: '50%',
+                  background: '#1e1e1e', border: '2px solid #444',
+                  boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.8)',
+                  zIndex: 3,
+                }}
+              />
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
