@@ -325,9 +325,9 @@
 
 /* ── Nametag ── bare text, hovering above the cabinet */
 .cabinet-nametag {
-  position: absolute;
-  top: calc(var(--depth-top) * -1 - 36px);
-  left: calc(50% + calc(var(--depth-side) / 2));
+  position: fixed;
+  top: calc(50% - 180px);
+  left: 50%;
   transform: translateX(-50%);
   font-family: var(--font-mono);
   font-weight: 700;
@@ -357,7 +357,7 @@
 
 @keyframes nametag-float {
   0%, 100% { transform: translateX(-50%) translateY(0px); }
-  50%       { transform: translateX(-50%) translateY(-6px); }
+  50%       { transform: translateX(-50%) translateY(-5px); }
 }
 
 
