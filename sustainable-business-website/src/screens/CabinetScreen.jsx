@@ -35,7 +35,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
         {/* Decorations — inside scene so they scale with it on mobile */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'visible' }}>
           {/* Picture frame — right of cabinet */}
-          <div ref={frameRef} style={{ position: 'absolute', left: '625px', top: '-6px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
+          <div ref={frameRef} style={{ position: 'absolute', left: '822px', top: '36px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
             <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)', flexShrink: 0 }} />
             <svg width="100%" height="28" viewBox="0 0 192 28" preserveAspectRatio="none" style={{ display: 'block', marginBottom: '-2px', flexShrink: 0 }}>
               <line x1="96" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
