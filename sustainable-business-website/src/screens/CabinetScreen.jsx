@@ -35,7 +35,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
         {/* Decorations — inside scene so they scale with it on mobile */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', overflow: 'visible' }}>
           {/* Picture frame — right of cabinet */}
-          <div ref={frameRef} style={{ position: 'absolute', left: '822px', top: '36px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '319px', height: '154px' }}>
+          <div ref={frameRef} style={{ position: 'absolute', left: '427px', top: '44px', zIndex: 2, display: 'flex', flexDirection: 'column', alignItems: 'center', width: '445px', height: '196px' }}>
             <div style={{ width: '6px', height: '10px', background: '#8a8a7a', borderRadius: '1px 1px 3px 3px', boxShadow: '0 2px 2px rgba(0,0,0,0.4)', flexShrink: 0 }} />
             <svg width="100%" height="28" viewBox="0 0 192 28" preserveAspectRatio="none" style={{ display: 'block', marginBottom: '-2px', flexShrink: 0 }}>
               <line x1="96" y1="0" x2="4" y2="26" stroke="#5a4a2a" strokeWidth="1.2" />
@@ -46,7 +46,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
             </div>
           </div>
           {/* Left cactus on stool */}
-          <div ref={cactusRef} style={{ position: 'absolute', left: '-150px', top: '220px', width: '239px', height: '346px' }}>
+          <div ref={cactusRef} style={{ position: 'absolute', left: '-460px', top: '201px', width: '281px', height: '395px' }}>
             <svg width="100%" height="100%" viewBox="0 0 70 90" fill="none">
               <rect x="22" y="52" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
               <rect x="18" y="50" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
@@ -65,7 +65,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
             </svg>
           </div>
           {/* Right leafy plant in pot */}
-          <div ref={plantRef} style={{ position: 'absolute', left: '560px', top: '229px', width: '227px', height: '395px' }}>
+          <div ref={plantRef} style={{ position: 'absolute', left: '452px', top: '285px', width: '281px', height: '437px' }}>
             <svg width="100%" height="100%" viewBox="0 0 60 80" fill="none">
               <rect x="17" y="50" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
               <rect x="13" y="48" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>

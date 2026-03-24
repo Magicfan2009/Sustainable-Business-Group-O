@@ -326,17 +326,19 @@
 
 /* ── Nametag ── bare text, hovering above the cabinet */
 .cabinet-nametag {
-  position: relative;
+  position: absolute;
+  left: -311px;
+  top: -46px;
+  width: 938px;
   text-align: center;
   font-family: var(--font-mono);
   font-weight: 700;
   letter-spacing: 0.18em;
-  font-size: 22px;
+  font-size: 28px;
   color: rgba(0, 30, 80, 0.7);
   text-transform: uppercase;
   white-space: nowrap;
   z-index: 10;
-  margin-bottom: 8px;
   animation: nametag-float 3s ease-in-out infinite;
 }
 
