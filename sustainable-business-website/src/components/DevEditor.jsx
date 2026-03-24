@@ -85,6 +85,7 @@ function Overlay({ id, label, color, rect, onRectChange }) {
 export default function DevEditor({ items }) {
   const [active, setActive] = useState(false)
   const [rects, setRects] = useState({})
+  const rectsRef = useRef({}) // always-fresh mirror of rects for use in effects/closures
   const [copied, setCopied] = useState(false)
   // Panel drag state
   const [panelPos, setPanelPos] = useState(null) // null = default centred at bottom
@@ -151,27 +152,47 @@ export default function DevEditor({ items }) {
         el.style.right = 'auto'
         el.style.zIndex = '99997'
       })
+      rectsRef.current = newRects
       setRects(newRects)
     } else {
       items.forEach(item => {
         const el = item.ref.current
         if (!el || !origStyles.current[item.id]) return
         const o = origStyles.current[item.id]
-        el.style.position = o.position
-        el.style.left = o.left
-        el.style.top = o.top
-        el.style.width = o.width
-        el.style.height = o.height
-        el.style.transform = o.transform
-        el.style.margin = o.margin
-        el.style.bottom = o.bottom
-        el.style.right = o.right
-        el.style.zIndex = o.zIndex
+        // If we have a final dragged rect, commit it as the element's real position
+        // (parent-relative for absolute elements, viewport for fixed/others)
+        const r = rectsRef.current[item.id]
+        const pr = parentRects.current[item.id] ?? { left: 0, top: 0 }
+        if (r && (o.position === 'absolute' || o.position === '')) {
+          el.style.position = 'absolute'
+          el.style.left = Math.round(r.left - pr.left) + 'px'
+          el.style.top = Math.round(r.top - pr.top) + 'px'
+          el.style.width = Math.round(r.width) + 'px'
+          el.style.height = Math.round(r.height) + 'px'
+          el.style.transform = 'none'
+          el.style.margin = '0'
+          el.style.bottom = 'auto'
+          el.style.right = 'auto'
+          el.style.zIndex = o.zIndex
+        } else {
+          // Non-absolute elements: restore original styles unchanged
+          el.style.position = o.position
+          el.style.left = o.left
+          el.style.top = o.top
+          el.style.width = o.width
+          el.style.height = o.height
+          el.style.transform = o.transform
+          el.style.margin = o.margin
+          el.style.bottom = o.bottom
+          el.style.right = o.right
+          el.style.zIndex = o.zIndex
+        }
       })
     }
   }, [active]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleRectChange = useCallback((id, newRect) => {
+    rectsRef.current = { ...rectsRef.current, [id]: newRect }
     setRects(prev => ({ ...prev, [id]: newRect }))
     const item = items.find(i => i.id === id)
     const el = item?.ref.current
