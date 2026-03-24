@@ -46,7 +46,7 @@ export default function CabinetScreen({ onOpenFile, onOpenAI, onHome, onPanLeft,
             </div>
           </div>
           {/* Left cactus on stool */}
-          <div ref={cactusRef} style={{ position: 'absolute', left: '-545px', top: '278px', width: '239px', height: '346px' }}>
+          <div ref={cactusRef} style={{ position: 'absolute', left: '-150px', top: '220px', width: '239px', height: '346px' }}>
             <svg width="100%" height="100%" viewBox="0 0 70 90" fill="none">
               <rect x="22" y="52" width="26" height="22" rx="3" fill="#8B5E3C" stroke="#5a3a1a" strokeWidth="1.5"/>
               <rect x="18" y="50" width="34" height="6" rx="2" fill="#a06a40" stroke="#5a3a1a" strokeWidth="1.5"/>
