@@ -99,6 +99,23 @@ export default function DevEditor({ items }) {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
+  // Returns the bounding rect of the nearest positioned ancestor (for absolute elements)
+  // so we can report coords relative to that ancestor rather than the viewport.
+  function getParentRect(el) {
+    let parent = el.parentElement
+    while (parent && parent !== document.body) {
+      const pos = window.getComputedStyle(parent).position
+      if (pos === 'relative' || pos === 'absolute' || pos === 'fixed' || pos === 'sticky') {
+        return parent.getBoundingClientRect()
+      }
+      parent = parent.parentElement
+    }
+    return { left: 0, top: 0 }
+  }
+
+  // For each item, store the parent rect offset so we can subtract it from overlay coords
+  const parentRects = useRef({})
+
   useEffect(() => {
     if (active) {
       const newRects = {}
@@ -106,6 +123,10 @@ export default function DevEditor({ items }) {
         const el = item.ref.current
         if (!el) return
         const r = el.getBoundingClientRect()
+        const computedPos = window.getComputedStyle(el).position
+        // For absolutely positioned elements, track parent offset so output is parent-relative
+        const pr = (computedPos === 'absolute') ? getParentRect(el) : { left: 0, top: 0 }
+        parentRects.current[item.id] = pr
         newRects[item.id] = { left: r.left, top: r.top, width: r.width, height: r.height }
         origStyles.current[item.id] = {
           position: el.style.position,
@@ -185,15 +206,16 @@ export default function DevEditor({ items }) {
   useEffect(() => { panelSnapPos.current = panelPos }, [panelPos])
 
   function buildOutput() {
-    const vw = window.innerWidth
-    const vh = window.innerHeight
     return items.map(item => {
       const r = rects[item.id]
       if (!r) return `  ${item.label}: (not measured — navigate to that room first)`
+      const pr = parentRects.current[item.id] ?? { left: 0, top: 0 }
+      const relLeft = Math.round(r.left - pr.left)
+      const relTop  = Math.round(r.top  - pr.top)
       return [
         `  ${item.label}:`,
-        `    left:   ${Math.round(r.left)}px  (${((r.left / vw) * 100).toFixed(1)}vw)`,
-        `    top:    ${Math.round(r.top)}px  (${((r.top / vh) * 100).toFixed(1)}vh)`,
+        `    left:   ${relLeft}px`,
+        `    top:    ${relTop}px`,
         `    width:  ${Math.round(r.width)}px`,
         `    height: ${Math.round(r.height)}px`,
       ].join('\n')
