@@ -4,7 +4,7 @@ import './MonitorScreen.css'
 const YT_ID = 'Y-VoPkpcchs'
 
 // SVG viewBox dimensions
-const W = 480, H = 420
+const W = 480, H = 392
 // Screen area within the bezel
 const SX = 48, SY = 36, SW = 384, SH = 260
 
@@ -92,7 +92,7 @@ export default function MonitorScreen({ onPanLeft, onPanRight, panning, deskRef 
         </svg>
         {/* Desk surface under monitor */}
         <div ref={deskRef} style={{ width: 'min(578px, 90vw)', lineHeight: 0, overflow: 'visible' }}>
-        <svg width="calc(100% + 400px)" height="26" viewBox="-200 0 880 26" style={{ display: 'block', marginTop: '-4px', marginLeft: '-200px' }}>
+        <svg width="calc(100% + 400px)" height="26" viewBox="-200 0 880 26" style={{ display: 'block', marginTop: '0', marginLeft: '-200px' }}>
           {/* Desk surface */}
           <rect x="0" y="0" width="480" height="18" rx="3" fill="#9a7048" stroke="#5a3a1a" strokeWidth="2"/>
           {/* Desk front face */}
