@@ -43,7 +43,7 @@ export default function AIScreen({ onBack }) {
           <p>
             <strong>Course:</strong> Sustainable Business (IB)<br/>
             <strong>Institution:</strong> Imperial College London Business School<br/>
-            <strong>Group:</strong> O | <strong>Assessment:</strong> Website Report (30%)<br/>
+            <strong>Group:</strong> O | <strong>Assessment:</strong> Website Report (40%)<br/>
             <strong>Submission Date:</strong> 23rd March 2026
           </p>
 
